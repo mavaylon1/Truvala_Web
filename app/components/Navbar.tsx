@@ -26,12 +26,12 @@ export default function Navbar() {
         boxShadow: '0 2px 20px rgba(14,42,99,0.06)',
       } : {}}
     >
-      <div className="container flex items-center justify-between py-5">
-        <a href="#" className="blue-text text-xl font-bold tracking-wide select-none">
+      <div className="container flex items-center justify-between py-6">
+        <a href="#" className="blue-text text-2xl font-bold tracking-wide select-none">
           Truvala
         </a>
 
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium" style={{ color: '#475569' }}>
+        <div className="hidden md:flex items-center gap-10 text-base font-medium" style={{ color: '#475569' }}>
           {[
             { label: 'Why Truvala', href: '#problem'  },
             { label: 'See It Work',  href: '#demo'     },
@@ -47,14 +47,6 @@ export default function Navbar() {
             </a>
           ))}
         </div>
-
-        <a
-          href="#waitlist"
-          className="relative px-5 py-2.5 rounded-full text-sm font-semibold text-white overflow-hidden transition-all duration-200 hover:shadow-lg hover:shadow-blue-200 hover:scale-[1.02]"
-        >
-          <span className="btn-blue absolute inset-0 rounded-full" />
-          <span className="relative z-10">Add to Chrome →</span>
-        </a>
       </div>
     </motion.nav>
   )
