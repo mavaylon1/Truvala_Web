@@ -5,8 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: "/Truvala_Web",
-  assetPrefix: "/Truvala_Web/",
+  // No basePath or assetPrefix — site is served from root via custom domain truvala.ai
 };
 
 export default nextConfig;
