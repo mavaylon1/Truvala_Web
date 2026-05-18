@@ -1,0 +1,1811 @@
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e7]:
+      - link "Dropship - Go to homepage" [ref=e8] [cursor=pointer]:
+        - /url: /
+        - img [ref=e9]
+      - generic [ref=e21]:
+        - list [ref=e22]:
+          - listitem [ref=e23]:
+            - button "Tools" [ref=e24] [cursor=pointer]:
+              - generic [ref=e25]: Tools
+              - img [ref=e26]
+          - listitem [ref=e28]:
+            - button "Resources" [ref=e29] [cursor=pointer]:
+              - generic [ref=e30]: Resources
+              - img [ref=e31]
+          - listitem [ref=e33]:
+            - link "Pricing" [ref=e34] [cursor=pointer]:
+              - /url: /pricing
+              - generic [ref=e35]: Pricing
+        - list [ref=e36]:
+          - listitem [ref=e37]:
+            - link "Sign in" [ref=e38] [cursor=pointer]:
+              - /url: https://app.dropship.io/login
+              - generic [ref=e41]: Sign in
+          - listitem [ref=e42]:
+            - link "Start Free Trial" [ref=e43] [cursor=pointer]:
+              - /url: https://app.dropship.io/sign-up
+              - generic [ref=e46]: Start Free Trial
+  - main [ref=e47]:
+    - generic [ref=e48]:
+      - generic [ref=e52]:
+        - paragraph [ref=e57]: Dropship 2.0 is live!
+        - heading "Discover winning products to sell" [level=1] [ref=e59]:
+          - text: Discover
+          - emphasis [ref=e60]: winning products
+          - text: to sell
+        - paragraph [ref=e62]: Find and monitor stores to gain insights into their revenue, sales, products, ads, apps and more.
+        - generic [ref=e64]:
+          - link "Start Free Trial" [ref=e65] [cursor=pointer]:
+            - /url: https://app.dropship.io/sign-up
+            - generic [ref=e68]: Start Free Trial
+          - link "Install Extension" [ref=e69] [cursor=pointer]:
+            - /url: https://chromewebstore.google.com/detail/dropship-product-research/pgccoaecgcgnhffkjjcaonjoockggmng?pli=1
+            - generic [ref=e72]: Install Extension
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - generic [ref=e76]:
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - generic [ref=e81]:
+                  - paragraph [ref=e82]: Mini Projector
+                  - paragraph [ref=e84]: Price $79,99
+                - generic [ref=e86]:
+                  - paragraph [ref=e87]: $384,920.40
+                  - generic [ref=e88]:
+                    - paragraph [ref=e89]: Revenue
+                    - generic [ref=e90]:
+                      - img [ref=e91]
+                      - generic [ref=e93]: 18.4%
+                - generic:
+                  - generic:
+                    - paragraph: Mini Projector
+                    - generic:
+                      - paragraph: Price $79,99
+                  - generic:
+                    - paragraph: $384,920.40
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 18.4%
+              - generic [ref=e94]:
+                - generic [ref=e96]:
+                  - paragraph [ref=e97]: Wine Dispenser
+                  - paragraph [ref=e99]: Price $19,99
+                - generic [ref=e101]:
+                  - paragraph [ref=e102]: $72,614.22
+                  - generic [ref=e103]:
+                    - paragraph [ref=e104]: Revenue
+                    - generic [ref=e105]:
+                      - img [ref=e106]
+                      - generic [ref=e108]: 6.8%
+                - generic:
+                  - generic:
+                    - paragraph: Wine Dispenser
+                    - generic:
+                      - paragraph: Price $19,99
+                  - generic:
+                    - paragraph: $72,614.22
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 6.8%
+              - generic [ref=e109]:
+                - generic [ref=e111]:
+                  - paragraph [ref=e112]: Portable Bottle Warmer
+                  - paragraph [ref=e114]: Price $26,99
+                - generic [ref=e116]:
+                  - paragraph [ref=e117]: $112,947.36
+                  - generic [ref=e118]:
+                    - paragraph [ref=e119]: Revenue
+                    - generic [ref=e120]:
+                      - img [ref=e121]
+                      - generic [ref=e123]: 7.2%
+                - generic:
+                  - generic:
+                    - paragraph: Portable Bottle Warmer
+                    - generic:
+                      - paragraph: Price $26,99
+                  - generic:
+                    - paragraph: $112,947.36
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 7.2%
+              - generic [ref=e124]:
+                - generic [ref=e126]:
+                  - paragraph [ref=e127]: Kids ATM Bank
+                  - paragraph [ref=e129]: Price $34,99
+                - generic [ref=e131]:
+                  - paragraph [ref=e132]: $128,450.70
+                  - generic [ref=e133]:
+                    - paragraph [ref=e134]: Revenue
+                    - generic [ref=e135]:
+                      - img [ref=e136]
+                      - generic [ref=e138]: 11.6%
+                - generic:
+                  - generic:
+                    - paragraph: Kids ATM Bank
+                    - generic:
+                      - paragraph: Price $34,99
+                  - generic:
+                    - paragraph: $128,450.70
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 11.6%
+              - generic [ref=e139]:
+                - generic [ref=e141]:
+                  - paragraph [ref=e142]: Mini Drone
+                  - paragraph [ref=e144]: Price $39,99
+                - generic [ref=e146]:
+                  - paragraph [ref=e147]: $301,540.62
+                  - generic [ref=e148]:
+                    - paragraph [ref=e149]: Revenue
+                    - generic [ref=e150]:
+                      - img [ref=e151]
+                      - generic [ref=e153]: 15.7%
+                - generic:
+                  - generic:
+                    - paragraph: Mini Drone
+                    - generic:
+                      - paragraph: Price $39,99
+                  - generic:
+                    - paragraph: $301,540.62
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 15.7%
+              - generic [ref=e154]:
+                - generic [ref=e156]:
+                  - paragraph [ref=e157]: Candy Gun
+                  - paragraph [ref=e159]: Price $18,99
+                - generic [ref=e161]:
+                  - paragraph [ref=e162]: $134,882.46
+                  - generic [ref=e163]:
+                    - paragraph [ref=e164]: Revenue
+                    - generic [ref=e165]:
+                      - img [ref=e166]
+                      - generic [ref=e168]: 17.2%
+                - generic:
+                  - generic:
+                    - paragraph: Candy Gun
+                    - generic:
+                      - paragraph: Price $18,99
+                  - generic:
+                    - paragraph: $134,882.46
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 17.2%
+              - generic [ref=e169]:
+                - generic [ref=e171]:
+                  - paragraph [ref=e172]: Glass Crystal Globe
+                  - paragraph [ref=e174]: Price $21,99
+                - generic [ref=e176]:
+                  - paragraph [ref=e177]: $68,741.08
+                  - generic [ref=e178]:
+                    - paragraph [ref=e179]: Revenue
+                    - generic [ref=e180]:
+                      - img [ref=e181]
+                      - generic [ref=e183]: 4.7%
+                - generic:
+                  - generic:
+                    - paragraph: Glass Crystal Globe
+                    - generic:
+                      - paragraph: Price $21,99
+                  - generic:
+                    - paragraph: $68,741.08
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 4.7%
+              - generic [ref=e184]:
+                - generic [ref=e186]:
+                  - paragraph [ref=e187]: Ice Breaker Cup
+                  - paragraph [ref=e189]: Price $12,99
+                - generic [ref=e191]:
+                  - paragraph [ref=e192]: $58,917.44
+                  - generic [ref=e193]:
+                    - paragraph [ref=e194]: Revenue
+                    - generic [ref=e195]:
+                      - img [ref=e196]
+                      - generic [ref=e198]: 3.9%
+                - generic:
+                  - generic:
+                    - paragraph: Ice Breaker Cup
+                    - generic:
+                      - paragraph: Price $12,99
+                  - generic:
+                    - paragraph: $58,917.44
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 3.9%
+              - generic [ref=e199]:
+                - generic [ref=e201]:
+                  - paragraph [ref=e202]: Shot Dispenser
+                  - paragraph [ref=e204]: Price $24,99
+                - generic [ref=e206]:
+                  - paragraph [ref=e207]: $43,8173.16
+                  - generic [ref=e208]:
+                    - paragraph [ref=e209]: Revenue
+                    - generic [ref=e210]:
+                      - img [ref=e211]
+                      - generic [ref=e213]: 11.5%
+                - generic:
+                  - generic:
+                    - paragraph: Shot Dispenser
+                    - generic:
+                      - paragraph: Price $24,99
+                  - generic:
+                    - paragraph: $43,8173.16
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 11.5%
+            - generic [ref=e215]:
+              - generic [ref=e216]:
+                - generic [ref=e218]:
+                  - paragraph [ref=e219]: Mini Projector
+                  - paragraph [ref=e221]: Price $79,99
+                - generic [ref=e223]:
+                  - paragraph [ref=e224]: $384,920.40
+                  - generic [ref=e225]:
+                    - paragraph [ref=e226]: Revenue
+                    - generic [ref=e227]:
+                      - img [ref=e228]
+                      - generic [ref=e230]: 18.4%
+                - generic:
+                  - generic:
+                    - paragraph: Mini Projector
+                    - generic:
+                      - paragraph: Price $79,99
+                  - generic:
+                    - paragraph: $384,920.40
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 18.4%
+              - generic [ref=e231]:
+                - generic [ref=e233]:
+                  - paragraph [ref=e234]: Wine Dispenser
+                  - paragraph [ref=e236]: Price $19,99
+                - generic [ref=e238]:
+                  - paragraph [ref=e239]: $72,614.22
+                  - generic [ref=e240]:
+                    - paragraph [ref=e241]: Revenue
+                    - generic [ref=e242]:
+                      - img [ref=e243]
+                      - generic [ref=e245]: 6.8%
+                - generic:
+                  - generic:
+                    - paragraph: Wine Dispenser
+                    - generic:
+                      - paragraph: Price $19,99
+                  - generic:
+                    - paragraph: $72,614.22
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 6.8%
+              - generic [ref=e246]:
+                - generic [ref=e248]:
+                  - paragraph [ref=e249]: Portable Bottle Warmer
+                  - paragraph [ref=e251]: Price $26,99
+                - generic [ref=e253]:
+                  - paragraph [ref=e254]: $112,947.36
+                  - generic [ref=e255]:
+                    - paragraph [ref=e256]: Revenue
+                    - generic [ref=e257]:
+                      - img [ref=e258]
+                      - generic [ref=e260]: 7.2%
+                - generic:
+                  - generic:
+                    - paragraph: Portable Bottle Warmer
+                    - generic:
+                      - paragraph: Price $26,99
+                  - generic:
+                    - paragraph: $112,947.36
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 7.2%
+              - generic [ref=e261]:
+                - generic [ref=e263]:
+                  - paragraph [ref=e264]: Kids ATM Bank
+                  - paragraph [ref=e266]: Price $34,99
+                - generic [ref=e268]:
+                  - paragraph [ref=e269]: $128,450.70
+                  - generic [ref=e270]:
+                    - paragraph [ref=e271]: Revenue
+                    - generic [ref=e272]:
+                      - img [ref=e273]
+                      - generic [ref=e275]: 11.6%
+                - generic:
+                  - generic:
+                    - paragraph: Kids ATM Bank
+                    - generic:
+                      - paragraph: Price $34,99
+                  - generic:
+                    - paragraph: $128,450.70
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 11.6%
+              - generic [ref=e276]:
+                - generic [ref=e278]:
+                  - paragraph [ref=e279]: Mini Drone
+                  - paragraph [ref=e281]: Price $39,99
+                - generic [ref=e283]:
+                  - paragraph [ref=e284]: $301,540.62
+                  - generic [ref=e285]:
+                    - paragraph [ref=e286]: Revenue
+                    - generic [ref=e287]:
+                      - img [ref=e288]
+                      - generic [ref=e290]: 15.7%
+                - generic:
+                  - generic:
+                    - paragraph: Mini Drone
+                    - generic:
+                      - paragraph: Price $39,99
+                  - generic:
+                    - paragraph: $301,540.62
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 15.7%
+              - generic [ref=e291]:
+                - generic [ref=e293]:
+                  - paragraph [ref=e294]: Candy Gun
+                  - paragraph [ref=e296]: Price $18,99
+                - generic [ref=e298]:
+                  - paragraph [ref=e299]: $134,882.46
+                  - generic [ref=e300]:
+                    - paragraph [ref=e301]: Revenue
+                    - generic [ref=e302]:
+                      - img [ref=e303]
+                      - generic [ref=e305]: 17.2%
+                - generic:
+                  - generic:
+                    - paragraph: Candy Gun
+                    - generic:
+                      - paragraph: Price $18,99
+                  - generic:
+                    - paragraph: $134,882.46
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 17.2%
+              - generic [ref=e306]:
+                - generic [ref=e308]:
+                  - paragraph [ref=e309]: Glass Crystal Globe
+                  - paragraph [ref=e311]: Price $21,99
+                - generic [ref=e313]:
+                  - paragraph [ref=e314]: $68,741.08
+                  - generic [ref=e315]:
+                    - paragraph [ref=e316]: Revenue
+                    - generic [ref=e317]:
+                      - img [ref=e318]
+                      - generic [ref=e320]: 4.7%
+                - generic:
+                  - generic:
+                    - paragraph: Glass Crystal Globe
+                    - generic:
+                      - paragraph: Price $21,99
+                  - generic:
+                    - paragraph: $68,741.08
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 4.7%
+              - generic [ref=e321]:
+                - generic [ref=e323]:
+                  - paragraph [ref=e324]: Ice Breaker Cup
+                  - paragraph [ref=e326]: Price $12,99
+                - generic [ref=e328]:
+                  - paragraph [ref=e329]: $58,917.44
+                  - generic [ref=e330]:
+                    - paragraph [ref=e331]: Revenue
+                    - generic [ref=e332]:
+                      - img [ref=e333]
+                      - generic [ref=e335]: 3.9%
+                - generic:
+                  - generic:
+                    - paragraph: Ice Breaker Cup
+                    - generic:
+                      - paragraph: Price $12,99
+                  - generic:
+                    - paragraph: $58,917.44
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 3.9%
+              - generic [ref=e336]:
+                - generic [ref=e338]:
+                  - paragraph [ref=e339]: Shot Dispenser
+                  - paragraph [ref=e341]: Price $24,99
+                - generic [ref=e343]:
+                  - paragraph [ref=e344]: $43,8173.16
+                  - generic [ref=e345]:
+                    - paragraph [ref=e346]: Revenue
+                    - generic [ref=e347]:
+                      - img [ref=e348]
+                      - generic [ref=e350]: 11.5%
+                - generic:
+                  - generic:
+                    - paragraph: Shot Dispenser
+                    - generic:
+                      - paragraph: Price $24,99
+                  - generic:
+                    - paragraph: $43,8173.16
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 11.5%
+          - generic [ref=e352]:
+            - generic [ref=e354]:
+              - generic [ref=e355]:
+                - generic [ref=e357]:
+                  - paragraph [ref=e358]: Drone Toy
+                  - paragraph [ref=e360]: Price $27,99
+                - generic [ref=e362]:
+                  - paragraph [ref=e363]: $24,700.15
+                  - generic [ref=e364]:
+                    - paragraph [ref=e365]: Revenue
+                    - generic [ref=e366]:
+                      - img [ref=e367]
+                      - generic [ref=e369]: 4.6%
+                - generic:
+                  - generic:
+                    - paragraph: Drone Toy
+                    - generic:
+                      - paragraph: Price $27,99
+                  - generic:
+                    - paragraph: $24,700.15
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 4.6%
+              - generic [ref=e370]:
+                - generic [ref=e372]:
+                  - paragraph [ref=e373]: Galaxy Projector
+                  - paragraph [ref=e375]: Price $32,99
+                - generic [ref=e377]:
+                  - paragraph [ref=e378]: $421,766.24
+                  - generic [ref=e379]:
+                    - paragraph [ref=e380]: Revenue
+                    - generic [ref=e381]:
+                      - img [ref=e382]
+                      - generic [ref=e384]: 24.6%
+                - generic:
+                  - generic:
+                    - paragraph: Galaxy Projector
+                    - generic:
+                      - paragraph: Price $32,99
+                  - generic:
+                    - paragraph: $421,766.24
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 24.6%
+              - generic [ref=e385]:
+                - generic [ref=e387]:
+                  - paragraph [ref=e388]: Cube Light
+                  - paragraph [ref=e390]: Price $29,99
+                - generic [ref=e392]:
+                  - paragraph [ref=e393]: $187,290.10
+                  - generic [ref=e394]:
+                    - paragraph [ref=e395]: Revenue
+                    - generic [ref=e396]:
+                      - img [ref=e397]
+                      - generic [ref=e399]: 13.2%
+                - generic:
+                  - generic:
+                    - paragraph: Cube Light
+                    - generic:
+                      - paragraph: Price $29,99
+                  - generic:
+                    - paragraph: $187,290.10
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 13.2%
+              - generic [ref=e400]:
+                - generic [ref=e402]:
+                  - paragraph [ref=e403]: Cat Lamp
+                  - paragraph [ref=e405]: Price $16,99
+                - generic [ref=e407]:
+                  - paragraph [ref=e408]: $12,732.88
+                  - generic [ref=e409]:
+                    - paragraph [ref=e410]: Revenue
+                    - generic [ref=e411]:
+                      - img [ref=e412]
+                      - generic [ref=e414]: 9.4%
+                - generic:
+                  - generic:
+                    - paragraph: Cat Lamp
+                    - generic:
+                      - paragraph: Price $16,99
+                  - generic:
+                    - paragraph: $12,732.88
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 9.4%
+              - generic [ref=e415]:
+                - generic [ref=e417]:
+                  - paragraph [ref=e418]: Hair Straightener
+                  - paragraph [ref=e420]: Price $29,99
+                - generic [ref=e422]:
+                  - paragraph [ref=e423]: $74,632.40
+                  - generic [ref=e424]:
+                    - paragraph [ref=e425]: Revenue
+                    - generic [ref=e426]:
+                      - img [ref=e427]
+                      - generic [ref=e429]: 2.1%
+                - generic:
+                  - generic:
+                    - paragraph: Hair Straightener
+                    - generic:
+                      - paragraph: Price $29,99
+                  - generic:
+                    - paragraph: $74,632.40
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 2.1%
+              - generic [ref=e430]:
+                - generic [ref=e432]:
+                  - paragraph [ref=e433]: Moon Lamp
+                  - paragraph [ref=e435]: Price $24,99
+                - generic [ref=e437]:
+                  - paragraph [ref=e438]: $38,176.90
+                  - generic [ref=e439]:
+                    - paragraph [ref=e440]: Revenue
+                    - generic [ref=e441]:
+                      - img [ref=e442]
+                      - generic [ref=e444]: 4.1%
+                - generic:
+                  - generic:
+                    - paragraph: Moon Lamp
+                    - generic:
+                      - paragraph: Price $24,99
+                  - generic:
+                    - paragraph: $38,176.90
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 4.1%
+              - generic [ref=e445]:
+                - generic [ref=e447]:
+                  - paragraph [ref=e448]: Mosquito Killer
+                  - paragraph [ref=e450]: Price $34,99
+                - generic [ref=e452]:
+                  - paragraph [ref=e453]: $201,012.37
+                  - generic [ref=e454]:
+                    - paragraph [ref=e455]: Revenue
+                    - generic [ref=e456]:
+                      - img [ref=e457]
+                      - generic [ref=e459]: 22.7%
+                - generic:
+                  - generic:
+                    - paragraph: Mosquito Killer
+                    - generic:
+                      - paragraph: Price $34,99
+                  - generic:
+                    - paragraph: $201,012.37
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 22.7%
+              - generic [ref=e460]:
+                - generic [ref=e462]:
+                  - paragraph [ref=e463]: Ice Cube Mold
+                  - paragraph [ref=e465]: Price $17,99
+                - generic [ref=e467]:
+                  - paragraph [ref=e468]: $83,219.75
+                  - generic [ref=e469]:
+                    - paragraph [ref=e470]: Revenue
+                    - generic [ref=e471]:
+                      - img [ref=e472]
+                      - generic [ref=e474]: 6.1%
+                - generic:
+                  - generic:
+                    - paragraph: Ice Cube Mold
+                    - generic:
+                      - paragraph: Price $17,99
+                  - generic:
+                    - paragraph: $83,219.75
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 6.1%
+              - generic [ref=e475]:
+                - generic [ref=e477]:
+                  - paragraph [ref=e478]: Wine Dispenser
+                  - paragraph [ref=e480]: Price $14,99
+                - generic [ref=e482]:
+                  - paragraph [ref=e483]: $19,472.43
+                  - generic [ref=e484]:
+                    - paragraph [ref=e485]: Revenue
+                    - generic [ref=e486]:
+                      - img [ref=e487]
+                      - generic [ref=e489]: 9.3%
+                - generic:
+                  - generic:
+                    - paragraph: Wine Dispenser
+                    - generic:
+                      - paragraph: Price $14,99
+                  - generic:
+                    - paragraph: $19,472.43
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 9.3%
+            - generic [ref=e491]:
+              - generic [ref=e492]:
+                - generic [ref=e494]:
+                  - paragraph [ref=e495]: Drone Toy
+                  - paragraph [ref=e497]: Price $27,99
+                - generic [ref=e499]:
+                  - paragraph [ref=e500]: $24,700.15
+                  - generic [ref=e501]:
+                    - paragraph [ref=e502]: Revenue
+                    - generic [ref=e503]:
+                      - img [ref=e504]
+                      - generic [ref=e506]: 4.6%
+                - generic:
+                  - generic:
+                    - paragraph: Drone Toy
+                    - generic:
+                      - paragraph: Price $27,99
+                  - generic:
+                    - paragraph: $24,700.15
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 4.6%
+              - generic [ref=e507]:
+                - generic [ref=e509]:
+                  - paragraph [ref=e510]: Galaxy Projector
+                  - paragraph [ref=e512]: Price $32,99
+                - generic [ref=e514]:
+                  - paragraph [ref=e515]: $421,766.24
+                  - generic [ref=e516]:
+                    - paragraph [ref=e517]: Revenue
+                    - generic [ref=e518]:
+                      - img [ref=e519]
+                      - generic [ref=e521]: 24.6%
+                - generic:
+                  - generic:
+                    - paragraph: Galaxy Projector
+                    - generic:
+                      - paragraph: Price $32,99
+                  - generic:
+                    - paragraph: $421,766.24
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 24.6%
+              - generic [ref=e522]:
+                - generic [ref=e524]:
+                  - paragraph [ref=e525]: Cube Light
+                  - paragraph [ref=e527]: Price $29,99
+                - generic [ref=e529]:
+                  - paragraph [ref=e530]: $187,290.10
+                  - generic [ref=e531]:
+                    - paragraph [ref=e532]: Revenue
+                    - generic [ref=e533]:
+                      - img [ref=e534]
+                      - generic [ref=e536]: 13.2%
+                - generic:
+                  - generic:
+                    - paragraph: Cube Light
+                    - generic:
+                      - paragraph: Price $29,99
+                  - generic:
+                    - paragraph: $187,290.10
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 13.2%
+              - generic [ref=e537]:
+                - generic [ref=e539]:
+                  - paragraph [ref=e540]: Cat Lamp
+                  - paragraph [ref=e542]: Price $16,99
+                - generic [ref=e544]:
+                  - paragraph [ref=e545]: $12,732.88
+                  - generic [ref=e546]:
+                    - paragraph [ref=e547]: Revenue
+                    - generic [ref=e548]:
+                      - img [ref=e549]
+                      - generic [ref=e551]: 9.4%
+                - generic:
+                  - generic:
+                    - paragraph: Cat Lamp
+                    - generic:
+                      - paragraph: Price $16,99
+                  - generic:
+                    - paragraph: $12,732.88
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 9.4%
+              - generic [ref=e552]:
+                - generic [ref=e554]:
+                  - paragraph [ref=e555]: Hair Straightener
+                  - paragraph [ref=e557]: Price $29,99
+                - generic [ref=e559]:
+                  - paragraph [ref=e560]: $74,632.40
+                  - generic [ref=e561]:
+                    - paragraph [ref=e562]: Revenue
+                    - generic [ref=e563]:
+                      - img [ref=e564]
+                      - generic [ref=e566]: 2.1%
+                - generic:
+                  - generic:
+                    - paragraph: Hair Straightener
+                    - generic:
+                      - paragraph: Price $29,99
+                  - generic:
+                    - paragraph: $74,632.40
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 2.1%
+              - generic [ref=e567]:
+                - generic [ref=e569]:
+                  - paragraph [ref=e570]: Moon Lamp
+                  - paragraph [ref=e572]: Price $24,99
+                - generic [ref=e574]:
+                  - paragraph [ref=e575]: $38,176.90
+                  - generic [ref=e576]:
+                    - paragraph [ref=e577]: Revenue
+                    - generic [ref=e578]:
+                      - img [ref=e579]
+                      - generic [ref=e581]: 4.1%
+                - generic:
+                  - generic:
+                    - paragraph: Moon Lamp
+                    - generic:
+                      - paragraph: Price $24,99
+                  - generic:
+                    - paragraph: $38,176.90
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 4.1%
+              - generic [ref=e582]:
+                - generic [ref=e584]:
+                  - paragraph [ref=e585]: Mosquito Killer
+                  - paragraph [ref=e587]: Price $34,99
+                - generic [ref=e589]:
+                  - paragraph [ref=e590]: $201,012.37
+                  - generic [ref=e591]:
+                    - paragraph [ref=e592]: Revenue
+                    - generic [ref=e593]:
+                      - img [ref=e594]
+                      - generic [ref=e596]: 22.7%
+                - generic:
+                  - generic:
+                    - paragraph: Mosquito Killer
+                    - generic:
+                      - paragraph: Price $34,99
+                  - generic:
+                    - paragraph: $201,012.37
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 22.7%
+              - generic [ref=e597]:
+                - generic [ref=e599]:
+                  - paragraph [ref=e600]: Ice Cube Mold
+                  - paragraph [ref=e602]: Price $17,99
+                - generic [ref=e604]:
+                  - paragraph [ref=e605]: $83,219.75
+                  - generic [ref=e606]:
+                    - paragraph [ref=e607]: Revenue
+                    - generic [ref=e608]:
+                      - img [ref=e609]
+                      - generic [ref=e611]: 6.1%
+                - generic:
+                  - generic:
+                    - paragraph: Ice Cube Mold
+                    - generic:
+                      - paragraph: Price $17,99
+                  - generic:
+                    - paragraph: $83,219.75
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 6.1%
+              - generic [ref=e612]:
+                - generic [ref=e614]:
+                  - paragraph [ref=e615]: Wine Dispenser
+                  - paragraph [ref=e617]: Price $14,99
+                - generic [ref=e619]:
+                  - paragraph [ref=e620]: $19,472.43
+                  - generic [ref=e621]:
+                    - paragraph [ref=e622]: Revenue
+                    - generic [ref=e623]:
+                      - img [ref=e624]
+                      - generic [ref=e626]: 9.3%
+                - generic:
+                  - generic:
+                    - paragraph: Wine Dispenser
+                    - generic:
+                      - paragraph: Price $14,99
+                  - generic:
+                    - paragraph: $19,472.43
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 9.3%
+          - generic [ref=e628]:
+            - generic [ref=e630]:
+              - generic [ref=e631]:
+                - generic [ref=e633]:
+                  - paragraph [ref=e634]: Pore Cleaner
+                  - paragraph [ref=e636]: Price $22,99
+                - generic [ref=e638]:
+                  - paragraph [ref=e639]: $164,872.50
+                  - generic [ref=e640]:
+                    - paragraph [ref=e641]: Revenue
+                    - generic [ref=e642]:
+                      - img [ref=e643]
+                      - generic [ref=e645]: 12.4%
+                - generic:
+                  - generic:
+                    - paragraph: Pore Cleaner
+                    - generic:
+                      - paragraph: Price $22,99
+                  - generic:
+                    - paragraph: $164,872.50
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 12.4%
+              - generic [ref=e646]:
+                - generic [ref=e648]:
+                  - paragraph [ref=e649]: Mini Sealing Machine
+                  - paragraph [ref=e651]: Price $12,99
+                - generic [ref=e653]:
+                  - paragraph [ref=e654]: $117,904.33
+                  - generic [ref=e655]:
+                    - paragraph [ref=e656]: Revenue
+                    - generic [ref=e657]:
+                      - img [ref=e658]
+                      - generic [ref=e660]: 12.1%
+                - generic:
+                  - generic:
+                    - paragraph: Mini Sealing Machine
+                    - generic:
+                      - paragraph: Price $12,99
+                  - generic:
+                    - paragraph: $117,904.33
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 12.1%
+              - generic [ref=e661]:
+                - generic [ref=e663]:
+                  - paragraph [ref=e664]: Smart Wall Switch
+                  - paragraph [ref=e666]: Price $24,99
+                - generic [ref=e668]:
+                  - paragraph [ref=e669]: $153,770.52
+                  - generic [ref=e670]:
+                    - paragraph [ref=e671]: Revenue
+                    - generic [ref=e672]:
+                      - img [ref=e673]
+                      - generic [ref=e675]: 9.8%
+                - generic:
+                  - generic:
+                    - paragraph: Smart Wall Switch
+                    - generic:
+                      - paragraph: Price $24,99
+                  - generic:
+                    - paragraph: $153,770.52
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 9.8%
+              - generic [ref=e676]:
+                - generic [ref=e678]:
+                  - paragraph [ref=e679]: Mosquito Slapper
+                  - paragraph [ref=e681]: Price $29,99
+                - generic [ref=e683]:
+                  - paragraph [ref=e684]: $42,432.12
+                  - generic [ref=e685]:
+                    - paragraph [ref=e686]: Revenue
+                    - generic [ref=e687]:
+                      - img [ref=e688]
+                      - generic [ref=e690]: 13.7%
+                - generic:
+                  - generic:
+                    - paragraph: Mosquito Slapper
+                    - generic:
+                      - paragraph: Price $29,99
+                  - generic:
+                    - paragraph: $42,432.12
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 13.7%
+              - generic [ref=e691]:
+                - generic [ref=e693]:
+                  - paragraph [ref=e694]: Popcorn Maker
+                  - paragraph [ref=e696]: Price $34,99
+                - generic [ref=e698]:
+                  - paragraph [ref=e699]: $81,273.16
+                  - generic [ref=e700]:
+                    - paragraph [ref=e701]: Revenue
+                    - generic [ref=e702]:
+                      - img [ref=e703]
+                      - generic [ref=e705]: 11.2%
+                - generic:
+                  - generic:
+                    - paragraph: Popcorn Maker
+                    - generic:
+                      - paragraph: Price $34,99
+                  - generic:
+                    - paragraph: $81,273.16
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 11.2%
+              - generic [ref=e706]:
+                - generic [ref=e708]:
+                  - paragraph [ref=e709]: Bubble Gun
+                  - paragraph [ref=e711]: Price $21.99
+                - generic [ref=e713]:
+                  - paragraph [ref=e714]: $19,918.80
+                  - generic [ref=e715]:
+                    - paragraph [ref=e716]: Revenue
+                    - generic [ref=e717]:
+                      - img [ref=e718]
+                      - generic [ref=e720]: 4.7%
+                - generic:
+                  - generic:
+                    - paragraph: Bubble Gun
+                    - generic:
+                      - paragraph: Price $21.99
+                  - generic:
+                    - paragraph: $19,918.80
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 4.7%
+              - generic [ref=e721]:
+                - generic [ref=e723]:
+                  - paragraph [ref=e724]: Moon Stand
+                  - paragraph [ref=e726]: Price $27,99
+                - generic [ref=e728]:
+                  - paragraph [ref=e729]: $24,178.12
+                  - generic [ref=e730]:
+                    - paragraph [ref=e731]: Revenue
+                    - generic [ref=e732]:
+                      - img [ref=e733]
+                      - generic [ref=e735]: 11.3%
+                - generic:
+                  - generic:
+                    - paragraph: Moon Stand
+                    - generic:
+                      - paragraph: Price $27,99
+                  - generic:
+                    - paragraph: $24,178.12
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 11.3%
+              - generic [ref=e736]:
+                - generic [ref=e738]:
+                  - paragraph [ref=e739]: Baby Pacifier Feeder
+                  - paragraph [ref=e741]: Price $14,99
+                - generic [ref=e743]:
+                  - paragraph [ref=e744]: $36,804.12
+                  - generic [ref=e745]:
+                    - paragraph [ref=e746]: Revenue
+                    - generic [ref=e747]:
+                      - img [ref=e748]
+                      - generic [ref=e750]: 2.8%
+                - generic:
+                  - generic:
+                    - paragraph: Baby Pacifier Feeder
+                    - generic:
+                      - paragraph: Price $14,99
+                  - generic:
+                    - paragraph: $36,804.12
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 2.8%
+              - generic [ref=e751]:
+                - generic [ref=e753]:
+                  - paragraph [ref=e754]: Baby Pacifier
+                  - paragraph [ref=e756]: Price $9.99
+                - generic [ref=e758]:
+                  - paragraph [ref=e759]: $11,179,40
+                  - generic [ref=e760]:
+                    - paragraph [ref=e761]: Revenue
+                    - generic [ref=e762]:
+                      - img [ref=e763]
+                      - generic [ref=e765]: 4.6%
+                - generic:
+                  - generic:
+                    - paragraph: Baby Pacifier
+                    - generic:
+                      - paragraph: Price $9.99
+                  - generic:
+                    - paragraph: $11,179,40
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 4.6%
+            - generic [ref=e767]:
+              - generic [ref=e768]:
+                - generic [ref=e770]:
+                  - paragraph [ref=e771]: Pore Cleaner
+                  - paragraph [ref=e773]: Price $22,99
+                - generic [ref=e775]:
+                  - paragraph [ref=e776]: $164,872.50
+                  - generic [ref=e777]:
+                    - paragraph [ref=e778]: Revenue
+                    - generic [ref=e779]:
+                      - img [ref=e780]
+                      - generic [ref=e782]: 12.4%
+                - generic:
+                  - generic:
+                    - paragraph: Pore Cleaner
+                    - generic:
+                      - paragraph: Price $22,99
+                  - generic:
+                    - paragraph: $164,872.50
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 12.4%
+              - generic [ref=e783]:
+                - generic [ref=e785]:
+                  - paragraph [ref=e786]: Mini Sealing Machine
+                  - paragraph [ref=e788]: Price $12,99
+                - generic [ref=e790]:
+                  - paragraph [ref=e791]: $117,904.33
+                  - generic [ref=e792]:
+                    - paragraph [ref=e793]: Revenue
+                    - generic [ref=e794]:
+                      - img [ref=e795]
+                      - generic [ref=e797]: 12.1%
+                - generic:
+                  - generic:
+                    - paragraph: Mini Sealing Machine
+                    - generic:
+                      - paragraph: Price $12,99
+                  - generic:
+                    - paragraph: $117,904.33
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 12.1%
+              - generic [ref=e798]:
+                - generic [ref=e800]:
+                  - paragraph [ref=e801]: Smart Wall Switch
+                  - paragraph [ref=e803]: Price $24,99
+                - generic [ref=e805]:
+                  - paragraph [ref=e806]: $153,770.52
+                  - generic [ref=e807]:
+                    - paragraph [ref=e808]: Revenue
+                    - generic [ref=e809]:
+                      - img [ref=e810]
+                      - generic [ref=e812]: 9.8%
+                - generic:
+                  - generic:
+                    - paragraph: Smart Wall Switch
+                    - generic:
+                      - paragraph: Price $24,99
+                  - generic:
+                    - paragraph: $153,770.52
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 9.8%
+              - generic [ref=e813]:
+                - generic [ref=e815]:
+                  - paragraph [ref=e816]: Mosquito Slapper
+                  - paragraph [ref=e818]: Price $29,99
+                - generic [ref=e820]:
+                  - paragraph [ref=e821]: $42,432.12
+                  - generic [ref=e822]:
+                    - paragraph [ref=e823]: Revenue
+                    - generic [ref=e824]:
+                      - img [ref=e825]
+                      - generic [ref=e827]: 13.7%
+                - generic:
+                  - generic:
+                    - paragraph: Mosquito Slapper
+                    - generic:
+                      - paragraph: Price $29,99
+                  - generic:
+                    - paragraph: $42,432.12
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 13.7%
+              - generic [ref=e828]:
+                - generic [ref=e830]:
+                  - paragraph [ref=e831]: Popcorn Maker
+                  - paragraph [ref=e833]: Price $34,99
+                - generic [ref=e835]:
+                  - paragraph [ref=e836]: $81,273.16
+                  - generic [ref=e837]:
+                    - paragraph [ref=e838]: Revenue
+                    - generic [ref=e839]:
+                      - img [ref=e840]
+                      - generic [ref=e842]: 11.2%
+                - generic:
+                  - generic:
+                    - paragraph: Popcorn Maker
+                    - generic:
+                      - paragraph: Price $34,99
+                  - generic:
+                    - paragraph: $81,273.16
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 11.2%
+              - generic [ref=e843]:
+                - generic [ref=e845]:
+                  - paragraph [ref=e846]: Bubble Gun
+                  - paragraph [ref=e848]: Price $21.99
+                - generic [ref=e850]:
+                  - paragraph [ref=e851]: $19,918.80
+                  - generic [ref=e852]:
+                    - paragraph [ref=e853]: Revenue
+                    - generic [ref=e854]:
+                      - img [ref=e855]
+                      - generic [ref=e857]: 4.7%
+                - generic:
+                  - generic:
+                    - paragraph: Bubble Gun
+                    - generic:
+                      - paragraph: Price $21.99
+                  - generic:
+                    - paragraph: $19,918.80
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 4.7%
+              - generic [ref=e858]:
+                - generic [ref=e860]:
+                  - paragraph [ref=e861]: Moon Stand
+                  - paragraph [ref=e863]: Price $27,99
+                - generic [ref=e865]:
+                  - paragraph [ref=e866]: $24,178.12
+                  - generic [ref=e867]:
+                    - paragraph [ref=e868]: Revenue
+                    - generic [ref=e869]:
+                      - img [ref=e870]
+                      - generic [ref=e872]: 11.3%
+                - generic:
+                  - generic:
+                    - paragraph: Moon Stand
+                    - generic:
+                      - paragraph: Price $27,99
+                  - generic:
+                    - paragraph: $24,178.12
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 11.3%
+              - generic [ref=e873]:
+                - generic [ref=e875]:
+                  - paragraph [ref=e876]: Baby Pacifier Feeder
+                  - paragraph [ref=e878]: Price $14,99
+                - generic [ref=e880]:
+                  - paragraph [ref=e881]: $36,804.12
+                  - generic [ref=e882]:
+                    - paragraph [ref=e883]: Revenue
+                    - generic [ref=e884]:
+                      - img [ref=e885]
+                      - generic [ref=e887]: 2.8%
+                - generic:
+                  - generic:
+                    - paragraph: Baby Pacifier Feeder
+                    - generic:
+                      - paragraph: Price $14,99
+                  - generic:
+                    - paragraph: $36,804.12
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 2.8%
+              - generic [ref=e888]:
+                - generic [ref=e890]:
+                  - paragraph [ref=e891]: Baby Pacifier
+                  - paragraph [ref=e893]: Price $9.99
+                - generic [ref=e895]:
+                  - paragraph [ref=e896]: $11,179,40
+                  - generic [ref=e897]:
+                    - paragraph [ref=e898]: Revenue
+                    - generic [ref=e899]:
+                      - img [ref=e900]
+                      - generic [ref=e902]: 4.6%
+                - generic:
+                  - generic:
+                    - paragraph: Baby Pacifier
+                    - generic:
+                      - paragraph: Price $9.99
+                  - generic:
+                    - paragraph: $11,179,40
+                    - generic:
+                      - paragraph: Revenue
+                      - generic:
+                        - img
+                        - generic: 4.6%
+        - img [ref=e905] [cursor=pointer]
+    - generic [ref=e911]:
+      - generic [ref=e914]:
+        - heading "Dropship products" [level=2] [ref=e916]
+        - paragraph [ref=e918]: Every tool you need to cover product research, ad spying, sales tracking, and competitor analysis, all in one account.
+      - generic [ref=e919]:
+        - generic [ref=e923]:
+          - tab "View tab" [ref=e924] [cursor=pointer]
+          - generic [ref=e926]: Sales Tracker
+          - tab "View tab" [ref=e927] [cursor=pointer]
+          - generic [ref=e929]: Portfolio
+          - tab "View tab" [ref=e930] [cursor=pointer]
+          - generic [ref=e932]: Shop Library
+          - tab "View tab" [ref=e933] [cursor=pointer]
+          - generic [ref=e935]: Ad Library
+          - tab "View tab" [ref=e936] [cursor=pointer]
+          - generic [ref=e938]: Product Library
+          - tab "View tab" [ref=e939] [cursor=pointer]
+          - generic [ref=e941]: Advertiser Tracker
+          - tab "View tab" [ref=e942] [cursor=pointer]
+          - generic [ref=e944]: Competitor Research
+          - tab "View tab" [ref=e945] [cursor=pointer]
+          - generic [ref=e947]: Advertiser Library
+          - tab "View tab" [ref=e948] [cursor=pointer]
+          - generic [ref=e950]: Magic AI Search
+          - tab "View tab" [ref=e951] [cursor=pointer]
+          - generic [ref=e953]: Creator Library
+        - generic [ref=e955]:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - heading "Sales Tracker" [level=3]
+                    - generic:
+                      - paragraph: Add TikTok shops and products to Sales Tracker to effectively track sales. Ensuring you spot the next big opportunity before others.
+                    - link "View product":
+                      - /url: /solutions/sales-tracker
+                      - generic:
+                        - generic:
+                          - generic: View product
+              - generic:
+                - generic:
+                  - generic:
+                    - paragraph: No more guesswork
+                  - generic:
+                    - paragraph: Review sales and revenue from millions of products and shops to make data-driven decisions.
+                - generic:
+                  - generic:
+                    - paragraph: Daily and historical metrics
+                  - generic:
+                    - paragraph: Every tracked item shows sales today, yesterday, 7 days, 30 days, and total revenue.
+                - generic:
+                  - generic:
+                    - paragraph: Handsfree
+                  - generic:
+                    - paragraph: All you need to do is add a Tiktok shop or product listing to Sales Tracker, and we'll handle the rest.
+          - generic [ref=e957]:
+            - generic [ref=e961]:
+              - generic [ref=e962]:
+                - paragraph [ref=e964]: Advertiser Tracker
+                - generic [ref=e966]:
+                  - img [ref=e970]
+                  - generic [ref=e974]: TRENDING
+              - paragraph [ref=e976]: Track any Facebook advertiser and see their new ads the moment they launch. Organize them in Collections by niche or campaign type.
+              - link "View product" [ref=e977] [cursor=pointer]:
+                - /url: /solutions/advertiser-tracker
+                - generic [ref=e980]: View product
+            - generic [ref=e982]:
+              - generic [ref=e983]:
+                - paragraph [ref=e985]: Paste a Meta Ad Library link
+                - paragraph [ref=e987]: One URL is all we need. Paste a Meta Ad Library link and the advertiser lands in your tracker.
+              - generic [ref=e988]:
+                - paragraph [ref=e990]: Track from any tool
+                - paragraph [ref=e992]: Add advertisers from Advertiser Library, Ad Library results, or Magic AI Search, all in one click.
+              - generic [ref=e993]:
+                - paragraph [ref=e995]: Organize in Collections
+                - paragraph [ref=e997]: Group tracked advertisers by niche, scale, or campaign type in your own collections.
+    - generic [ref=e1001]:
+      - generic [ref=e1009]:
+        - heading "Millions of products" [level=2] [ref=e1012]
+        - paragraph [ref=e1014]: Search millions of TikTok Shop products with live sales and revenue. Filter by price, reviews, and category to find winners.
+        - link "Learn More" [ref=e1016] [cursor=pointer]:
+          - /url: /solutions/product-library
+          - generic [ref=e1019]: Learn More
+      - generic [ref=e1031]:
+        - heading "Track Stores Revenue" [level=2] [ref=e1034]
+        - paragraph [ref=e1036]: Paste any TikTok Shop link and watch daily sales, revenue, and growth rate show up within 24 hours.
+        - link "Learn More" [ref=e1038] [cursor=pointer]:
+          - /url: /solutions/sales-tracker
+          - generic [ref=e1041]: Learn More
+    - generic [ref=e1048]:
+      - generic [ref=e1051]:
+        - 'heading "NEW: Magic AI Search" [level=2] [ref=e1053]'
+        - paragraph [ref=e1055]: Find your next profitable product by exploring our vast database with millions of products and ads, using our smart search.
+        - link "Learn More" [ref=e1058] [cursor=pointer]:
+          - /url: /solutions/magic-ai-search
+          - generic [ref=e1061]: Learn More
+      - list [ref=e1071]:
+        - listitem [ref=e1072]:
+          - generic [ref=e1073]: Find me the best selling products in Europe...
+        - listitem [ref=e1074]:
+          - generic [ref=e1075]: Show me new Shopify stores in fashion
+        - listitem [ref=e1076]:
+          - generic [ref=e1077]: Find me the best selling products in Europe
+        - listitem [ref=e1078]:
+          - generic [ref=e1079]: Which ads are spending the most on pet products?
+        - listitem [ref=e1080]:
+          - generic [ref=e1081]: Show me top earners in home decor
+        - listitem [ref=e1082]:
+          - generic [ref=e1083]: What is trending on TikTok Shop right now?
+        - listitem [ref=e1084]:
+          - generic [ref=e1085]: Find what’s selling right now
+    - generic [ref=e1091]:
+      - generic [ref=e1094]:
+        - link "Dropship 2.0 is live! Check what’s new" [ref=e1096] [cursor=pointer]:
+          - /url: "#"
+          - paragraph [ref=e1097]: Dropship 2.0 is live!
+          - generic [ref=e1099]:
+            - paragraph [ref=e1100]: Check what’s new
+            - generic [ref=e1101]:
+              - img [ref=e1103]
+              - generic:
+                - img
+        - heading "Perks of Dropship" [level=2] [ref=e1106]
+        - paragraph [ref=e1108]: Built by sellers for sellers with the mission to help entrepreneurs start and grow successful businesses.
+      - generic [ref=e1112]:
+        - generic [ref=e1121]:
+          - paragraph [ref=e1125]: Handsfree
+          - paragraph [ref=e1127]: Receive algorithmically detected product drops on a weekly basis, straight to your Dropship portfolio.
+        - generic [ref=e1140]:
+          - paragraph [ref=e1144]: Save time & money
+          - paragraph [ref=e1146]: Remain informed about any product trends, market shifts, or potential opportunities that might help scale your business.
+        - generic [ref=e1159]:
+          - paragraph [ref=e1163]: One sale, bill paid
+          - paragraph [ref=e1165]: Roughly one sale is all you need to cover the cost of a subscription with us. On the other hand, one winner could do wonders.
+        - generic [ref=e1178]:
+          - paragraph [ref=e1182]: Extensive insights
+          - paragraph [ref=e1184]: Give yourself an excellent foundation for success with the vast amounts of product insights that are included in each drop.
+        - generic [ref=e1197]:
+          - paragraph [ref=e1201]: Stay up to date
+          - paragraph [ref=e1203]: Why hire a VA or allocate your time to do product research? Your time is valuable and better spent on other parts of your business.
+        - generic [ref=e1216]:
+          - paragraph [ref=e1220]: On the go
+          - paragraph [ref=e1222]: A drop just released, and you are not close to your computer? Access Dropship directly from your mobile device.
+    - generic [ref=e1232]:
+      - paragraph [ref=e1235]: 4.8/5 Rating
+      - heading "Dropship Chrome Extension" [level=2] [ref=e1237]
+      - paragraph [ref=e1239]: Install the extension and unlock Facebook ad spend data, Shopify store analysis, and one-click imports on every listing you visit.
+      - link "Install Extension" [ref=e1242] [cursor=pointer]:
+        - /url: https://chromewebstore.google.com/detail/dropship-product-research/pgccoaecgcgnhffkjjcaonjoockggmng?pli=1
+        - generic [ref=e1245]: Install Extension
+    - generic [ref=e1251]:
+      - generic [ref=e1254]:
+        - link "4.8/5 Rating 100k+ active users" [ref=e1256] [cursor=pointer]:
+          - /url: https://www.trustpilot.com/review/dropship.io
+          - paragraph [ref=e1257]: 4.8/5 Rating
+          - generic [ref=e1259]:
+            - paragraph [ref=e1260]: 100k+ active users
+            - generic [ref=e1261]:
+              - img [ref=e1263]
+              - generic:
+                - img
+        - heading "Track the revenue of shops in one click" [level=2] [ref=e1266]
+        - paragraph [ref=e1268]: Dropship enables access to a Tiktok shop's product offerings and revenue data. Empowering you to identify winning products and minimize the risk of selling low performing items.
+      - generic [ref=e1271]:
+        - generic:
+          - generic:
+            - generic: $14 Sale
+          - generic:
+            - generic: $99 Sale
+          - generic:
+            - generic: $74 Sale
+          - generic:
+            - generic: $42 Sale
+          - generic:
+            - generic: $33 Sale
+          - generic:
+            - generic: $84 Sale
+          - generic:
+            - generic: $52 Sale
+          - generic:
+            - generic: $482 Sale
+          - generic:
+            - generic: $24 Sale
+          - generic:
+            - generic: $38 Sale
+          - generic:
+            - generic: $51 Sale
+          - generic:
+            - generic: $74 Sale
+          - generic:
+            - generic: $64 Sale
+          - generic:
+            - generic: $61 Sale
+          - generic:
+            - generic: $28 Sale
+          - generic:
+            - generic: $56 Sale
+          - generic:
+            - generic: $88 Sale
+          - generic:
+            - generic: $48 Sale
+          - generic:
+            - generic: $22 Sale
+          - generic:
+            - generic: $34 Sale
+        - generic [ref=e1273]: Loading…
+    - generic [ref=e1277]:
+      - generic [ref=e1280]:
+        - link "4.8/5 Rating 100k+ active users" [ref=e1282] [cursor=pointer]:
+          - /url: https://www.trustpilot.com/review/dropship.io
+          - paragraph [ref=e1283]: 4.8/5 Rating
+          - generic [ref=e1285]:
+            - paragraph [ref=e1286]: 100k+ active users
+            - generic [ref=e1287]:
+              - img [ref=e1289]
+              - generic:
+                - img
+        - heading "Browse our latest articles" [level=2] [ref=e1292]
+      - generic [ref=e1293]:
+        - list [ref=e1295]:
+          - listitem [ref=e1296]:
+            - generic [ref=e1298]:
+              - generic [ref=e1299]:
+                - generic [ref=e1300]:
+                  - generic [ref=e1301]: January 22, 2026 • 22 min read
+                  - link "Read Article" [ref=e1303] [cursor=pointer]:
+                    - /url: /blog/dropshipping-for-dummies
+                    - generic [ref=e1306]: Read Article
+                - 'heading "Dropshipping for Dummies: A Beginner’s Ultimate Guide to Dropshipping" [level=3] [ref=e1307]'
+                - paragraph [ref=e1308]: What is dropshipping, and why is it a business that you should consider?
+              - link [ref=e1309] [cursor=pointer]:
+                - /url: /blog/dropshipping-for-dummies
+        - list [ref=e1311]:
+          - listitem [ref=e1312]:
+            - generic [ref=e1314]:
+              - generic [ref=e1315]:
+                - generic [ref=e1317]: January 22, 2026 • 18 min read
+                - heading "9 Best Dropshipping Software Programs (Free & Paid)" [level=4] [ref=e1318]
+                - paragraph [ref=e1319]: I will show you several of the best dropshipping software programs you can use for product sourcing and research.
+              - link [ref=e1320] [cursor=pointer]:
+                - /url: /blog/best-dropshipping-software
+          - listitem [ref=e1321]:
+            - generic [ref=e1323]:
+              - generic [ref=e1324]:
+                - generic [ref=e1326]: January 22, 2026 • 48 min read
+                - 'heading "24 Best Dropshipping Suppliers in the US: Buy Low, Sell High!" [level=4] [ref=e1327]'
+                - paragraph [ref=e1328]: In my experience, the best suppliers in the US are those who understand that you are in the dropshipping business. If they built their business model around dropshipping, they could support you.
+              - link [ref=e1329] [cursor=pointer]:
+                - /url: /blog/best-dropshipping-suppliers-in-the-us
+          - listitem [ref=e1330]:
+            - generic [ref=e1332]:
+              - generic [ref=e1333]:
+                - generic [ref=e1335]: January 22, 2026 • 16 min read
+                - heading "15 Best Dropshipping Websites for Running an Ecommerce Store" [level=4] [ref=e1336]
+                - paragraph [ref=e1337]: In this article, I will give you a list of the 15 best dropshipping websites. I hand-picked these sites for their ease of use, product range, policies, and shipping times.
+              - link [ref=e1338] [cursor=pointer]:
+                - /url: /blog/best-dropshipping-websites
+          - listitem [ref=e1339]:
+            - generic [ref=e1341]:
+              - generic [ref=e1342]:
+                - generic [ref=e1344]: October 1, 2025 • 9 min read
+                - heading "7 Best TikTok Agency Ad Account Providers in 2025" [level=4] [ref=e1345]
+                - paragraph [ref=e1346]: Running TikTok ads is one of the most effective ways to generate revenue. These 7 TikTok Agency Ad Account providers scale this strategy exponentially.
+              - link [ref=e1347] [cursor=pointer]:
+                - /url: /blog/best-tiktok-agency-ad-account-providers
+          - listitem [ref=e1348]:
+            - generic [ref=e1350]:
+              - generic [ref=e1351]:
+                - generic [ref=e1353]: June 28, 2025 • 23 min read
+                - heading "9 Best High-Ticket Products for Dropshipping" [level=4] [ref=e1354]
+                - paragraph [ref=e1355]: Where do you go from here? The next step I recommend is to first validate your idea. Use Dropship.IO to find products, see how they perform in terms of sales, and spy on your competitors. Dropship.IO is available for free for 7-days so try it now!
+              - link [ref=e1356] [cursor=pointer]:
+                - /url: /blog/best-high-ticket-products
+    - generic [ref=e1359]:
+      - list [ref=e1360]:
+        - listitem [ref=e1361]:
+          - link "Sales Tracker" [ref=e1362] [cursor=pointer]:
+            - /url: /solutions/sales-tracker
+          - generic:
+            - generic: Sales Tracker
+        - listitem [ref=e1363]:
+          - link "Portfolio" [ref=e1364] [cursor=pointer]:
+            - /url: /solutions/portfolio
+          - generic:
+            - generic: Portfolio
+        - listitem [ref=e1365]:
+          - link "Shop Library" [ref=e1366] [cursor=pointer]:
+            - /url: /solutions/shop-library
+          - generic:
+            - generic: Shop Library
+        - listitem [ref=e1367]:
+          - link "Advertiser Tracker" [ref=e1368] [cursor=pointer]:
+            - /url: /solutions/advertiser-tracker
+          - generic:
+            - generic: Advertiser Tracker
+        - listitem [ref=e1369]:
+          - link "Ad Library" [ref=e1370] [cursor=pointer]:
+            - /url: /solutions/ad-library
+          - generic:
+            - generic: Ad Library
+        - listitem [ref=e1371]:
+          - link "Product Library" [ref=e1372] [cursor=pointer]:
+            - /url: /solutions/product-library
+          - generic:
+            - generic: Product Library
+        - listitem [ref=e1373]:
+          - link "Competitors" [ref=e1374] [cursor=pointer]:
+            - /url: /solutions/competitor-research
+          - generic:
+            - generic: Competitors
+        - listitem [ref=e1375]:
+          - link "Advertiser Library" [ref=e1376] [cursor=pointer]:
+            - /url: /solutions/advertiser-library
+          - generic:
+            - generic: Advertiser Library
+        - listitem [ref=e1377]:
+          - link "Magic AI Search" [ref=e1378] [cursor=pointer]:
+            - /url: /solutions/magic-ai-search
+          - generic:
+            - generic: Magic AI Search
+        - listitem [ref=e1379]:
+          - link "Creator Library" [ref=e1380] [cursor=pointer]:
+            - /url: /solutions/creator-library
+          - generic:
+            - generic: Creator Library
+      - generic [ref=e1383]:
+        - paragraph [ref=e1385]: Launch your next winning product today
+        - paragraph [ref=e1387]: Find your next winning product using smart filters across millions of products, stores, and ads, tailored to your niche.
+    - generic [ref=e1388]:
+      - generic [ref=e1394]:
+        - heading "Ready to begin?" [level=2] [ref=e1396]
+        - paragraph [ref=e1398]: Start your free trial and start finding winning products today.
+        - link "Start Free Trial" [ref=e1401] [cursor=pointer]:
+          - /url: https://app.dropship.io/sign-up
+          - generic [ref=e1404]: Start Free Trial
+      - generic [ref=e1406]:
+        - generic [ref=e1407]:
+          - generic [ref=e1408]:
+            - generic [ref=e1409]:
+              - link "Dropship - Go to homepage" [ref=e1410] [cursor=pointer]:
+                - /url: /
+                - img [ref=e1411]
+              - paragraph [ref=e1424]: Discover Products With Potential
+              - generic [ref=e1425]:
+                - paragraph [ref=e1426]: Dropship FZCO
+                - paragraph [ref=e1427]: "Premises No: 33007-001, IFZA Business Park, Dubai Silicon Oasis, DDP, Building A1"
+                - paragraph [ref=e1428]: United Arab Emirates
+            - list [ref=e1430]:
+              - listitem [ref=e1431]:
+                - link "en" [ref=e1432] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e1433]:
+                - link "de" [ref=e1434] [cursor=pointer]:
+                  - /url: /de
+              - listitem [ref=e1435]:
+                - link "fr" [ref=e1436] [cursor=pointer]:
+                  - /url: /fr
+              - listitem [ref=e1437]:
+                - link "nl" [ref=e1438] [cursor=pointer]:
+                  - /url: /nl
+              - listitem [ref=e1439]:
+                - link "es" [ref=e1440] [cursor=pointer]:
+                  - /url: /es
+          - generic [ref=e1441]:
+            - generic [ref=e1442]:
+              - paragraph [ref=e1444]:
+                - text: Tools
+                - emphasis
+              - list [ref=e1445]:
+                - listitem [ref=e1446]:
+                  - link "Ad Library HOT" [ref=e1447] [cursor=pointer]:
+                    - /url: /solutions/ad-library
+                    - generic [ref=e1448]: Ad Library
+                    - generic [ref=e1450]:
+                      - img [ref=e1454]
+                      - generic [ref=e1458]: HOT
+                - listitem [ref=e1459]:
+                  - link "Advertiser Tracker TRENDING" [ref=e1460] [cursor=pointer]:
+                    - /url: /solutions/advertiser-tracker
+                    - generic [ref=e1461]: Advertiser Tracker
+                    - generic [ref=e1463]:
+                      - img [ref=e1467]
+                      - generic [ref=e1469]: TRENDING
+                - listitem
+                - listitem [ref=e1470]:
+                  - link "Creator Library NEW" [ref=e1471] [cursor=pointer]:
+                    - /url: /solutions/creator-library
+                    - generic [ref=e1472]: Creator Library
+                    - generic [ref=e1474]:
+                      - img [ref=e1478]
+                      - generic [ref=e1482]: NEW
+                - link "Advertiser Library" [ref=e1483] [cursor=pointer]:
+                  - /url: /solutions/advertiser-library
+                  - generic [ref=e1484]: Advertiser Library
+                - listitem [ref=e1485]:
+                  - link "Product Library" [ref=e1486] [cursor=pointer]:
+                    - /url: /solutions/product-library
+                    - generic [ref=e1487]: Product Library
+                - listitem [ref=e1488]:
+                  - link "Shop Library" [ref=e1489] [cursor=pointer]:
+                    - /url: /solutions/shop-library
+                    - generic [ref=e1490]: Shop Library
+                - listitem [ref=e1491]:
+                  - link "Sales Tracker" [ref=e1492] [cursor=pointer]:
+                    - /url: /solutions/sales-tracker
+                    - generic [ref=e1493]: Sales Tracker
+                - listitem [ref=e1494]:
+                  - link "Portfolio" [ref=e1495] [cursor=pointer]:
+                    - /url: /solutions/portfolio
+                    - generic [ref=e1496]: Portfolio
+                - listitem [ref=e1497]:
+                  - link "Competitor Research" [ref=e1498] [cursor=pointer]:
+                    - /url: /solutions/competitor-research
+                    - generic [ref=e1499]: Competitor Research
+                - listitem [ref=e1500]:
+                  - link "Magic AI Search" [ref=e1501] [cursor=pointer]:
+                    - /url: /solutions/magic-ai-search
+                    - generic [ref=e1502]: Magic AI Search
+            - generic [ref=e1503]:
+              - paragraph [ref=e1505]: Free Tools
+              - list [ref=e1506]:
+                - listitem [ref=e1507]:
+                  - link "Pre-built Shopify Stores" [ref=e1508] [cursor=pointer]:
+                    - /url: https://start.dropship.io/
+                    - generic [ref=e1509]: Pre-built Shopify Stores
+                - listitem [ref=e1510]:
+                  - link "Theme Detector" [ref=e1511] [cursor=pointer]:
+                    - /url: /free-tools/theme-detector
+                    - generic [ref=e1512]: Theme Detector
+                - listitem [ref=e1513]:
+                  - link "Interest Explorer" [ref=e1514] [cursor=pointer]:
+                    - /url: /free-tools/interest-explorer
+                    - generic [ref=e1515]: Interest Explorer
+                - listitem [ref=e1516]:
+                  - link "Numbers Breakdown" [ref=e1517] [cursor=pointer]:
+                    - /url: /free-tools/numbers-breakdown
+                    - generic [ref=e1518]: Numbers Breakdown
+                - listitem [ref=e1519]:
+                  - link "CPA Calculator" [ref=e1520] [cursor=pointer]:
+                    - /url: /free-tools/cpa-calculator
+                    - generic [ref=e1521]: CPA Calculator
+                - listitem [ref=e1522]:
+                  - link "ROAS Calculator" [ref=e1523] [cursor=pointer]:
+                    - /url: /free-tools/roas-calculator
+                    - generic [ref=e1524]: ROAS Calculator
+                - listitem [ref=e1525]:
+                  - link "BEROAS Calculator" [ref=e1526] [cursor=pointer]:
+                    - /url: /free-tools/beroas-calculator
+                    - generic [ref=e1527]: BEROAS Calculator
+            - generic [ref=e1528]:
+              - paragraph [ref=e1530]: Company
+              - list [ref=e1531]:
+                - listitem [ref=e1532]:
+                  - link "Pricing" [ref=e1533] [cursor=pointer]:
+                    - /url: /pricing
+                    - generic [ref=e1534]: Pricing
+                - listitem [ref=e1535]:
+                  - link "About" [ref=e1536] [cursor=pointer]:
+                    - /url: /about
+                    - generic [ref=e1537]: About
+                - listitem [ref=e1538]:
+                  - link "Affiliate Program" [ref=e1539] [cursor=pointer]:
+                    - /url: /affiliate
+                    - generic [ref=e1540]: Affiliate Program
+                - listitem [ref=e1541]:
+                  - link "Contact" [ref=e1542] [cursor=pointer]:
+                    - /url: /contact
+                    - generic [ref=e1543]: Contact
+            - generic [ref=e1544]:
+              - paragraph [ref=e1546]: Resources
+              - list [ref=e1547]:
+                - listitem [ref=e1548]:
+                  - link "Blog" [ref=e1549] [cursor=pointer]:
+                    - /url: /blog
+                    - generic [ref=e1550]: Blog
+                - listitem [ref=e1551]:
+                  - link "Community" [ref=e1552] [cursor=pointer]:
+                    - /url: https://discord.com/invite/dropship
+                    - generic [ref=e1553]: Community
+                - listitem [ref=e1554]:
+                  - link "Dropship University" [ref=e1555] [cursor=pointer]:
+                    - /url: /university
+                    - generic [ref=e1556]: Dropship University
+                - listitem [ref=e1557]:
+                  - link "FAQs" [ref=e1558] [cursor=pointer]:
+                    - /url: /faq
+                    - generic [ref=e1559]: FAQs
+        - generic [ref=e1560]:
+          - paragraph [ref=e1562]: Copyright © 2026 Dropship. All Rights Reserved.
+          - list [ref=e1563]:
+            - listitem [ref=e1564]:
+              - link "Follow us on Instagram" [ref=e1565] [cursor=pointer]:
+                - /url: https://instagram.com/dropship
+            - listitem [ref=e1568]:
+              - link "Follow us on TikTok" [ref=e1569] [cursor=pointer]:
+                - /url: https://tiktok.com/@dropship
+          - list [ref=e1572]:
+            - listitem [ref=e1573]:
+              - link "Cookie Policy" [ref=e1574] [cursor=pointer]:
+                - /url: /cookie-policy
+                - generic [ref=e1575]: Cookie Policy
+            - listitem [ref=e1576]:
+              - link "Privacy Policy" [ref=e1577] [cursor=pointer]:
+                - /url: /privacy-policy
+                - generic [ref=e1578]: Privacy Policy
+            - listitem [ref=e1579]:
+              - link "Terms and Conditions" [ref=e1580] [cursor=pointer]:
+                - /url: /terms-and-conditions
+                - generic [ref=e1581]: Terms and Conditions

@@ -1,0 +1,469 @@
+- generic [active] [ref=e1]:
+  - dialog "This website uses cookies" [ref=e2]:
+    - generic [ref=e3]:
+      - link "Cookiebot by Usercentrics - opens in a new window" [ref=e6] [cursor=pointer]:
+        - /url: https://www.cookiebot.com/en/what-is-behind-powered-by-cookiebot/?utm_source=banner_cb&utm_medium=referral&utm_content=v2
+        - img [ref=e7]
+      - tablist [ref=e34]:
+        - tab "Consent" [selected] [ref=e35] [cursor=pointer]
+        - tab "Details" [ref=e36] [cursor=pointer]
+        - tab "About" [ref=e37] [cursor=pointer]
+      - tabpanel "Consent" [ref=e39]:
+        - generic [ref=e41]:
+          - heading "This website uses cookies" [level=2] [ref=e42]
+          - generic [ref=e43]: We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.
+        - group "Consent Selection" [ref=e50]:
+          - generic [ref=e51]: Consent Selection
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - strong [ref=e55]: Necessary
+              - generic [ref=e56]:
+                - checkbox "Necessary" [checked] [disabled]
+            - generic [ref=e57]:
+              - strong [ref=e59] [cursor=pointer]: Preferences
+              - switch "Preferences" [ref=e61] [cursor=pointer]
+            - generic [ref=e62]:
+              - strong [ref=e64] [cursor=pointer]: Statistics
+              - switch "Statistics" [ref=e66] [cursor=pointer]
+            - generic [ref=e67]:
+              - strong [ref=e69] [cursor=pointer]: Marketing
+              - switch "Marketing" [ref=e71] [cursor=pointer]
+      - generic [ref=e75]:
+        - button "Deny" [ref=e76] [cursor=pointer]
+        - button "Allow selection" [ref=e77] [cursor=pointer]
+        - button "Allow all" [ref=e78] [cursor=pointer]
+  - generic [ref=e80]:
+    - link "Logo" [ref=e81] [cursor=pointer]:
+      - /url: /
+    - generic [ref=e82]:
+      - link "Home" [ref=e83] [cursor=pointer]:
+        - /url: /
+      - link "About us" [ref=e84] [cursor=pointer]:
+        - /url: /about-us
+      - link "Commodities" [ref=e85] [cursor=pointer]:
+        - /url: /commodities
+      - link "Infrastructure" [ref=e86] [cursor=pointer]:
+        - /url: /infrastructure
+      - link "Sustainability and Impact" [ref=e87] [cursor=pointer]:
+        - /url: /sustainability-and-impact
+    - generic [ref=e88]:
+      - link "News" [ref=e89] [cursor=pointer]:
+        - /url: /the-auremin-feed
+      - link "Careers" [ref=e90] [cursor=pointer]:
+        - /url: /careers
+      - link "Contact us" [ref=e91] [cursor=pointer]:
+        - /url: /contact-us
+  - generic [ref=e98]: 0%
+  - generic [ref=e100]:
+    - generic:
+      - region "Hero":
+        - generic:
+          - link "Scroll down":
+            - /url: "#who-we-are"
+            - button "Scroll down" [ref=e103] [cursor=pointer]:
+              - generic [ref=e104]: Scroll down
+              - img [ref=e105]
+  - generic [ref=e108]:
+    - heading "Who We Are" [level=2] [ref=e110]
+    - link "More about us Arrow-icon" [ref=e113] [cursor=pointer]:
+      - /url: /about-us
+      - paragraph [ref=e114]: More about us
+      - img "Arrow-icon" [ref=e115]
+  - generic [ref=e118]:
+    - heading "What We Do" [level=2] [ref=e119]
+    - generic [ref=e120]:
+      - generic [ref=e121]:
+        - paragraph [ref=e123]: TRADING APPROACH
+        - img "Commodities" [ref=e125]
+      - generic [ref=e126]:
+        - paragraph [ref=e128]: Auremin trades and delivers a focused portfolio of commodities across energy, construction, and industrial markets - including petroleum products, bitumen, LNG, cement, sulfuric acid, and critical metals. From sourcing through to last-mile delivery, we manage complex supply chains with precision and reliability.
+        - generic [ref=e129] [cursor=pointer]:
+          - generic [ref=e130]:
+            - paragraph [ref=e131]: "1"
+            - heading "Commodity Trading" [level=3] [ref=e132]
+            - img "plus-icon" [ref=e133]
+          - paragraph [ref=e134]: Global sourcing and delivery of energy and industrial commodities.
+        - generic [ref=e135] [cursor=pointer]:
+          - generic [ref=e136]:
+            - paragraph [ref=e137]: "2"
+            - heading "Infrastructure Development" [level=3] [ref=e138]
+            - img "plus-icon" [ref=e139]
+          - paragraph [ref=e140]: Building the systems that enable markets to grow.
+        - generic [ref=e141] [cursor=pointer]:
+          - generic [ref=e142]:
+            - paragraph [ref=e143]: "3"
+            - heading "Supply Chain Execution" [level=3] [ref=e144]
+            - img "plus-icon" [ref=e145]
+          - paragraph [ref=e146]: Reliable logistics, storage, and delivery across complex markets.
+  - generic [ref=e150]:
+    - heading "Our Commodities" [level=2] [ref=e151]
+    - generic [ref=e154]:
+      - generic [ref=e155]:
+        - generic [ref=e156]:
+          - paragraph [ref=e157]: Cobalt
+          - paragraph [ref=e158]: Auremin specializes in trading and delivering high-quality bitumen, a key material used in road construction and roofing. We ensure seamless sourcing and reliable last-mile delivery, managing every step of the supply chain with expertise and care.
+        - generic [ref=e159]:
+          - link "Arrow-icon" [ref=e160] [cursor=pointer]:
+            - /url: "#"
+            - img "Arrow-icon" [ref=e161]
+          - link "Arrow-icon" [ref=e162] [cursor=pointer]:
+            - /url: "#"
+            - img "Arrow-icon" [ref=e163]
+      - link "View Our Products Arrow-icon" [ref=e166] [cursor=pointer]:
+        - /url: /commodities
+        - paragraph [ref=e167]: View Our Products
+        - img "Arrow-icon" [ref=e168]
+  - generic [ref=e173]:
+    - generic:
+      - list:
+        - listitem:
+          - generic:
+            - generic:
+              - heading "Nairobi" [level=3]
+              - heading "Kenya" [level=4]
+            - paragraph: Information
+            - generic:
+              - generic:
+                - generic: "Entity:"
+                - generic:
+                  - paragraph: Etyev Limited
+              - generic:
+                - generic: "Address:"
+                - generic:
+                  - paragraph: Woodvale Lane, Westland District, Nairobi
+              - generic:
+                - generic: "Phone:"
+                - link "+971 44 567 1561":
+                  - /url: tel:+971445671561
+        - listitem:
+          - generic:
+            - generic:
+              - heading "Dar Es Salaam" [level=3]
+              - heading "Tanzania" [level=4]
+            - paragraph: Information
+            - generic:
+              - generic:
+                - generic: "Entity:"
+                - generic:
+                  - paragraph: Etyev TZ Limited
+              - generic:
+                - generic: "Address:"
+                - generic:
+                  - paragraph: Region Dar Es Salaam, District Kinondoni, Ward Msasani, Postal Code 14111, 2nd Floor, The Luminary, Cnr Haile Selassie & Chole Road - P.O. Box 78852
+              - generic:
+                - generic: "Phone:"
+                - link "+971 44 567 1561":
+                  - /url: tel:+971445671561
+        - listitem:
+          - generic:
+            - generic:
+              - heading "Lubumbashi" [level=3]
+              - heading "Democratic Republic of the Congo" [level=4]
+            - paragraph: Information
+            - generic:
+              - generic:
+                - generic: "Entity:"
+                - generic:
+                  - paragraph: Energetech DRC
+              - generic:
+                - generic: "Address:"
+                - generic:
+                  - paragraph:
+                    - link "Immeuble la Vision, Route du Golf, n 5796, Commune de Lubumbashi, Lubumbashi, DRC":
+                      - /url: https://maps.app.goo.gl/PGGX6VbMrMiHcE7x5
+              - generic:
+                - generic: "Phone:"
+                - link "+243 843 892 970":
+                  - /url: tel:+243843892970
+        - listitem:
+          - generic:
+            - generic:
+              - heading "Singapore" [level=3]
+              - heading "Republic of Singapore" [level=4]
+            - paragraph: Information
+            - generic:
+              - generic:
+                - generic: "Entity:"
+                - generic:
+                  - paragraph: Energetech PTE LTD
+              - generic:
+                - generic: "Address:"
+                - generic:
+                  - paragraph:
+                    - 'link "9 Raffles Place #26-01, Republic Plaza, Singapore 048619"':
+                      - /url: https://www.google.com/maps/place/Republic+Plaza/@1.2832798,103.8460117,16z/data=!3m2!4b1!5s0x31da190ea3d0f331:0x54b66fd25ffafa10!4m6!3m5!1s0x31da190e9ecc1339:0xb1eb01c620f7a15f!8m2!3d1.2832744!4d103.8508826!16zL20vMDY2OWs3?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3Dhttps://www.google.com/maps/place/Republic+Plaza/@1.2832798,103.8460117,16z/data=!3m2!4b1!5s0x31da190ea3d0f331:0x54b66fd25ffafa10!4m6!3m5!1s0x31da190e9ecc1339:0xb1eb01c620f7a15f!8m2!3d1.2832744!4d103.8508826!16zL20vMDY2OWs3?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D
+              - generic:
+                - generic: "Phone:"
+                - link "+971 44 567 1561":
+                  - /url: tel:+971445671561
+        - listitem:
+          - generic:
+            - generic:
+              - heading "Amsterdam" [level=3]
+              - heading "Netherlands" [level=4]
+            - paragraph: Information
+            - generic:
+              - generic:
+                - generic: "Entity:"
+                - generic:
+                  - paragraph: Energetech Europe B.V.
+              - generic:
+                - generic: "Address:"
+                - generic:
+                  - paragraph:
+                    - link "De Ruijterkade 142, 1/F 1011 AC, Amsterdam":
+                      - /url: https://www.google.com/maps/place/De+Ruijterkade,+Amsterdam/@52.379471,4.8986296,17z/data=!3m1!4b1!4m6!3m5!1s0x47c609b646f89b21:0xb1f631c99dabe1b5!8m2!3d52.3794678!4d4.9012045!16s%2Fg%2F1235dv_c?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D
+              - generic:
+                - generic: "Phone:"
+                - link "+971 44 567 1561":
+                  - /url: tel:+971445671561
+        - listitem:
+          - generic:
+            - generic:
+              - heading "Johannesburg" [level=3]
+              - heading "South Africa" [level=4]
+            - paragraph: Information
+            - generic:
+              - generic:
+                - generic: "Entity:"
+                - generic:
+                  - paragraph: Auremin (Pty) Ltd
+              - generic:
+                - generic: "Address:"
+                - generic:
+                  - paragraph:
+                    - link "Office 68, 2nd Floor, West Tower, Nelson Mandela Square, Maude Street, Sandton 2196":
+                      - /url: https://www.google.com/maps/place/Maude+St,+Sandton,+2196,+South+Africa/@-26.1045215,28.0534052,17z/data=!3m1!4b1!4m6!3m5!1s0x1e95732db58414d5:0xf007bce0ed1b626d!8m2!3d-26.1045263!4d28.0559801!16s%2Fg%2F1vy5dhyk?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D
+              - generic:
+                - generic: "Phone:"
+                - link "+971 44 567 1561":
+                  - /url: tel:+971445671561
+        - listitem:
+          - generic:
+            - generic:
+              - heading "Kinshasa" [level=3]
+              - heading "Democratic Republic of the Congo" [level=4]
+            - paragraph: Information
+            - generic:
+              - generic:
+                - generic: "Entity:"
+                - generic:
+                  - paragraph: Etyev Oil International S.A.R.L.
+              - generic:
+                - generic: "Address:"
+                - generic:
+                  - paragraph:
+                    - link "27, Avenue Kalemie, Commune de la Gombe, Ville De Kinshasa":
+                      - /url: https://www.google.com/maps/place/27+Av.+Kalemie,+Kinshasa,+Democratic+Republic+of+the+Congo/@-4.30339,15.2912754,17z/data=!3m1!4b1!4m6!3m5!1s0x1a6a33eb15bca44d:0x3ef9e6537303065e!8m2!3d-4.3033954!4d15.2938503!16s%2Fg%2F11jztddc5y?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D
+              - generic:
+                - generic: "Phone:"
+                - link "+243 843 892 970":
+                  - /url: tel:+243843892970
+        - listitem:
+          - generic:
+            - generic:
+              - heading "Dubai" [level=3]
+              - heading "United Arab Emirates" [level=4]
+            - paragraph: Information
+            - generic:
+              - generic:
+                - generic: "Entity:"
+                - generic:
+                  - paragraph:
+                    - text: Auremin International FZCO
+                    - text: Energetech Trading FZCO - DMCC
+              - generic:
+                - generic: "Address:"
+                - generic:
+                  - paragraph:
+                    - link "Office 201B, JBC 3, Jumeirah Lakes Towers, Cluster Y, P.O. Box 282027, Dubai, United Arab Emirates":
+                      - /url: https://maps.app.goo.gl/xnCpxV9uw5gR7Vxo8
+                  - paragraph: ‍
+              - generic:
+                - generic: "Phone:"
+                - link "+971 44 567 1561":
+                  - /url: tel:+971445671561
+        - listitem:
+          - generic:
+            - generic:
+              - heading "London" [level=3]
+              - heading "United Kingdom" [level=4]
+            - paragraph: Information
+            - generic:
+              - generic:
+                - generic: "Entity:"
+                - generic:
+                  - paragraph: Energetech Operations Limited
+              - generic:
+                - generic: "Address:"
+                - generic:
+                  - paragraph:
+                    - link "Tower 42 International Financial Centre 25, Old Broad Street, London EC2N 1HN":
+                      - /url: https://www.google.com/maps/place/Signature+by+Regus+-+London+Tower+42/@51.5152944,-0.0859216,17z/data=!3m2!4b1!5s0x48761cad36725ff7:0x8fe824ea484f067d!4m6!3m5!1s0x487603529b7164a9:0xcb08a7a53e508084!8m2!3d51.5152911!4d-0.0833467!16zL20vMDE5dGQz?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D
+              - generic:
+                - generic: "Phone:"
+                - link "+44 203 897 9441":
+                  - /url: tel:+442038979441
+    - generic [ref=e174]:
+      - heading "Global Presence" [level=3] [ref=e175]
+      - paragraph [ref=e176]: Our operations connect global commodity markets with high-growth frontier regions.
+      - link "Contact us Arrow-icon" [ref=e177] [cursor=pointer]:
+        - /url: /contact-us
+        - paragraph [ref=e178]: Contact us
+        - img "Arrow-icon" [ref=e179]
+  - generic [ref=e181]:
+    - generic [ref=e182]:
+      - heading "The Auremin Feed" [level=2] [ref=e183]
+      - generic [ref=e184]:
+        - paragraph [ref=e185]: The latest from Auremin – market developments, operational milestones, and the people and places at the heart of what we do.
+        - link "View All News Arrow-icon" [ref=e186] [cursor=pointer]:
+          - /url: /the-auremin-feed
+          - paragraph [ref=e187]: View All News
+          - img "Arrow-icon" [ref=e188]
+    - list [ref=e190]:
+      - listitem [ref=e191]:
+        - link "Energetech Rebrands as Auremin" [ref=e192] [cursor=pointer]:
+          - /url: /blog/energetech-rebrands-as-auremin
+          - heading "Energetech Rebrands as Auremin" [level=3] [ref=e194]
+      - listitem [ref=e195]:
+        - link "Kinshasa generates an estimated 10,000 tonnes of waste every single day." [ref=e196] [cursor=pointer]:
+          - /url: /blog/kinshasa-generates-an-estimated-10-000-tonnes-of-waste-every-single-day
+          - heading "Kinshasa generates an estimated 10,000 tonnes of waste every single day." [level=3] [ref=e198]
+      - listitem [ref=e199]:
+        - link "Energetech-Tantel and TPDC Sign $100M MoU to Transform Tanzania’s Energy Landscape" [ref=e200] [cursor=pointer]:
+          - /url: /blog/energetech--tantel-and-tpdc-sign-100m-mou-to-transform-tanzanias-energy-landscape
+          - heading "Energetech-Tantel and TPDC Sign $100M MoU to Transform Tanzania’s Energy Landscape" [level=3] [ref=e202]
+  - generic [ref=e204]:
+    - heading "Careers" [level=2] [ref=e205]
+    - generic [ref=e206]:
+      - paragraph [ref=e207]: Our people are at the core of everything we do. We work across borders, commodities and cultures – and we're building a team that reflects the ambition and diversity of the markets we serve.
+      - link "View All Careers Arrow-icon" [ref=e208] [cursor=pointer]:
+        - /url: /careers
+        - paragraph [ref=e209]: View All Careers
+        - img "Arrow-icon" [ref=e210]
+  - generic [ref=e211]:
+    - heading "Contact us" [level=2] [ref=e213]
+    - generic [ref=e215]:
+      - generic [ref=e216]:
+        - paragraph [ref=e217]: Information
+        - generic [ref=e218]:
+          - generic [ref=e219]:
+            - generic [ref=e220]: "A:"
+            - generic [ref=e221]: Office 201B, JBC 3, Jumeirah Lakes Towers, Cluster Y, P.O. Box 282027, Dubai, United Arab Emirates
+          - generic [ref=e222]:
+            - generic [ref=e223]: "E:"
+            - generic [ref=e224]: contact@auremin.com
+          - generic [ref=e225]:
+            - generic [ref=e226]: "S:"
+            - link "linkedin-icon" [ref=e228] [cursor=pointer]:
+              - /url: "#"
+              - img "linkedin-icon" [ref=e229]
+      - generic [ref=e230]:
+        - paragraph [ref=e231]: Send us a message
+        - generic [ref=e233]:
+          - textbox "Name*" [ref=e234]
+          - textbox "Email*" [ref=e235]
+          - textbox "Comment" [ref=e236]
+          - generic [ref=e237]:
+            - checkbox "I accept the Privacy Policy" [ref=e238]
+            - generic [ref=e239] [cursor=pointer]:
+              - text: I accept the
+              - link "Privacy Policy" [ref=e240]:
+                - /url: "#"
+          - iframe [ref=e244]:
+            - generic [ref=f4e2]:
+              - generic [ref=f4e3]:
+                - checkbox "I'm not a robot" [ref=f4e7]
+                - generic [ref=f4e11]: I'm not a robot
+              - generic [ref=f4e15]: reCAPTCHA
+          - button "Send message" [ref=e245] [cursor=pointer]
+  - generic [ref=e247]:
+    - generic [ref=e248]:
+      - img "auremin-light-logo" [ref=e249]
+      - paragraph [ref=e250]:
+        - text: © Copyright 2026. All rights reserved.
+        - link "Privacy Policy" [ref=e251] [cursor=pointer]:
+          - /url: /privacy-policy
+    - generic [ref=e252]:
+      - generic [ref=e253]:
+        - generic [ref=e254]:
+          - paragraph [ref=e255]: Menu
+          - paragraph [ref=e256]:
+            - link "Home" [ref=e257] [cursor=pointer]:
+              - /url: /
+          - paragraph [ref=e258]:
+            - link "Commodities" [ref=e259] [cursor=pointer]:
+              - /url: /commodities
+          - paragraph [ref=e260]:
+            - link "Infrastructure" [ref=e261] [cursor=pointer]:
+              - /url: /infrastructure
+          - paragraph [ref=e262]:
+            - link "Sustainability and Impact" [ref=e263] [cursor=pointer]:
+              - /url: /sustainability-and-impact
+          - paragraph [ref=e264]:
+            - link "Ethics and Compliance" [ref=e265] [cursor=pointer]:
+              - /url: /about-us/#ethics-and-compliance
+        - generic [ref=e266]:
+          - paragraph [ref=e267]: Products
+          - paragraph [ref=e268]:
+            - link "Copper" [ref=e269] [cursor=pointer]:
+              - /url: /commodities/#copper
+          - paragraph [ref=e270]:
+            - link "Cobalt" [ref=e271] [cursor=pointer]:
+              - /url: /commodities/#cobalt
+          - paragraph [ref=e272]:
+            - link "Sulfur & Sulfuric Acid" [ref=e273] [cursor=pointer]:
+              - /url: /commodities/#acid
+          - paragraph [ref=e274]:
+            - link "Diesel" [ref=e275] [cursor=pointer]:
+              - /url: /commodities/#diesel
+          - paragraph [ref=e276]:
+            - link "Gold" [ref=e277] [cursor=pointer]:
+              - /url: /commodities/#gold
+          - paragraph [ref=e278]:
+            - link "Tin" [ref=e279] [cursor=pointer]:
+              - /url: /commodities/#tin
+          - paragraph [ref=e280]:
+            - link "LNG" [ref=e281] [cursor=pointer]:
+              - /url: /commodities/#lng
+          - paragraph [ref=e282]:
+            - link "Power" [ref=e283] [cursor=pointer]:
+              - /url: /commodities/#power
+          - paragraph [ref=e284]:
+            - link "HFO" [ref=e285] [cursor=pointer]:
+              - /url: /commodities/#hfo
+          - paragraph [ref=e286]:
+            - link "Bitumen" [ref=e287] [cursor=pointer]:
+              - /url: /commodities/#bitumen
+          - paragraph [ref=e288]:
+            - link "Cement" [ref=e289] [cursor=pointer]:
+              - /url: /commodities/#cement
+        - generic [ref=e290]:
+          - paragraph [ref=e291]: Company
+          - paragraph [ref=e292]:
+            - link "About us" [ref=e293] [cursor=pointer]:
+              - /url: /about-us
+          - paragraph [ref=e294]:
+            - link "Careers" [ref=e295] [cursor=pointer]:
+              - /url: /careers
+          - paragraph [ref=e296]:
+            - link "TAF - News" [ref=e297] [cursor=pointer]:
+              - /url: /the-auremin-feed
+          - paragraph [ref=e298]:
+            - link "Contact us" [ref=e299] [cursor=pointer]:
+              - /url: /contact-us
+      - generic [ref=e300]:
+        - generic [ref=e301]:
+          - paragraph [ref=e302]: Contacts
+          - paragraph [ref=e303]:
+            - 'link "Office Landline: + 971 4 567 1561" [ref=e304] [cursor=pointer]':
+              - /url: tel:+97145671561
+              - text: "Office Landline:"
+              - text: + 971 4 567 1561
+        - generic [ref=e305]:
+          - paragraph [ref=e306]: Subscribe
+          - generic [ref=e308]:
+            - textbox "Enter your email" [ref=e309]
+            - button "submit-button" [ref=e310] [cursor=pointer]
+  - iframe [ref=e311]:
+    

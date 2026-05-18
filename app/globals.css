@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,15 +7,176 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  /* ── Light theme — white base, dark navy text ── */
+  --background: #ffffff;
+  --foreground: #0a1628;
+  --surface:    #f0f5ff;
+  --surface-2:  #e6effd;
+
+  /* ── Brand blues (from real extension) */
+  --blue-deep:   #1e3a8a;
+  --blue:        #2563eb;
+  --blue-bright: #3b82f6;
+  --blue-light:  #60a5fa;
+  --blue-pale:   #dbeafe;
+
+  /* ── Pops */
+  --cyan:        #06b6d4;
+  --cyan-bright: #22d3ee;
+  --violet:      #7c3aed;
+  --violet-bright: #8b5cf6;
+  --emerald:     #059669;
+  --amber:       #d97706;
+
+  /* ── Glass / cards (light mode) */
+  --glass:        rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(37, 99, 235, 0.14);
 }
+
+html { scroll-behavior: auto; }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans, system-ui, sans-serif);
+  overflow-x: hidden;
+}
+
+/* ─── Orb drift ─────────────────────────────────────── */
+@keyframes orb-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(40px, -50px) scale(1.07); }
+  66%       { transform: translate(-28px, 34px) scale(0.93); }
+}
+@keyframes orb-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-52px, 44px) scale(0.88); }
+  75%       { transform: translate(32px, -40px) scale(1.12); }
+}
+@keyframes orb-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(18px, -30px) scale(1.16); }
+}
+@keyframes orb-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  45%       { transform: translate(-26px, 22px) scale(1.09); }
+  80%       { transform: translate(18px, -26px) scale(0.91); }
+}
+
+/* ─── Float ─────────────────────────────────────────── */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-18px) rotate(0.5deg); }
+}
+
+/* ─── Shimmer ────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* ─── Scroll bounce ──────────────────────────────────── */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.45; }
+  50%       { transform: translateY(8px); opacity: 1; }
+}
+
+/* ─── Slide up reveal (for scroll triggers) ──────────── */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Badge pulse ────────────────────────────────────── */
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(37, 99, 235, 0); }
+}
+
+/* ─── Card (light mode) ──────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  box-shadow: 0 2px 16px rgba(14, 42, 99, 0.06);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.glass-card:hover {
+  border-color: rgba(37, 99, 235, 0.26);
+  box-shadow: 0 8px 40px rgba(14, 42, 99, 0.12);
+}
+
+/* ─── Text gradients ─────────────────────────────────── */
+.blue-text {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 45%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cyan-text {
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.violet-text {
+  background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Buttons ────────────────────────────────────────── */
+.btn-blue {
+  background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 30%, #3b82f6 50%, #2563eb 70%, #1e3a8a 100%);
+  background-size: 200% auto;
+  animation: shimmer 3.5s linear infinite;
+}
+
+/* ─── Grid background ────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ─── Layout ─────────────────────────────────────────── */
+.section-base { padding: 120px 0; }
+@media (max-width: 768px) { .section-base { padding: 80px 0; } }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* ─── Mockup float ───────────────────────────────────── */
+.mockup-float { animation: float-slow 6s ease-in-out 4s infinite; }
+@media (prefers-reduced-motion: reduce) { .mockup-float { animation: none; } }
+
+/* ─── Score ring ─────────────────────────────────────── */
+.score-ring { transition: stroke-dashoffset 1.8s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ─── Risk badges (light-mode readable) ─────────────── */
+.risk-high   { background: #fef2f2; border-color: #fca5a5; color: #dc2626; }
+.risk-medium { background: #fffbeb; border-color: #fcd34d; color: #d97706; }
+.risk-low    { background: #f0fdf4; border-color: #86efac; color: #16a34a; }
+
+/* ─── Hero ray ───────────────────────────────────────── */
+.hero-ray {
+  position: absolute;
+  height: 1px;
+  width: 60%;
+  left: 20%;
+  background: linear-gradient(90deg, transparent, rgba(37,99,235,0.15) 30%, rgba(6,182,212,0.12) 70%, transparent);
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+/* ─── Section divider fade ───────────────────────────── */
+.section-fade-top {
+  background: linear-gradient(to bottom, var(--background) 0%, transparent 100%);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 80px;
+  pointer-events: none;
+  z-index: 1;
 }
