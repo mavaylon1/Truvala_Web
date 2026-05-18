@@ -204,7 +204,16 @@ export default function CTA() {
                 <path d="M8 0.5L15.5 6V13.5H11V9H5V13.5H0.5V6L8 0.5Z" fill="white" />
               </svg>
             </div>
-            <p className="font-bold text-lg text-white">Truvala</p>
+            <a
+              href="/"
+              className="font-bold text-lg text-white"
+              onClick={(e) => {
+                e.preventDefault()
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
+            >
+              Truvala
+            </a>
           </div>
           <p className="text-xs" style={{ color: 'rgba(255,255,255,0.28)' }}>
             &copy; 2025 Truvala. All rights reserved.

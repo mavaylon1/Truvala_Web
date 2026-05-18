@@ -39,23 +39,32 @@ export default function Navbar() {
         style={{ padding: '0 32px', height: 60 }}
       >
         {/* Brand — flush left */}
-        <a href="#" className="flex items-center gap-2.5 select-none group">
+        <a
+          href="/"
+          className="select-none inline-flex items-center gap-2.5 group"
+          onClick={(e) => {
+            e.preventDefault()
+            if (window.location.pathname !== '/') {
+              window.location.href = '/'
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }
+          }}
+        >
           <div
             className="flex items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-[1.05]"
             style={{
-              width: 30, height: 30,
+              width: 32, height: 32,
               background: 'linear-gradient(140deg, #2563eb 0%, #1e3a8a 100%)',
               boxShadow: '0 2px 10px rgba(37,99,235,0.3)',
+              flexShrink: 0,
             }}
           >
             <svg width="16" height="14" viewBox="0 0 16 14" fill="none">
               <path d="M8 0.5L15.5 6V13.5H11V9H5V13.5H0.5V6L8 0.5Z" fill="white" />
             </svg>
           </div>
-          <span
-            className="font-bold tracking-tight"
-            style={{ fontSize: 18, color: '#0a1628' }}
-          >
+          <span className="font-bold tracking-tight" style={{ fontSize: 25, color: '#0a1628' }}>
             Truvala
           </span>
         </a>
@@ -67,7 +76,7 @@ export default function Navbar() {
               key={label}
               href={href}
               className="font-medium transition-colors duration-200 hover:text-blue-600"
-              style={{ fontSize: 15, color: '#4a5568' }}
+              style={{ fontSize: 16, color: '#4a5568' }}
             >
               {label}
             </a>
