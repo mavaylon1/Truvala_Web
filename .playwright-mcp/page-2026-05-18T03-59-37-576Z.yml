@@ -1,0 +1,478 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic:
+      - generic:
+        - generic:
+          - img
+        - generic: TRUVALA
+  - banner [ref=e5]:
+    - generic [ref=e7]:
+      - link "Truvala" [ref=e8] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e10]
+        - generic [ref=e12]: Truvala
+      - navigation [ref=e13]:
+        - link "Why Truvala" [ref=e14] [cursor=pointer]:
+          - /url: "#problem"
+        - link "How It Works" [ref=e15] [cursor=pointer]:
+          - /url: "#features"
+        - link "Live Demo" [ref=e16] [cursor=pointer]:
+          - /url: "#demo"
+      - link "Add to Chrome" [ref=e17] [cursor=pointer]:
+        - /url: "#waitlist"
+        - img [ref=e18]
+        - text: Add to Chrome
+  - generic [ref=e20]:
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e26]: Browser Extension · Free · Works on Zillow & Redfin
+        - heading "Buy with clarity. Not just hope." [level=1] [ref=e27]:
+          - generic [ref=e29]: Buy with
+          - generic [ref=e31]: clarity.
+          - generic [ref=e33]: Not just hope.
+        - paragraph [ref=e34]: Truvala adds a decision layer to every listing you browse — surfacing buyer fit, reliability flags, hidden risks, and true ownership costs before you fall in love.
+        - generic [ref=e35]:
+          - link "Add to Chrome — Free" [ref=e36] [cursor=pointer]:
+            - /url: "#waitlist"
+            - text: Add to Chrome — Free
+            - img [ref=e37]
+          - link "See it in action" [ref=e39] [cursor=pointer]:
+            - /url: "#demo"
+            - text: See it in action
+            - img [ref=e40]
+        - generic [ref=e42]:
+          - generic [ref=e43]: Works on
+          - generic [ref=e44]: Zillow
+          - generic [ref=e45]: Redfin
+          - generic [ref=e46]: Realtor.com
+          - generic [ref=e47]: Homes.com
+      - generic [ref=e48]:
+        - generic [ref=e50]:
+          - generic [ref=e57]: zillow.com/homedetails/4721-meadowbrook-lane
+          - generic [ref=e58]:
+            - generic [ref=e59]:
+              - generic [ref=e60]:
+                - img [ref=e62]
+                - generic [ref=e68]:
+                  - generic [ref=e69]: 47 days on market
+                  - generic [ref=e70]: Price reduced 2×
+              - paragraph [ref=e71]: 4721 Meadowbrook Lane
+              - paragraph [ref=e72]: Austin, TX 78749
+              - paragraph [ref=e73]: $672,000
+              - paragraph [ref=e74]: 4 bd · 3 ba · 2,100 sqft · Built 1987
+            - generic [ref=e75]:
+              - generic [ref=e78]: TRUVALA
+              - img [ref=e80]:
+                - generic [ref=e83]: "0"
+                - generic [ref=e84]: BUYER FIT
+              - generic [ref=e85]:
+                - generic [ref=e86]:
+                  - generic [ref=e87]: Reliability
+                  - generic [ref=e88]: 3 flags
+                - generic [ref=e89]:
+                  - generic [ref=e90]: Risks
+                  - generic [ref=e91]: 2 high
+                - generic [ref=e92]:
+                  - generic [ref=e93]: Costs
+                  - generic [ref=e94]: ~$55k
+              - button "View Report" [ref=e95]
+        - paragraph [ref=e96]: Shown on any listing you browse — no import required
+    - generic [ref=e97]:
+      - generic [ref=e98]: Scroll to explore
+      - img [ref=e100]
+  - generic [ref=e103]:
+    - generic [ref=e104]:
+      - generic [ref=e105]: THE PROBLEM
+      - heading "Listings are designed to sell. Not to inform." [level=2] [ref=e106]:
+        - text: Listings are designed
+        - text: to sell. Not to inform.
+      - paragraph [ref=e107]: You're browsing homes with tools built for search, not decision-making. The information gap between buyer and seller has never been wider.
+    - generic [ref=e108]:
+      - generic [ref=e109]:
+        - generic [ref=e111]: "01"
+        - generic [ref=e112]:
+          - generic [ref=e113]:
+            - img [ref=e115]
+            - generic [ref=e117]: Listing Language
+          - heading "Listings tell you what they want you to know." [level=3] [ref=e118]
+          - paragraph [ref=e119]: A "beautifully updated kitchen" could mean new cabinet pulls. "Cozy" could mean 900 sqft. Listings are marketing documents, not objective reports.
+      - generic [ref=e120]:
+        - generic [ref=e122]: "02"
+        - generic [ref=e123]:
+          - generic [ref=e124]:
+            - img [ref=e126]
+            - generic [ref=e128]: Hidden Signals
+          - heading "Risk hides in plain sight." [level=3] [ref=e129]
+          - paragraph [ref=e130]: 47 days on market. Original 1987 HVAC. Three permits, no final inspections. The signals exist in every listing — but you have to know where to look.
+      - generic [ref=e131]:
+        - generic [ref=e133]: "03"
+        - generic [ref=e134]:
+          - generic [ref=e135]:
+            - img [ref=e137]
+            - generic [ref=e139]: True Cost
+          - heading "The real price is never on the listing." [level=3] [ref=e140]
+          - paragraph [ref=e141]: "The price tag says $672,000. It doesn't say: roof in five years, HVAC now, $280/mo HOA forever, and $2,500 a year to maintain what's already there."
+      - generic [ref=e142]:
+        - generic [ref=e144]: "04"
+        - generic [ref=e145]:
+          - generic [ref=e146]:
+            - img [ref=e148]
+            - generic [ref=e150]: Decision Gap
+          - heading "You don't know what you don't know." [level=3] [ref=e151]
+          - paragraph [ref=e152]: Most buyers ask the right questions after they've moved in. Truvala tells you before you commit — the questions you didn't know to ask, surfaced automatically.
+  - generic [ref=e154]:
+    - generic [ref=e155]:
+      - generic [ref=e156]: WHAT TRUVALA DOES
+      - heading "A second opinion, built into the browser." [level=2] [ref=e157]
+      - paragraph [ref=e158]: Not a new place to search. A smarter lens on every listing you already browse.
+    - generic [ref=e159]:
+      - generic [ref=e160]:
+        - generic [ref=e161]:
+          - generic [ref=e162]:
+            - generic [ref=e163]: "01"
+            - generic [ref=e164]: Buyer Fit
+          - heading "Your priorities. Not the algorithm's." [level=3] [ref=e165]
+          - paragraph [ref=e166]: Truvala builds a fit score around you — your budget comfort, space needs, commute tolerance, HOA sensitivity, and lifestyle priorities. You see how well a listing matches you, and exactly why.
+        - generic [ref=e168]:
+          - generic [ref=e169]:
+            - generic [ref=e170]:
+              - paragraph [ref=e171]: 78/100
+              - paragraph [ref=e172]: Buyer Fit Score
+            - img [ref=e173]
+          - generic [ref=e177]:
+            - generic [ref=e178]: Square footage
+            - generic [ref=e179]: Strong match
+          - generic [ref=e182]:
+            - generic [ref=e183]: Budget range
+            - generic [ref=e184]: At upper limit
+          - generic [ref=e187]:
+            - generic [ref=e188]: Commute
+            - generic [ref=e189]: 14 min to target
+          - generic [ref=e192]:
+            - generic [ref=e193]: HOA tolerance
+            - generic [ref=e194]: Exceeds preference
+          - generic [ref=e197]:
+            - generic [ref=e198]: School district
+            - generic [ref=e199]: High priority met
+      - generic [ref=e201]:
+        - generic [ref=e202]:
+          - generic [ref=e203]:
+            - generic [ref=e204]: "02"
+            - generic [ref=e205]: Reliability Analysis
+          - heading "What the listing isn't saying." [level=3] [ref=e206]
+          - paragraph [ref=e207]: Truvala reads what's there — and what's absent. It flags vague language, missing disclosures, claims without permits, and gaps that warrant questions before your offer.
+        - generic [ref=e209]:
+          - paragraph [ref=e210]: LISTING ANALYSIS
+          - generic [ref=e211]:
+            - img [ref=e213]
+            - generic [ref=e215]: HVAC age not disclosed — typical red flag for 1987 builds
+          - generic [ref=e216]:
+            - img [ref=e218]
+            - generic [ref=e220]: "\"Renovated kitchen\" — scope unclear, no permit found"
+          - generic [ref=e221]:
+            - img [ref=e223]
+            - generic [ref=e225]: 2021 permit filed — no final inspection on record
+          - generic [ref=e226]:
+            - img [ref=e228]
+            - generic [ref=e230]: Tax history consistent with listed ownership
+          - generic [ref=e231]:
+            - img [ref=e233]
+            - generic [ref=e235]: Seller disclosure complete and filed
+      - generic [ref=e236]:
+        - generic [ref=e237]:
+          - generic [ref=e238]:
+            - generic [ref=e239]: "03"
+            - generic [ref=e240]: Risk Analysis
+          - heading "The risks that listings don't list." [level=3] [ref=e241]
+          - paragraph [ref=e242]: Age-based component failures, bad flip signals, HOA exposure, unusual property types, long days on market, pricing irregularities, and ownership risks — Truvala surfaces them all.
+        - generic [ref=e244]:
+          - paragraph [ref=e245]: RISK BREAKDOWN
+          - generic [ref=e246]:
+            - generic [ref=e247]: high
+            - generic [ref=e248]:
+              - paragraph [ref=e249]: Component Age
+              - paragraph [ref=e250]: Roof & HVAC likely original (1987). Both approaching or past expected lifespan.
+          - generic [ref=e251]:
+            - generic [ref=e252]: high
+            - generic [ref=e253]:
+              - paragraph [ref=e254]: Market Signal
+              - paragraph [ref=e255]: 47 days + 2 price drops. May indicate undisclosed issue or overpricing.
+          - generic [ref=e256]:
+            - generic [ref=e257]: medium
+            - generic [ref=e258]:
+              - paragraph [ref=e259]: HOA Exposure
+              - paragraph [ref=e260]: $280/mo — reserve study unavailable. Unknown capital call liability.
+          - generic [ref=e261]:
+            - generic [ref=e262]: low
+            - generic [ref=e263]:
+              - paragraph [ref=e264]: Flip Signal
+              - paragraph [ref=e265]: 3 permits in 5 yrs, cosmetic only. No structural improvements.
+      - generic [ref=e266]:
+        - generic [ref=e267]:
+          - generic [ref=e268]:
+            - generic [ref=e269]: "04"
+            - generic [ref=e270]: Hidden Costs
+          - heading "The real price of ownership." [level=3] [ref=e271]
+          - paragraph [ref=e272]: Truvala estimates near-term repair needs, ongoing maintenance obligations, HOA fee burden, and upgrade costs — so you know what $672,000 actually costs to own over five years.
+        - generic [ref=e274]:
+          - paragraph [ref=e275]: ESTIMATED OWNERSHIP COSTS
+          - generic [ref=e276]:
+            - generic [ref=e277]:
+              - paragraph [ref=e278]: Roof replacement
+              - paragraph [ref=e279]: 0–5 years
+            - paragraph [ref=e281]:
+              - text: $18k
+              - generic [ref=e282]: –$24k
+          - generic [ref=e283]:
+            - generic [ref=e284]:
+              - paragraph [ref=e285]: HVAC replacement
+              - paragraph [ref=e286]: Immediate
+            - paragraph [ref=e288]:
+              - text: $8k
+              - generic [ref=e289]: –$12k
+          - generic [ref=e290]:
+            - generic [ref=e291]:
+              - paragraph [ref=e292]: HOA fees (5yr)
+              - paragraph [ref=e293]: Ongoing
+            - paragraph [ref=e295]: $17k
+          - generic [ref=e296]:
+            - generic [ref=e297]:
+              - paragraph [ref=e298]: Annual maintenance
+              - paragraph [ref=e299]: Per year
+            - paragraph [ref=e301]:
+              - text: $10k
+              - generic [ref=e302]: –$15k
+          - generic [ref=e304]:
+            - generic [ref=e305]:
+              - paragraph [ref=e306]: 5-year total exposure
+              - paragraph [ref=e307]: Beyond mortgage & taxes
+            - paragraph [ref=e308]: ~$55k–75k
+  - generic [ref=e310]:
+    - generic [ref=e311]:
+      - generic [ref=e312]: INTERACTIVE DEMO
+      - heading "See Truvala in action." [level=2] [ref=e313]
+      - paragraph [ref=e314]: A real analysis layout — click the tabs to explore what Truvala surfaces on every listing you browse.
+    - generic [ref=e315]:
+      - generic [ref=e316]:
+        - paragraph [ref=e317]: LISTING VIEWED
+        - generic [ref=e318]:
+          - generic [ref=e324]: zillow.com/homedetails/4721-meadowbrook-lane
+          - generic [ref=e325]:
+            - generic [ref=e326]:
+              - img [ref=e328]
+              - generic [ref=e334]:
+                - generic [ref=e335]: 47 days on market
+                - generic [ref=e336]: Price reduced 2×
+            - generic [ref=e337]:
+              - generic [ref=e338]:
+                - paragraph [ref=e339]: $672,000
+                - paragraph [ref=e340]: 4 bd · 3 ba · 2,100 sqft
+              - generic [ref=e341]:
+                - paragraph [ref=e342]: Built 1987
+                - paragraph [ref=e343]: HOA $280/mo
+            - paragraph [ref=e344]: 4721 Meadowbrook Lane
+            - paragraph [ref=e345]: Austin, TX 78749
+            - generic [ref=e346]:
+              - generic [ref=e347]:
+                - paragraph [ref=e348]: 78/100
+                - paragraph [ref=e349]: Buyer Fit
+              - generic [ref=e350]:
+                - paragraph [ref=e351]: 3 flags
+                - paragraph [ref=e352]: Reliability
+              - generic [ref=e353]:
+                - paragraph [ref=e354]: High
+                - paragraph [ref=e355]: Risk Level
+      - generic [ref=e356]:
+        - paragraph [ref=e357]: TRUVALA ANALYSIS
+        - generic [ref=e358]:
+          - generic [ref=e359]:
+            - generic [ref=e362]: TRUVALA
+            - generic [ref=e363]: 4721 Meadowbrook Ln
+          - generic [ref=e364]:
+            - button "Buyer Fit 78/100" [ref=e365]:
+              - text: Buyer Fit
+              - generic [ref=e367]: 78/100
+            - button "Reliability 3 flags" [ref=e368]:
+              - text: Reliability
+              - generic [ref=e369]: 3 flags
+            - button "Risks 4 found" [ref=e370]:
+              - text: Risks
+              - generic [ref=e371]: 4 found
+            - button "Hidden Costs ~$55k" [ref=e372]:
+              - text: Hidden Costs
+              - generic [ref=e373]: ~$55k
+          - generic [ref=e376]:
+            - generic [ref=e377]:
+              - img [ref=e378]:
+                - generic [ref=e381]: "0"
+                - generic [ref=e382]: BUYER FIT
+              - generic [ref=e383]:
+                - paragraph [ref=e384]: 0/100
+                - paragraph [ref=e385]: Strong Match
+                - paragraph [ref=e386]: Based on your stated priorities
+            - generic [ref=e387]:
+              - generic [ref=e389]:
+                - generic [ref=e390]: Square footage
+                - generic [ref=e391]: 2,100 sqft — strong match for household of 4
+              - generic [ref=e394]:
+                - generic [ref=e395]: Budget range
+                - generic [ref=e396]: At upper limit of $650k comfort zone
+              - generic [ref=e399]:
+                - generic [ref=e400]: Commute
+                - generic [ref=e401]: 14 min to preferred work area
+              - generic [ref=e404]:
+                - generic [ref=e405]: HOA tolerance
+                - generic [ref=e406]: $280/mo exceeds your stated preference
+              - generic [ref=e409]:
+                - generic [ref=e410]: School district
+                - generic [ref=e411]: Highly rated — matches stated priority
+          - generic [ref=e413]:
+            - paragraph [ref=e414]: Analysis from listing data
+            - button "Full Report→" [ref=e415]
+  - generic [ref=e418]:
+    - generic [ref=e419]:
+      - generic [ref=e420]: DECISION CONFIDENCE
+      - heading "Not just a score. An explanation." [level=2] [ref=e421]:
+        - text: Not just a score.
+        - text: An explanation.
+      - paragraph [ref=e422]: Every Truvala score comes with a breakdown of what went into it, what data was used, what's uncertain, and what you should investigate before moving forward. You get the reasoning, not just the number.
+      - list [ref=e423]:
+        - listitem [ref=e424]:
+          - img [ref=e426]
+          - text: Why the score is what it is
+        - listitem [ref=e428]:
+          - img [ref=e430]
+          - text: What data sources informed the analysis
+        - listitem [ref=e432]:
+          - img [ref=e434]
+          - text: What Truvala could not verify
+        - listitem [ref=e436]:
+          - img [ref=e438]
+          - text: What to investigate before offering
+    - generic [ref=e440]:
+      - generic [ref=e443]: WHY THIS SCORE
+      - generic [ref=e444]:
+        - generic [ref=e445]:
+          - paragraph [ref=e446]: Strong spatial match
+          - generic [ref=e447]: +12 pts
+        - paragraph [ref=e448]: 2,100 sqft aligns well with a household of 4. We weighted this heavily based on your stated priorities.
+      - generic [ref=e449]:
+        - generic [ref=e450]:
+          - paragraph [ref=e451]: Budget risk flagged
+          - generic [ref=e452]: −9 pts
+        - paragraph [ref=e453]: $672k is at the top of your $650k comfort zone. Monthly costs including HOA push well above your target.
+      - generic [ref=e454]:
+        - generic [ref=e455]:
+          - paragraph [ref=e456]: HOA exceeds preference
+          - generic [ref=e457]: −7 pts
+        - paragraph [ref=e458]: You indicated HOA sensitivity. $280/mo is 40% above your stated tolerance.
+      - generic [ref=e459]:
+        - generic [ref=e460]:
+          - paragraph [ref=e461]: Location is a strong fit
+          - generic [ref=e462]: +8 pts
+        - paragraph [ref=e463]: 14 min to your preferred work area. School district rating matches your listed priority.
+  - generic [ref=e465]:
+    - generic [ref=e466]:
+      - generic [ref=e467]: ACTIONABLE NEXT STEPS
+      - heading "From listing to structured action plan." [level=2] [ref=e468]:
+        - text: From listing to
+        - text: structured action plan.
+      - paragraph [ref=e469]: Truvala turns every listing into a prioritized list of things to verify, questions to ask, and decisions to make — before you make an offer.
+    - generic [ref=e470]:
+      - generic [ref=e471]:
+        - generic [ref=e472]:
+          - generic [ref=e474]: "1"
+          - generic [ref=e475]:
+            - generic [ref=e476]:
+              - heading "Ask about HVAC and roof age" [level=3] [ref=e477]
+              - generic [ref=e478]: critical
+            - paragraph [ref=e479]: Neither is disclosed. Both could be original to 1987. Get documentation before your inspection.
+        - generic [ref=e480]:
+          - generic [ref=e482]: "2"
+          - generic [ref=e483]:
+            - generic [ref=e484]:
+              - heading "Request the permit history in full" [level=3] [ref=e485]
+              - generic [ref=e486]: high
+            - paragraph [ref=e487]: A 2021 permit shows no final inspection. Find out what work was done and why it wasn't closed.
+        - generic [ref=e488]:
+          - generic [ref=e490]: "3"
+          - generic [ref=e491]:
+            - generic [ref=e492]:
+              - heading "Pull the HOA reserve study" [level=3] [ref=e493]
+              - generic [ref=e494]: high
+            - paragraph [ref=e495]: The $280/mo fee doesn't tell you if the HOA is underfunded. Request the last 2 years of financials.
+      - generic [ref=e496]:
+        - generic [ref=e497]:
+          - generic [ref=e499]: "4"
+          - generic [ref=e500]:
+            - generic [ref=e501]:
+              - heading "Understand the 47-day context" [level=3] [ref=e502]
+              - generic [ref=e503]: medium
+            - paragraph [ref=e504]: Two price reductions in 47 days is a signal. Ask why it hasn't sold and whether there are known issues.
+        - generic [ref=e505]:
+          - generic [ref=e507]: "5"
+          - generic [ref=e508]:
+            - generic [ref=e509]:
+              - heading "Budget for near-term repairs" [level=3] [ref=e510]
+              - generic [ref=e511]: medium
+            - paragraph [ref=e512]: "Conservative scenario: $26k–36k in the first 1–2 years. Factor this into your offer strategy."
+        - generic [ref=e513]:
+          - generic [ref=e515]: "6"
+          - generic [ref=e516]:
+            - generic [ref=e517]:
+              - heading "Verify dual agency disclosure" [level=3] [ref=e518]
+              - generic [ref=e519]: low
+            - paragraph [ref=e520]: Listing agent is also the sellers' agent. Know what that means for your negotiating position.
+  - generic [ref=e524]:
+    - generic [ref=e525]:
+      - generic [ref=e526]: FOR AGENTS & PARTNERS
+      - heading "Built for buyers. Welcomed by agents." [level=2] [ref=e527]:
+        - text: Built for buyers.
+        - text: Welcomed by agents.
+      - paragraph [ref=e528]: Truvala doesn't replace your agent — it makes you a better client. Buyers who use Truvala arrive with smarter questions, cleaner offers, and fewer regrets.
+    - generic [ref=e529]:
+      - generic [ref=e530]:
+        - img [ref=e532]
+        - generic [ref=e534]:
+          - paragraph [ref=e535]: Agent-additive, not agent-replacement
+          - paragraph [ref=e536]: Truvala identifies what to verify. Your agent tells you how.
+      - generic [ref=e537]:
+        - img [ref=e539]
+        - generic [ref=e541]:
+          - paragraph [ref=e542]: Shareable reports
+          - paragraph [ref=e543]: Send your Truvala report to your agent before a showing. Arrive prepared.
+      - generic [ref=e544]:
+        - img [ref=e546]
+        - generic [ref=e548]:
+          - paragraph [ref=e549]: No data access required
+          - paragraph [ref=e550]: Truvala works from the listing itself. No MLS access, no agent credentials.
+  - generic [ref=e552]:
+    - generic [ref=e553]:
+      - generic [ref=e556]: Early access — free forever for founding users
+      - heading "Clarity starts here." [level=2] [ref=e557]
+      - paragraph [ref=e558]: Join thousands of homebuyers getting access to Truvala. Add it to Chrome free — works immediately on any listing you browse.
+      - link "Add to Chrome — Free" [ref=e559] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e560]
+        - text: Add to Chrome — Free
+      - generic [ref=e562]:
+        - paragraph [ref=e563]: Can't install right now?
+        - paragraph [ref=e564]: Join the waitlist — we'll notify you when Truvala is ready for your browser.
+        - generic [ref=e565]:
+          - textbox "your@email.com" [ref=e567]
+          - button "Join Waitlist" [ref=e568]
+      - generic [ref=e569]:
+        - generic [ref=e570]:
+          - img [ref=e571]
+          - text: Free forever for early users
+        - generic [ref=e573]:
+          - img [ref=e574]
+          - text: No account required
+        - generic [ref=e576]:
+          - img [ref=e577]
+          - text: No data sold. Ever.
+    - generic [ref=e579]:
+      - generic [ref=e580]:
+        - img [ref=e582]
+        - paragraph [ref=e584]: Truvala
+      - paragraph [ref=e585]: © 2025 Truvala. All rights reserved. · Not affiliated with Zillow, Redfin, or any MLS.

@@ -3,51 +3,77 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 
+const NAV_LINKS = [
+  { label: 'Why Truvala', href: '#problem'  },
+  { label: 'How It Works', href: '#features' },
+  { label: 'Live Demo',    href: '#demo'     },
+]
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => setScrolled(window.scrollY > 48)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
-    <motion.nav
-      initial={{ y: -24, opacity: 0 }}
+    <motion.header
+      initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={scrolled ? {
-        background: 'rgba(255,255,255,0.92)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(37,99,235,0.1)',
-        boxShadow: '0 2px 20px rgba(14,42,99,0.06)',
-      } : {}}
+        background: 'rgba(249,251,255,0.88)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        borderBottom: '1px solid rgba(37,99,235,0.08)',
+        boxShadow: '0 1px 20px rgba(14,42,99,0.06)',
+      } : {
+        background: 'transparent',
+      }}
     >
-      <div className="container flex items-center justify-between py-6">
-        <a href="#" className="blue-text text-2xl font-bold tracking-wide select-none">
-          Truvala
+      <div
+        className="flex items-center justify-between"
+        style={{ padding: '0 32px', height: 60 }}
+      >
+        {/* Brand — flush left */}
+        <a href="#" className="flex items-center gap-2.5 select-none group">
+          <div
+            className="flex items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-[1.05]"
+            style={{
+              width: 30, height: 30,
+              background: 'linear-gradient(140deg, #2563eb 0%, #1e3a8a 100%)',
+              boxShadow: '0 2px 10px rgba(37,99,235,0.3)',
+            }}
+          >
+            <svg width="16" height="14" viewBox="0 0 16 14" fill="none">
+              <path d="M8 0.5L15.5 6V13.5H11V9H5V13.5H0.5V6L8 0.5Z" fill="white" />
+            </svg>
+          </div>
+          <span
+            className="font-bold tracking-tight"
+            style={{ fontSize: 18, color: '#0a1628' }}
+          >
+            Truvala
+          </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-10 text-base font-medium" style={{ color: '#475569' }}>
-          {[
-            { label: 'Why Truvala', href: '#problem'  },
-            { label: 'See It Work',  href: '#demo'     },
-            { label: 'Features',     href: '#features' },
-            { label: 'Pricing',      href: '#waitlist' },
-          ].map(({ label, href }) => (
+        {/* Nav links — right side */}
+        <nav className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map(({ label, href }) => (
             <a
               key={label}
               href={href}
-              className="transition-colors duration-200 hover:text-blue-600"
+              className="font-medium transition-colors duration-200 hover:text-blue-600"
+              style={{ fontSize: 15, color: '#4a5568' }}
             >
               {label}
             </a>
           ))}
-        </div>
+        </nav>
       </div>
-    </motion.nav>
+    </motion.header>
   )
 }
