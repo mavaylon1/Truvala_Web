@@ -15,39 +15,37 @@ const BLOBS: Blob[] = [
   { cx: 0.45, cy: 0.80, r: 0.45, rgb: [124, 58,  237], alpha: 0.08, phase: 3.6, sx: 0.14, sy: 0.18, ax: 0.12, ay: 0.08 },
 ]
 
-// One horizontal, one strong diagonal, one semi-vertical from the side.
-// Perpendicular oscillations use a fixed 700px scale so they feel consistent
-// on all screen sizes — lines simply clip at canvas edges on mobile.
+// mobile: only lines with showMobile:true are drawn (keeps it from compressing)
 const LINES = [
   {
-    // Gentle horizontal, slight downward slope
     x0: -0.05, y0: 0.32, x1: 1.05, y1: 0.44,
     drift: 'y' as const, driftSpeed:  0.009,
     waves: [
-      { amp: 0.13, freq: 1.6, phase: 0.0, ts: 0.035 },
-      { amp: 0.05, freq: 3.2, phase: 1.4, ts: 0.055 },
+      { amp: 0.13, freq: 1.6, phase: 0.0, ts: 0.010 },
+      { amp: 0.05, freq: 3.2, phase: 1.4, ts: 0.016 },
     ],
     rgb: [37, 99, 235]  as [number,number,number], alpha: 0.26, width: 1.2,
+    showMobile: false,
   },
   {
-    // Strong diagonal — right-to-left, top-to-bottom
     x0: 1.05, y0: 0.05, x1: -0.05, y1: 0.80,
     drift: 'y' as const, driftSpeed: -0.007,
     waves: [
-      { amp: 0.11, freq: 1.3, phase: 2.1, ts: 0.030 },
-      { amp: 0.05, freq: 2.8, phase: 0.7, ts: 0.048 },
+      { amp: 0.11, freq: 1.3, phase: 2.1, ts: 0.008 },
+      { amp: 0.05, freq: 2.8, phase: 0.7, ts: 0.013 },
     ],
     rgb: [6, 182, 212]  as [number,number,number], alpha: 0.22, width: 1.0,
+    showMobile: true,
   },
   {
-    // Semi-vertical, enters from top, slight rightward lean — drifts horizontally
     x0: 0.18, y0: -0.05, x1: 0.38, y1: 1.05,
     drift: 'x' as const, driftSpeed: -0.006,
     waves: [
-      { amp: 0.10, freq: 1.4, phase: 3.8, ts: 0.038 },
-      { amp: 0.04, freq: 2.6, phase: 1.1, ts: 0.025 },
+      { amp: 0.10, freq: 1.4, phase: 3.8, ts: 0.009 },
+      { amp: 0.04, freq: 2.6, phase: 1.1, ts: 0.006 },
     ],
     rgb: [99, 102, 241] as [number,number,number], alpha: 0.20, width: 0.9,
+    showMobile: true,
   },
 ]
 
@@ -55,7 +53,7 @@ const SAMPLES    = 240
 const FADE_ZONE  = 0.18
 const REPEL_DIST = 0.16
 const REPEL_STR  = 0.055
-const PERP_SCALE = 700   // fixed px — lines clip naturally on mobile, no compression
+const PERP_SCALE = 700  // fixed px ref — lines clip at edges, never compressed
 
 export default function AuroraBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -97,18 +95,23 @@ export default function AuroraBackground() {
     }
 
     function drawLines(time: number) {
-      // Centre position of each y-drifting line for repulsion
-      const centres = LINES.map(ln => {
+      const isMobile = w < 768
+      // wScale stretches wave frequencies on narrow screens so curve density
+      // stays consistent regardless of viewport width
+      const wScale = Math.min(1.0, w / 1000)
+
+      const active = LINES.filter(ln => !isMobile || ln.showMobile)
+
+      const centres = active.map(ln => {
         const raw = (time * ln.driftSpeed) % 1.0
         const o   = raw < 0 ? raw + 1.0 : raw
         return ln.drift === 'y' ? ln.y0 + o : ln.x0 + o
       })
 
-      // Soft cosine repulsion between same-axis lines
-      const repel = new Array(LINES.length).fill(0)
-      for (let i = 0; i < LINES.length; i++) {
-        for (let j = i + 1; j < LINES.length; j++) {
-          if (LINES[i].drift !== LINES[j].drift) continue
+      const repel = new Array(active.length).fill(0)
+      for (let i = 0; i < active.length; i++) {
+        for (let j = i + 1; j < active.length; j++) {
+          if (active[i].drift !== active[j].drift) continue
           const d = centres[i] - centres[j]
           const a = Math.abs(d)
           if (a < REPEL_DIST && a > 0.001) {
@@ -120,8 +123,8 @@ export default function AuroraBackground() {
         }
       }
 
-      for (let li = 0; li < LINES.length; li++) {
-        const ln = LINES[li]
+      for (let li = 0; li < active.length; li++) {
+        const ln = active[li]
         const dx  = ln.x1 - ln.x0
         const dy  = ln.y1 - ln.y0
         const len = Math.sqrt(dx * dx + dy * dy)
@@ -147,7 +150,7 @@ export default function AuroraBackground() {
             const s = i / SAMPLES
             let off = 0
             for (const wv of ln.waves) {
-              off += wv.amp * Math.sin(s * wv.freq * Math.PI * 2 + time * wv.ts + wv.phase)
+              off += wv.amp * Math.sin(s * wv.freq * wScale * Math.PI * 2 + time * wv.ts + wv.phase)
             }
             const bx = (ln.x0 + dx * s + (ln.drift === 'x' ? o : 0)) * w
             const by = (ln.y0 + dy * s + (ln.drift === 'y' ? o : 0)) * h
