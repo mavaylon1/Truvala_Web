@@ -3,16 +3,19 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 
-// Grid cell size — smaller = smoother lines, more CPU
-const GRID = 12
+// Grid cell size — responsive, larger = coarser lines on small screens
+function gridSize(): number {
+  const w = window.innerWidth
+  if (w < 768)  return 20
+  if (w < 1024) return 16
+  return 12
+}
 
 const LEVELS = [
-  { v: -0.62, rgb: [6,   182, 212] as [number,number,number], alpha: 0.11, width: 0.6 },
-  { v: -0.38, rgb: [37,  99,  235] as [number,number,number], alpha: 0.14, width: 0.8 },
-  { v: -0.14, rgb: [59,  130, 246] as [number,number,number], alpha: 0.12, width: 0.6 },
-  { v:  0.10, rgb: [99,  102, 241] as [number,number,number], alpha: 0.15, width: 0.9 },
-  { v:  0.34, rgb: [37,  99,  235] as [number,number,number], alpha: 0.12, width: 0.7 },
-  { v:  0.58, rgb: [6,   182, 212] as [number,number,number], alpha: 0.10, width: 0.6 },
+  { v: -0.55, rgb: [6,   182, 212] as [number,number,number], alpha: 0.12, width: 0.7 },
+  { v: -0.15, rgb: [37,  99,  235] as [number,number,number], alpha: 0.15, width: 0.9 },
+  { v:  0.25, rgb: [99,  102, 241] as [number,number,number], alpha: 0.13, width: 0.7 },
+  { v:  0.65, rgb: [6,   182, 212] as [number,number,number], alpha: 0.11, width: 0.6 },
 ]
 
 // Layered sine waves in different directions — produces closed contour loops
@@ -93,8 +96,9 @@ export default function AuroraBackground() {
     canvas.height = h
 
     // Pre-allocate field array — reuse every frame to avoid GC pressure
-    let cols  = Math.ceil(w / GRID) + 2
-    let rows  = Math.ceil(h / GRID) + 2
+    let g     = gridSize()
+    let cols  = Math.ceil(w / g) + 2
+    let rows  = Math.ceil(h / g) + 2
     let field = new Float32Array(cols * rows)
 
     const resize = () => {
@@ -102,8 +106,9 @@ export default function AuroraBackground() {
       h = window.innerHeight
       canvas.width  = w
       canvas.height = h
-      cols  = Math.ceil(w / GRID) + 2
-      rows  = Math.ceil(h / GRID) + 2
+      g     = gridSize()
+      cols  = Math.ceil(w / g) + 2
+      rows  = Math.ceil(h / g) + 2
       field = new Float32Array(cols * rows)
       if (prefersReduced) draw(0)
     }
@@ -115,16 +120,16 @@ export default function AuroraBackground() {
       // Fill height field
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
-          field[r * cols + c] = heightAt(c * GRID / w, r * GRID / h, time)
+          field[r * cols + c] = heightAt(c * g / w, r * g / h, time)
         }
       }
 
       // Draw each contour level
       for (const lv of LEVELS) {
-        const [r, g, b] = lv.rgb
-        ctx.strokeStyle = `rgba(${r},${g},${b},${lv.alpha})`
+        const [ri, gi, bi] = lv.rgb
+        ctx.strokeStyle = `rgba(${ri},${gi},${bi},${lv.alpha})`
         ctx.lineWidth   = lv.width
-        traceContour(ctx, field, cols, rows, lv.v, GRID)
+        traceContour(ctx, field, cols, rows, lv.v, g)
       }
     }
 
