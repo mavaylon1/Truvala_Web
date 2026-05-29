@@ -3,43 +3,27 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 
-interface Particle {
-  bx:    number   // base x
-  by:    number   // base y
-  r:     number   // radius
-  alpha: number
-  rgb:   [number, number, number]
+interface GlowWave {
+  baseY:    number   // 0–1 vertical center
+  amp:      number   // 0–1 oscillation amplitude
+  freqFrac: number   // wave period as fraction of screen width
+  speed:    number   // rad / s
+  phase:    number
+  glowR:    number   // radius of each gradient circle (px)
+  alpha:    number   // peak opacity per gradient
+  rgb:      [number, number, number]
 }
 
-const COLORS: [number, number, number][] = [
-  [255, 255, 255],
-  [255, 255, 255],
-  [37,  99,  235],
-  [6,   182, 212],
-  [34,  211, 238],
+// Each wave is rendered as overlapping soft radial gradients placed along
+// a sine path — circles overlap enough to merge into a continuous glow band
+const WAVES: GlowWave[] = [
+  { baseY: 0.28, amp: 0.10, freqFrac: 0.48, speed: 0.14, phase: 0.0, glowR: 110, alpha: 0.055, rgb: [37,  99,  235] },
+  { baseY: 0.50, amp: 0.12, freqFrac: 0.42, speed: 0.11, phase: 1.8, glowR: 130, alpha: 0.050, rgb: [6,   182, 212] },
+  { baseY: 0.72, amp: 0.09, freqFrac: 0.52, speed: 0.13, phase: 3.4, glowR: 100, alpha: 0.048, rgb: [99,  102, 241] },
+  { baseY: 0.38, amp: 0.08, freqFrac: 0.38, speed: 0.09, phase: 0.9, glowR: 120, alpha: 0.040, rgb: [34,  211, 238] },
 ]
 
-function buildParticles(w: number, h: number): Particle[] {
-  // Grid layout with slight jitter so it never looks mechanical
-  const cols  = Math.round(w / 38)
-  const rows  = Math.round(h / 38)
-  const cellW = w / cols
-  const cellH = h / rows
-  const out: Particle[] = []
-
-  for (let c = 0; c < cols; c++) {
-    for (let r = 0; r < rows; r++) {
-      out.push({
-        bx:    c * cellW + cellW * 0.5 + (Math.random() - 0.5) * cellW * 0.7,
-        by:    r * cellH + cellH * 0.5 + (Math.random() - 0.5) * cellH * 0.7,
-        r:     0.9 + Math.random() * 1.6,
-        alpha: 0.28 + Math.random() * 0.52,
-        rgb:   COLORS[Math.floor(Math.random() * COLORS.length)],
-      })
-    }
-  }
-  return out
-}
+const STEP = 28   // px between gradient circles — enough overlap to merge seamlessly
 
 export default function AuroraBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -54,71 +38,39 @@ export default function AuroraBackground() {
     canvas.width  = w
     canvas.height = h
 
-    let particles = buildParticles(w, h)
-
     const resize = () => {
       w = window.innerWidth
       h = window.innerHeight
       canvas.width  = w
       canvas.height = h
-      particles = buildParticles(w, h)
       if (prefersReduced) draw(0)
     }
     window.addEventListener('resize', resize)
 
-    // Ambient color blobs so the field has color variety
-    const blobs = [
-      { cx: 0.20, cy: 0.35, r: 0.55, rgb: [37,  99,  235] as [number,number,number], alpha: 0.09 },
-      { cx: 0.78, cy: 0.60, r: 0.50, rgb: [6,   182, 212] as [number,number,number], alpha: 0.08 },
-      { cx: 0.50, cy: 0.80, r: 0.45, rgb: [124, 58,  237] as [number,number,number], alpha: 0.07 },
-    ]
+    function drawWave(wave: GlowWave, time: number) {
+      const freq = (Math.PI * 2) / (w * wave.freqFrac)
+      const [r, g, b] = wave.rgb
 
-    function drawBlobs(time: number) {
-      for (const b of blobs) {
-        const px = (b.cx + Math.sin(time * 0.10) * 0.05) * w
-        const py = (b.cy + Math.cos(time * 0.08) * 0.05) * h
-        const r  = b.r * Math.min(w, h)
-        const [r_, g_, b_] = b.rgb
-        const grad = ctx.createRadialGradient(px, py, 0, px, py, r)
-        grad.addColorStop(0, `rgba(${r_},${g_},${b_},${b.alpha})`)
-        grad.addColorStop(1, `rgba(${r_},${g_},${b_},0)`)
+      for (let x = -wave.glowR; x <= w + wave.glowR; x += STEP) {
+        const cy = (wave.baseY + wave.amp * Math.sin(x * freq + time * wave.speed + wave.phase)) * h
+
+        const grad = ctx.createRadialGradient(x, cy, 0, x, cy, wave.glowR)
+        grad.addColorStop(0,    `rgba(${r},${g},${b},${wave.alpha})`)
+        grad.addColorStop(0.45, `rgba(${r},${g},${b},${(wave.alpha * 0.5).toFixed(3)})`)
+        grad.addColorStop(1,    `rgba(${r},${g},${b},0)`)
+
+        ctx.beginPath()
+        ctx.arc(x, cy, wave.glowR, 0, Math.PI * 2)
         ctx.fillStyle = grad
-        ctx.beginPath()
-        ctx.arc(px, py, r, 0, Math.PI * 2)
-        ctx.fill()
-      }
-    }
-
-    function drawParticles(time: number) {
-      // Two layered waves travelling in the same direction — primary + gentle ripple
-      const amp1  = h * 0.075         // ~67px on 900px screen
-      const amp2  = h * 0.028
-      const freq1 = (Math.PI * 2) / (w * 0.44)   // ~2.3 crests across screen
-      const freq2 = (Math.PI * 2) / (w * 0.22)
-      const spd1  = 0.28              // rad / s  — slow rolling
-      const spd2  = 0.46
-
-      for (const p of particles) {
-        const dy = amp1 * Math.sin(p.bx * freq1 + time * spd1)
-               + amp2 * Math.sin(p.bx * freq2 + time * spd2 + 1.4)
-
-        const x = p.bx
-        const y = p.by + dy
-
-        if (y < -10 || y > h + 10) continue   // skip if scrolled off canvas
-
-        const [r, g, b] = p.rgb
-        ctx.beginPath()
-        ctx.arc(x, y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${r},${g},${b},${p.alpha})`
         ctx.fill()
       }
     }
 
     function draw(time: number) {
       ctx.clearRect(0, 0, w, h)
-      drawBlobs(time)
-      drawParticles(time)
+      for (const wave of WAVES) {
+        drawWave(wave, time)
+      }
     }
 
     if (prefersReduced) {
