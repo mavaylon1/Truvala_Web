@@ -15,31 +15,37 @@ const BLOBS: Blob[] = [
   { cx: 0.45, cy: 0.80, r: 0.45, rgb: [124, 58,  237], alpha: 0.08, phase: 3.6, sx: 0.14, sy: 0.18, ax: 0.12, ay: 0.08 },
 ]
 
+// One horizontal, one strong diagonal, one semi-vertical from the side.
+// Perpendicular oscillations use a fixed 700px scale so they feel consistent
+// on all screen sizes — lines simply clip at canvas edges on mobile.
 const LINES = [
   {
-    x0: -0.05, y0: 0.30, x1: 1.05, y1: 0.30,
+    // Gentle horizontal, slight downward slope
+    x0: -0.05, y0: 0.32, x1: 1.05, y1: 0.44,
     drift: 'y' as const, driftSpeed:  0.009,
     waves: [
-      { amp: 0.14, freq: 1.6, phase: 0.0, ts: 0.035 },
-      { amp: 0.05, freq: 3.1, phase: 1.4, ts: 0.055 },
+      { amp: 0.13, freq: 1.6, phase: 0.0, ts: 0.035 },
+      { amp: 0.05, freq: 3.2, phase: 1.4, ts: 0.055 },
     ],
     rgb: [37, 99, 235]  as [number,number,number], alpha: 0.26, width: 1.2,
   },
   {
-    x0: 1.05, y0: 0.55, x1: -0.05, y1: 0.55,
-    drift: 'y' as const, driftSpeed: -0.0065,
+    // Strong diagonal — right-to-left, top-to-bottom
+    x0: 1.05, y0: 0.05, x1: -0.05, y1: 0.80,
+    drift: 'y' as const, driftSpeed: -0.007,
     waves: [
-      { amp: 0.12, freq: 1.2, phase: 2.2, ts: 0.030 },
-      { amp: 0.06, freq: 2.7, phase: 0.6, ts: 0.050 },
+      { amp: 0.11, freq: 1.3, phase: 2.1, ts: 0.030 },
+      { amp: 0.05, freq: 2.8, phase: 0.7, ts: 0.048 },
     ],
     rgb: [6, 182, 212]  as [number,number,number], alpha: 0.22, width: 1.0,
   },
   {
-    x0: -0.05, y0: 0.72, x1: 1.05, y1: 0.72,
-    drift: 'y' as const, driftSpeed:  0.011,
+    // Semi-vertical, enters from top, slight rightward lean — drifts horizontally
+    x0: 0.18, y0: -0.05, x1: 0.38, y1: 1.05,
+    drift: 'x' as const, driftSpeed: -0.006,
     waves: [
-      { amp: 0.10, freq: 2.0, phase: 3.8, ts: 0.040 },
-      { amp: 0.04, freq: 0.8, phase: 1.0, ts: 0.025 },
+      { amp: 0.10, freq: 1.4, phase: 3.8, ts: 0.038 },
+      { amp: 0.04, freq: 2.6, phase: 1.1, ts: 0.025 },
     ],
     rgb: [99, 102, 241] as [number,number,number], alpha: 0.20, width: 0.9,
   },
@@ -49,6 +55,7 @@ const SAMPLES    = 240
 const FADE_ZONE  = 0.18
 const REPEL_DIST = 0.16
 const REPEL_STR  = 0.055
+const PERP_SCALE = 700   // fixed px — lines clip naturally on mobile, no compression
 
 export default function AuroraBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -90,17 +97,18 @@ export default function AuroraBackground() {
     }
 
     function drawLines(time: number) {
-      // Centre y of each line for repulsion
+      // Centre position of each y-drifting line for repulsion
       const centres = LINES.map(ln => {
         const raw = (time * ln.driftSpeed) % 1.0
         const o   = raw < 0 ? raw + 1.0 : raw
-        return ln.y0 + o
+        return ln.drift === 'y' ? ln.y0 + o : ln.x0 + o
       })
 
-      // Soft cosine repulsion between lines — keeps them apart but allows crossing
+      // Soft cosine repulsion between same-axis lines
       const repel = new Array(LINES.length).fill(0)
       for (let i = 0; i < LINES.length; i++) {
         for (let j = i + 1; j < LINES.length; j++) {
+          if (LINES[i].drift !== LINES[j].drift) continue
           const d = centres[i] - centres[j]
           const a = Math.abs(d)
           if (a < REPEL_DIST && a > 0.001) {
@@ -130,7 +138,7 @@ export default function AuroraBackground() {
         ctx.lineJoin  = 'round'
 
         for (const o of copies) {
-          const pos  = ln.y0 + o
+          const pos  = ln.drift === 'y' ? ln.y0 + o : ln.x0 + o
           const fade = Math.max(0, Math.min(pos / FADE_ZONE, (1.0 - pos) / FADE_ZONE, 1))
           if (fade < 0.01) continue
 
@@ -141,10 +149,10 @@ export default function AuroraBackground() {
             for (const wv of ln.waves) {
               off += wv.amp * Math.sin(s * wv.freq * Math.PI * 2 + time * wv.ts + wv.phase)
             }
-            const bx = (ln.x0 + dx * s) * w
-            const by = (ln.y0 + dy * s + o) * h
-            const x  = bx + px * off * Math.min(w, h)
-            const y  = by + py * off * Math.min(w, h)
+            const bx = (ln.x0 + dx * s + (ln.drift === 'x' ? o : 0)) * w
+            const by = (ln.y0 + dy * s + (ln.drift === 'y' ? o : 0)) * h
+            const x  = bx + px * off * PERP_SCALE
+            const y  = by + py * off * PERP_SCALE
             i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
           }
           ctx.strokeStyle = `rgba(${r},${g},${b},${(ln.alpha * fade).toFixed(3)})`
