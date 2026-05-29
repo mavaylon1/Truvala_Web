@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuroraBackground from "./components/AuroraBackground";
+import Navbar from "./components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +17,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Truvala — Buy with Clarity, Not Just Hope",
   description:
-    "A browser extension that analyzes listings you're already browsing — surfacing buyer fit, reliability flags, hidden risks, and true ownership costs before you commit.",
-  keywords: ["home buying", "real estate", "browser extension", "zillow", "redfin", "home analysis"],
+    "An AI real estate startup making home buying clearer, smarter, and more transparent for buyers and real estate professionals.",
+  keywords: ["home buying", "real estate", "AI", "browser extension", "zillow", "redfin"],
 };
 
 export default function RootLayout({
@@ -32,7 +33,10 @@ export default function RootLayout({
     >
       <body className="min-h-screen">
         <AuroraBackground />
-        <div style={{ position: 'relative', zIndex: 1 }}>{children}</div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );

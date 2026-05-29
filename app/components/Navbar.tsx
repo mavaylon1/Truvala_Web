@@ -2,15 +2,18 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const NAV_LINKS = [
-  { label: 'Why Truvala', href: '#problem'  },
-  { label: 'How It Works', href: '#features' },
-  { label: 'Live Demo',    href: '#demo'     },
+  { label: 'What is Truvala',   href: '/what-is-truvala'   },
+  { label: 'Who are we',        href: '/who-are-we'        },
+  { label: 'Upcoming Products', href: '/upcoming-products' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 48)
@@ -34,23 +37,9 @@ export default function Navbar() {
         background: 'transparent',
       }}
     >
-      <div
-        className="flex items-center justify-between"
-        style={{ padding: '0 32px', height: 60 }}
-      >
-        {/* Brand — flush left */}
-        <a
-          href="/"
-          className="select-none inline-flex items-center gap-2.5 group"
-          onClick={(e) => {
-            e.preventDefault()
-            if (window.location.pathname !== '/') {
-              window.location.href = '/'
-            } else {
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-            }
-          }}
-        >
+      <div className="flex items-center gap-6" style={{ padding: '0 32px', height: 60 }}>
+        {/* Brand */}
+        <Link href="/" className="select-none inline-flex items-center gap-2.5 group flex-shrink-0">
           <div
             className="flex items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-[1.05]"
             style={{
@@ -64,23 +53,42 @@ export default function Navbar() {
               <path d="M8 0.5L15.5 6V13.5H11V9H5V13.5H0.5V6L8 0.5Z" fill="white" />
             </svg>
           </div>
-          <span className="font-bold tracking-tight" style={{ fontSize: 25, color: '#0a1628' }}>
+          <span className="font-bold tracking-tight" style={{ fontSize: 22, color: '#0a1628' }}>
             Truvala
           </span>
-        </a>
+        </Link>
 
-        {/* Nav links — right side */}
-        <nav className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map(({ label, href }) => (
-            <a
-              key={label}
-              href={href}
-              className="font-medium transition-colors duration-200 hover:text-blue-600"
-              style={{ fontSize: 16, color: '#4a5568' }}
-            >
-              {label}
-            </a>
-          ))}
+        {/* Divider */}
+        <div style={{ width: 1, height: 18, background: 'rgba(37,99,235,0.18)', flexShrink: 0 }} />
+
+        {/* Nav links — left side */}
+        <nav className="hidden md:flex items-center gap-6">
+          {NAV_LINKS.map(({ label, href }) => {
+            const isActive = pathname === href
+            return (
+              <Link
+                key={label}
+                href={href}
+                className="font-medium transition-all duration-200 hover:text-blue-600 relative"
+                style={{ fontSize: 15, color: isActive ? '#2563eb' : '#4a5568' }}
+              >
+                {label}
+                {isActive && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      bottom: -4,
+                      left: 0,
+                      right: 0,
+                      height: 2,
+                      borderRadius: 1,
+                      background: '#2563eb',
+                    }}
+                  />
+                )}
+              </Link>
+            )
+          })}
         </nav>
       </div>
     </motion.header>
