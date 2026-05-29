@@ -3,86 +3,63 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 
-// Grid cell size — responsive, larger = coarser lines on small screens
-function gridSize(): number {
-  const w = window.innerWidth
-  if (w < 768)  return 20
-  if (w < 1024) return 16
-  return 12
+interface Blob {
+  cx: number; cy: number; r: number
+  rgb: [number, number, number]; alpha: number
+  phase: number; sx: number; sy: number; ax: number; ay: number
 }
 
-const LEVELS = [
-  { v: -0.55, rgb: [6,   182, 212] as [number,number,number], alpha: 0.12, width: 0.7 },
-  { v: -0.15, rgb: [37,  99,  235] as [number,number,number], alpha: 0.15, width: 0.9 },
-  { v:  0.25, rgb: [99,  102, 241] as [number,number,number], alpha: 0.13, width: 0.7 },
-  { v:  0.65, rgb: [6,   182, 212] as [number,number,number], alpha: 0.11, width: 0.6 },
+const BLOBS: Blob[] = [
+  { cx: 0.10, cy: 0.18, r: 0.60, rgb: [37,  99,  235], alpha: 0.13, phase: 0.0, sx: 0.23, sy: 0.18, ax: 0.10, ay: 0.09 },
+  { cx: 0.82, cy: 0.10, r: 0.52, rgb: [6,   182, 212], alpha: 0.11, phase: 1.9, sx: 0.18, sy: 0.27, ax: 0.09, ay: 0.12 },
+  { cx: 0.45, cy: 0.82, r: 0.48, rgb: [124, 58,  237], alpha: 0.09, phase: 3.6, sx: 0.15, sy: 0.20, ax: 0.13, ay: 0.09 },
+  { cx: 0.92, cy: 0.62, r: 0.42, rgb: [34,  211, 238], alpha: 0.09, phase: 0.8, sx: 0.30, sy: 0.16, ax: 0.07, ay: 0.11 },
+  { cx: 0.18, cy: 0.75, r: 0.50, rgb: [59,  130, 246], alpha: 0.10, phase: 2.4, sx: 0.21, sy: 0.26, ax: 0.11, ay: 0.08 },
 ]
 
-// Fixed pixel scale so the pattern has the same physical size on every screen.
-// Mobile sees fewer features rather than a compressed/tiled version.
-const S = 0.00175
+// Spatial scale — fixed pixel units so the pattern looks the same size on all screens
+const S        = 0.0022
+const STEP     = 4     // px per integration step
+const MAX_STEPS = 220  // max length of each streamline
 
-function heightAt(x: number, y: number, t: number): number {
+// Vector field angle at pixel (x, y) — layered sines create organic regions of
+// convergence and divergence without forcing closed loops
+function fieldAngle(x: number, y: number, t: number): number {
   return (
-    0.50 * Math.sin(x * S * 5.2 + y * S * 3.1 + t * 0.08) +
-    0.32 * Math.sin(-x * S * 3.8 + y * S * 4.6 + t * 0.06 + 2.1) +
-    0.18 * Math.sin(x * S * 7.4 - y * S * 2.4 + t * 0.10 + 4.3)
+    Math.PI       * Math.sin(x * S * 2.6 + y * S * 1.5 + t * 0.09)       +
+    Math.PI * 0.5 * Math.cos(-x * S * 1.8 + y * S * 2.3 + t * 0.06 + 1.8) +
+    Math.PI * 0.2 * Math.sin(x * S * 4.1 - y * S * 1.2 + t * 0.11 + 3.5)
   )
 }
 
-// Marching squares — draw one contour level into the current path
-function traceContour(
-  ctx: CanvasRenderingContext2D,
-  field: Float32Array,
-  cols: number,
-  rows: number,
-  level: number,
-  g: number,
-) {
-  ctx.beginPath()
+const LINE_STYLES: { rgb: [number,number,number]; alpha: number; width: number }[] = [
+  { rgb: [37,  99,  235], alpha: 0.18, width: 0.8 },
+  { rgb: [6,   182, 212], alpha: 0.15, width: 0.7 },
+  { rgb: [99,  102, 241], alpha: 0.14, width: 0.7 },
+]
 
-  for (let r = 0; r < rows - 1; r++) {
-    for (let c = 0; c < cols - 1; c++) {
-      const tl = field[r * cols + c]
-      const tr = field[r * cols + c + 1]
-      const br = field[(r + 1) * cols + c + 1]
-      const bl = field[(r + 1) * cols + c]
+function makeSeedPoints(w: number, h: number): { x: number; y: number; style: number }[] {
+  let cols: number, rows: number
+  if      (w < 480)  { cols = 5;  rows = 9  }
+  else if (w < 768)  { cols = 7;  rows = 11 }
+  else if (w < 1024) { cols = 9;  rows = 13 }
+  else if (w < 1920) { cols = 11; rows = 15 }
+  else if (w < 2560) { cols = 15; rows = 17 }
+  else               { cols = 19; rows = 19 }
 
-      const code = (tl > level ? 8 : 0)
-                 | (tr > level ? 4 : 0)
-                 | (br > level ? 2 : 0)
-                 | (bl > level ? 1 : 0)
-
-      if (code === 0 || code === 15) continue
-
-      const x = c * g
-      const y = r * g
-      const li = (a: number, b: number) => g * (level - a) / (b - a)
-
-      const T = [x + li(tl, tr), y      ]
-      const R = [x + g,          y + li(tr, br)]
-      const B = [x + li(bl, br), y + g  ]
-      const L = [x,              y + li(tl, bl)]
-
-      const seg = (a: number[], b: number[]) => {
-        ctx.moveTo(a[0], a[1])
-        ctx.lineTo(b[0], b[1])
-      }
-
-      switch (code) {
-        case  1: case 14: seg(L, B); break
-        case  2: case 13: seg(B, R); break
-        case  3: case 12: seg(L, R); break
-        case  4: case 11: seg(T, R); break
-        case  5:          seg(T, L); seg(R, B); break
-        case  6: case  9: seg(T, B); break
-        case  7: case  8: seg(T, L); break
-        case 10:          seg(T, R); seg(L, B); break
-      }
+  const seeds = []
+  const cw = w / cols
+  const ch = h / rows
+  for (let c = 0; c < cols; c++) {
+    for (let r = 0; r < rows; r++) {
+      seeds.push({
+        x:     (c + 0.5) * cw + (Math.random() - 0.5) * cw * 0.4,
+        y:     (r + 0.5) * ch + (Math.random() - 0.5) * ch * 0.4,
+        style: (c * 3 + r * 2) % LINE_STYLES.length,
+      })
     }
   }
-
-  ctx.stroke()
+  return seeds
 }
 
 export default function AuroraBackground() {
@@ -98,42 +75,67 @@ export default function AuroraBackground() {
     canvas.width  = w
     canvas.height = h
 
-    // Pre-allocate field array — reuse every frame to avoid GC pressure
-    let g     = gridSize()
-    let cols  = Math.ceil(w / g) + 2
-    let rows  = Math.ceil(h / g) + 2
-    let field = new Float32Array(cols * rows)
+    let seeds = makeSeedPoints(w, h)
 
     const resize = () => {
       w = window.innerWidth
       h = window.innerHeight
       canvas.width  = w
       canvas.height = h
-      g     = gridSize()
-      cols  = Math.ceil(w / g) + 2
-      rows  = Math.ceil(h / g) + 2
-      field = new Float32Array(cols * rows)
+      seeds = makeSeedPoints(w, h)
       if (prefersReduced) draw(0)
     }
     window.addEventListener('resize', resize)
 
+    function drawBlobs(time: number) {
+      for (const b of BLOBS) {
+        const px = (b.cx + Math.sin(time * b.sx + b.phase) * b.ax) * w
+        const py = (b.cy + Math.cos(time * b.sy + b.phase * 1.3) * b.ay) * h
+        const r  = b.r * Math.min(w, h)
+        const [r_, g_, b_] = b.rgb
+        const grad = ctx.createRadialGradient(px, py, 0, px, py, r)
+        grad.addColorStop(0,    `rgba(${r_},${g_},${b_},${b.alpha})`)
+        grad.addColorStop(0.42, `rgba(${r_},${g_},${b_},${+(b.alpha * 0.4).toFixed(3)})`)
+        grad.addColorStop(1,    `rgba(${r_},${g_},${b_},0)`)
+        ctx.fillStyle = grad
+        ctx.beginPath()
+        ctx.arc(px, py, r, 0, Math.PI * 2)
+        ctx.fill()
+      }
+    }
+
+    function drawStreamlines(time: number) {
+      // Group seeds by style for fewer ctx state changes
+      for (let si = 0; si < LINE_STYLES.length; si++) {
+        const style = LINE_STYLES[si]
+        const [r, g, b] = style.rgb
+        ctx.strokeStyle = `rgba(${r},${g},${b},${style.alpha})`
+        ctx.lineWidth   = style.width
+        ctx.lineCap     = 'round'
+        ctx.lineJoin    = 'round'
+
+        ctx.beginPath()
+        for (const seed of seeds) {
+          if (seed.style !== si) continue
+          let x = seed.x
+          let y = seed.y
+          ctx.moveTo(x, y)
+          for (let step = 0; step < MAX_STEPS; step++) {
+            const angle = fieldAngle(x, y, time)
+            x += Math.cos(angle) * STEP
+            y += Math.sin(angle) * STEP
+            if (x < -20 || x > w + 20 || y < -20 || y > h + 20) break
+            ctx.lineTo(x, y)
+          }
+        }
+        ctx.stroke()
+      }
+    }
+
     function draw(time: number) {
       ctx.clearRect(0, 0, w, h)
-
-      // Fill height field — pass actual pixel coords, not normalized
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          field[r * cols + c] = heightAt(c * g, r * g, time)
-        }
-      }
-
-      // Draw each contour level
-      for (const lv of LEVELS) {
-        const [ri, gi, bi] = lv.rgb
-        ctx.strokeStyle = `rgba(${ri},${gi},${bi},${lv.alpha})`
-        ctx.lineWidth   = lv.width
-        traceContour(ctx, field, cols, rows, lv.v, g)
-      }
+      drawBlobs(time)
+      drawStreamlines(time)
     }
 
     if (prefersReduced) {
