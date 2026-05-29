@@ -131,7 +131,9 @@ export default function AuroraBackground() {
         const px  = -dy / len
         const py  =  dx / len
 
-        const raw    = (time * ln.driftSpeed) % 1.0
+        // Normalise drift to pixel speed — keeps motion consistent across screen sizes
+        const driftScale = ln.drift === 'y' ? (900 / h) : (1440 / w)
+        const raw    = (time * ln.driftSpeed * driftScale) % 1.0
         const offset = (raw < 0 ? raw + 1.0 : raw) + repel[li]
         const copies = [offset - 1.0, offset, offset + 1.0]
 
