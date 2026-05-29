@@ -15,82 +15,40 @@ const BLOBS: Blob[] = [
   { cx: 0.45, cy: 0.80, r: 0.45, rgb: [124, 58,  237], alpha: 0.08, phase: 3.6, sx: 0.14, sy: 0.18, ax: 0.12, ay: 0.08 },
 ]
 
-// Each track is a slowly drifting iso-level through the height field.
-// Because the field has a linear base in y, lines at different levels
-// are mathematically guaranteed never to cross — they can only get close.
-const TRACKS = [
-  { baseV: -0.62, driftSpeed:  0.009, rgb: [37,  99,  235] as [number,number,number], alpha: 0.26, width: 1.2 },
-  { baseV: -0.21, driftSpeed: -0.007, rgb: [6,   182, 212] as [number,number,number], alpha: 0.22, width: 1.0 },
-  { baseV:  0.20, driftSpeed:  0.011, rgb: [99,  102, 241] as [number,number,number], alpha: 0.20, width: 0.9 },
-  { baseV:  0.61, driftSpeed: -0.008, rgb: [37,  99,  235] as [number,number,number], alpha: 0.20, width: 0.9 },
+const LINES = [
+  {
+    x0: -0.05, y0: 0.30, x1: 1.05, y1: 0.30,
+    drift: 'y' as const, driftSpeed:  0.009,
+    waves: [
+      { amp: 0.14, freq: 1.6, phase: 0.0, ts: 0.035 },
+      { amp: 0.05, freq: 3.1, phase: 1.4, ts: 0.055 },
+    ],
+    rgb: [37, 99, 235]  as [number,number,number], alpha: 0.26, width: 1.2,
+  },
+  {
+    x0: 1.05, y0: 0.55, x1: -0.05, y1: 0.55,
+    drift: 'y' as const, driftSpeed: -0.0065,
+    waves: [
+      { amp: 0.12, freq: 1.2, phase: 2.2, ts: 0.030 },
+      { amp: 0.06, freq: 2.7, phase: 0.6, ts: 0.050 },
+    ],
+    rgb: [6, 182, 212]  as [number,number,number], alpha: 0.22, width: 1.0,
+  },
+  {
+    x0: -0.05, y0: 0.72, x1: 1.05, y1: 0.72,
+    drift: 'y' as const, driftSpeed:  0.011,
+    waves: [
+      { amp: 0.10, freq: 2.0, phase: 3.8, ts: 0.040 },
+      { amp: 0.04, freq: 0.8, phase: 1.0, ts: 0.025 },
+    ],
+    rgb: [99, 102, 241] as [number,number,number], alpha: 0.20, width: 0.9,
+  },
 ]
 
-const FADE_V  = 0.28   // fade over this much of the [-1,1] field range at each edge
-const S       = 0.0022 // spatial scale (px⁻¹) — consistent across all screen sizes
-const H_DRIFT = 30     // horizontal drift speed px/s — shapes slowly translate
-
-function gridSize(): number {
-  if (typeof window === 'undefined') return 12
-  const w = window.innerWidth
-  if (w < 768)  return 20
-  if (w < 1024) return 16
-  return 12
-}
-
-// Height field: linear base (y) + small perturbation (x,y).
-// The linear base makes every iso-contour a non-intersecting horizontal curve.
-// The perturbation adds organic curvature; kept small enough that levels never swap.
-function fieldAt(px: number, py: number, t: number, h: number): number {
-  const base     = (py / h) * 2 - 1                // −1 at top → +1 at bottom
-  const driftedX = px + t * H_DRIFT
-  const perturb  = (
-    0.16 * Math.sin(driftedX * S * 2.6 + py * S * 0.7 + t * 0.035)        +
-    0.09 * Math.sin(-driftedX * S * 1.8 + py * S * 0.5 + t * 0.025 + 1.8) +
-    0.04 * Math.sin(driftedX * S * 4.1 - py * S * 0.3 + t * 0.040 + 3.5)
-  )
-  return base + perturb
-}
-
-// Marching squares — one contour level into the current open path
-function traceLevel(
-  ctx: CanvasRenderingContext2D,
-  field: Float32Array,
-  cols: number, rows: number,
-  level: number, g: number,
-) {
-  ctx.beginPath()
-  for (let r = 0; r < rows - 1; r++) {
-    for (let c = 0; c < cols - 1; c++) {
-      const tl = field[r * cols + c]
-      const tr = field[r * cols + c + 1]
-      const br = field[(r + 1) * cols + c + 1]
-      const bl = field[(r + 1) * cols + c]
-      const code = (tl > level ? 8 : 0) | (tr > level ? 4 : 0)
-                 | (br > level ? 2 : 0) | (bl > level ? 1 : 0)
-      if (code === 0 || code === 15) continue
-
-      const x = c * g, y = r * g
-      const li = (a: number, b: number) => g * (level - a) / (b - a)
-      const T = [x + li(tl, tr), y    ]
-      const R = [x + g,          y + li(tr, br)]
-      const B = [x + li(bl, br), y + g]
-      const L = [x,              y + li(tl, bl)]
-      const seg = (a: number[], b: number[]) => { ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]) }
-
-      switch (code) {
-        case  1: case 14: seg(L, B); break
-        case  2: case 13: seg(B, R); break
-        case  3: case 12: seg(L, R); break
-        case  4: case 11: seg(T, R); break
-        case  5:          seg(T, L); seg(R, B); break
-        case  6: case  9: seg(T, B); break
-        case  7: case  8: seg(T, L); break
-        case 10:          seg(T, R); seg(L, B); break
-      }
-    }
-  }
-  ctx.stroke()
-}
+const SAMPLES    = 240
+const FADE_ZONE  = 0.18
+const REPEL_DIST = 0.16
+const REPEL_STR  = 0.055
 
 export default function AuroraBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -105,18 +63,11 @@ export default function AuroraBackground() {
     canvas.width  = w
     canvas.height = h
 
-    let g    = gridSize()
-    let cols = Math.ceil(w / g) + 2
-    let rows = Math.ceil(h / g) + 2
-    let field = new Float32Array(cols * rows)
-
     const resize = () => {
-      w = window.innerWidth; h = window.innerHeight
-      canvas.width = w; canvas.height = h
-      g = gridSize()
-      cols = Math.ceil(w / g) + 2
-      rows = Math.ceil(h / g) + 2
-      field = new Float32Array(cols * rows)
+      w = window.innerWidth
+      h = window.innerHeight
+      canvas.width  = w
+      canvas.height = h
       if (prefersReduced) draw(0)
     }
     window.addEventListener('resize', resize)
@@ -138,41 +89,74 @@ export default function AuroraBackground() {
       }
     }
 
+    function drawLines(time: number) {
+      // Centre y of each line for repulsion
+      const centres = LINES.map(ln => {
+        const raw = (time * ln.driftSpeed) % 1.0
+        const o   = raw < 0 ? raw + 1.0 : raw
+        return ln.y0 + o
+      })
+
+      // Soft cosine repulsion between lines — keeps them apart but allows crossing
+      const repel = new Array(LINES.length).fill(0)
+      for (let i = 0; i < LINES.length; i++) {
+        for (let j = i + 1; j < LINES.length; j++) {
+          const d = centres[i] - centres[j]
+          const a = Math.abs(d)
+          if (a < REPEL_DIST && a > 0.001) {
+            const f = REPEL_STR * 0.5 * (1 + Math.cos(Math.PI * a / REPEL_DIST))
+            const s = d > 0 ? 1 : -1
+            repel[i] += s * f
+            repel[j] -= s * f
+          }
+        }
+      }
+
+      for (let li = 0; li < LINES.length; li++) {
+        const ln = LINES[li]
+        const dx  = ln.x1 - ln.x0
+        const dy  = ln.y1 - ln.y0
+        const len = Math.sqrt(dx * dx + dy * dy)
+        const px  = -dy / len
+        const py  =  dx / len
+
+        const raw    = (time * ln.driftSpeed) % 1.0
+        const offset = (raw < 0 ? raw + 1.0 : raw) + repel[li]
+        const copies = [offset - 1.0, offset, offset + 1.0]
+
+        const [r, g, b] = ln.rgb
+        ctx.lineWidth = ln.width
+        ctx.lineCap   = 'round'
+        ctx.lineJoin  = 'round'
+
+        for (const o of copies) {
+          const pos  = ln.y0 + o
+          const fade = Math.max(0, Math.min(pos / FADE_ZONE, (1.0 - pos) / FADE_ZONE, 1))
+          if (fade < 0.01) continue
+
+          ctx.beginPath()
+          for (let i = 0; i <= SAMPLES; i++) {
+            const s = i / SAMPLES
+            let off = 0
+            for (const wv of ln.waves) {
+              off += wv.amp * Math.sin(s * wv.freq * Math.PI * 2 + time * wv.ts + wv.phase)
+            }
+            const bx = (ln.x0 + dx * s) * w
+            const by = (ln.y0 + dy * s + o) * h
+            const x  = bx + px * off * Math.min(w, h)
+            const y  = by + py * off * Math.min(w, h)
+            i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
+          }
+          ctx.strokeStyle = `rgba(${r},${g},${b},${(ln.alpha * fade).toFixed(3)})`
+          ctx.stroke()
+        }
+      }
+    }
+
     function draw(time: number) {
       ctx.clearRect(0, 0, w, h)
       drawBlobs(time)
-
-      // Fill height field once — shared by all levels
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          field[r * cols + c] = fieldAt(c * g, r * g, time, h)
-        }
-      }
-
-      // Draw each track — iso-level drifts slowly through the field
-      for (const track of TRACKS) {
-        // Effective level after drift — wraps in [-1, 1]
-        const raw = track.baseV + time * track.driftSpeed
-        // Draw at three wrapped positions so re-entry is seamless
-        for (const offset of [0, -2, 2]) {
-          const v = raw + offset
-          if (v < -1 - FADE_V || v > 1 + FADE_V) continue
-
-          // Fade at field edges (when line is near top/bottom of screen)
-          const fade = Math.max(0, Math.min(1,
-            (v + 1) / FADE_V,
-            (1 - v) / FADE_V,
-          ))
-          if (fade < 0.01) continue
-
-          const [r, gr, b] = track.rgb
-          ctx.strokeStyle = `rgba(${r},${gr},${b},${(track.alpha * fade).toFixed(3)})`
-          ctx.lineWidth   = track.width
-          ctx.lineCap     = 'round'
-          ctx.lineJoin    = 'round'
-          traceLevel(ctx, field, cols, rows, v, g)
-        }
-      }
+      drawLines(time)
     }
 
     if (prefersReduced) {
