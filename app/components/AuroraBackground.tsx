@@ -3,65 +3,79 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 
-interface Blob {
-  cx: number; cy: number; r: number
-  rgb: [number, number, number]; alpha: number
-  phase: number; sx: number; sy: number; ax: number; ay: number
+interface Wave {
+  freq:   number  // spatial cycles across screen
+  amp:    number  // fraction of screen height
+  phase:  number  // spatial phase offset
+  tfreq:  number  // temporal speed (rad / s)
 }
 
-interface Particle {
-  x: number; y: number
-  vx: number; vy: number
-  r: number
-  maxAlpha: number
-  life: number   // 0–1
-  speed: number  // life units per ms
-  rgb: [number, number, number]
+interface Band {
+  baseY:     number   // 0–1 fraction of screen height
+  thickness: number   // 0–1 fraction of screen height
+  alpha:     number   // peak opacity
+  rgb:       [number, number, number]
+  waves:     Wave[]
 }
 
-const BLOBS: Blob[] = [
-  { cx: 0.10, cy: 0.18, r: 0.60, rgb: [37,  99,  235], alpha: 0.14, phase: 0.0, sx: 0.23, sy: 0.18, ax: 0.10, ay: 0.09 },
-  { cx: 0.82, cy: 0.10, r: 0.52, rgb: [6,   182, 212], alpha: 0.12, phase: 1.9, sx: 0.18, sy: 0.27, ax: 0.09, ay: 0.12 },
-  { cx: 0.45, cy: 0.82, r: 0.48, rgb: [124, 58,  237], alpha: 0.10, phase: 3.6, sx: 0.15, sy: 0.20, ax: 0.13, ay: 0.09 },
-  { cx: 0.92, cy: 0.62, r: 0.42, rgb: [34,  211, 238], alpha: 0.10, phase: 0.8, sx: 0.30, sy: 0.16, ax: 0.07, ay: 0.11 },
-  { cx: 0.18, cy: 0.75, r: 0.50, rgb: [59,  130, 246], alpha: 0.11, phase: 2.4, sx: 0.21, sy: 0.26, ax: 0.11, ay: 0.08 },
-  { cx: 0.60, cy: 0.38, r: 0.40, rgb: [99,  102, 241], alpha: 0.08, phase: 4.2, sx: 0.26, sy: 0.19, ax: 0.08, ay: 0.12 },
+const BANDS: Band[] = [
+  {
+    baseY: 0.08, thickness: 0.08, alpha: 0.34,
+    rgb: [37, 99, 235],
+    waves: [
+      { freq: 1.1, amp: 0.050, phase: 0.0, tfreq: 0.38 },
+      { freq: 2.4, amp: 0.022, phase: 1.8, tfreq: 0.66 },
+      { freq: 0.6, amp: 0.032, phase: 3.2, tfreq: 0.22 },
+    ],
+  },
+  {
+    baseY: 0.24, thickness: 0.12, alpha: 0.29,
+    rgb: [6, 182, 212],
+    waves: [
+      { freq: 0.8, amp: 0.062, phase: 1.4, tfreq: 0.30 },
+      { freq: 1.9, amp: 0.028, phase: 0.7, tfreq: 0.56 },
+      { freq: 2.8, amp: 0.016, phase: 2.5, tfreq: 0.82 },
+    ],
+  },
+  {
+    baseY: 0.41, thickness: 0.15, alpha: 0.24,
+    rgb: [99, 102, 241],
+    waves: [
+      { freq: 1.3, amp: 0.068, phase: 2.6, tfreq: 0.42 },
+      { freq: 0.5, amp: 0.040, phase: 0.2, tfreq: 0.18 },
+      { freq: 2.2, amp: 0.024, phase: 3.8, tfreq: 0.72 },
+    ],
+  },
+  {
+    baseY: 0.57, thickness: 0.10, alpha: 0.31,
+    rgb: [34, 211, 238],
+    waves: [
+      { freq: 1.6, amp: 0.052, phase: 1.0, tfreq: 0.48 },
+      { freq: 2.7, amp: 0.020, phase: 4.2, tfreq: 0.74 },
+      { freq: 0.9, amp: 0.036, phase: 2.1, tfreq: 0.28 },
+    ],
+  },
+  {
+    baseY: 0.72, thickness: 0.13, alpha: 0.26,
+    rgb: [124, 58, 237],
+    waves: [
+      { freq: 0.7, amp: 0.060, phase: 3.5, tfreq: 0.34 },
+      { freq: 2.1, amp: 0.030, phase: 1.6, tfreq: 0.62 },
+      { freq: 1.4, amp: 0.040, phase: 0.4, tfreq: 0.44 },
+    ],
+  },
+  {
+    baseY: 0.88, thickness: 0.10, alpha: 0.31,
+    rgb: [37, 99, 235],
+    waves: [
+      { freq: 1.0, amp: 0.050, phase: 0.9, tfreq: 0.40 },
+      { freq: 2.5, amp: 0.025, phase: 2.8, tfreq: 0.68 },
+      { freq: 0.4, amp: 0.038, phase: 4.6, tfreq: 0.20 },
+    ],
+  },
 ]
 
-const PARTICLE_COUNT = 140
-
-const PARTICLE_COLORS: [number, number, number][] = [
-  [255, 255, 255],   // white  — 50 %
-  [255, 255, 255],
-  [255, 255, 255],
-  [37,  99,  235],   // blue   — 25 %
-  [37,  99,  235],
-  [6,   182, 212],   // cyan   — 15 %
-  [34,  211, 238],   // bright cyan — 10 %
-]
-
-function alphaFromLife(life: number): number {
-  if (life < 0.18) return life / 0.18
-  if (life < 0.78) return 1.0
-  return (1.0 - life) / 0.22
-}
-
-function makeParticle(w: number, h: number, randomLife = false): Particle {
-  const lifetime = 3500 + Math.random() * 5000  // 3.5–8.5 s
-  const angle    = Math.random() * Math.PI * 2
-  const drift    = 0.010 + Math.random() * 0.020
-  return {
-    x:        Math.random() * w,
-    y:        Math.random() * h,
-    vx:       Math.cos(angle) * drift,
-    vy:       Math.sin(angle) * drift,
-    r:        1.2 + Math.random() * 3.2,          // 1.2–4.4 px
-    maxAlpha: 0.55 + Math.random() * 0.40,        // 0.55–0.95
-    life:     randomLife ? Math.random() : 0,
-    speed:    1 / lifetime,
-    rgb:      PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)],
-  }
-}
+const STEPS = 80  // horizontal sample points per band
 
 export default function AuroraBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -76,77 +90,64 @@ export default function AuroraBackground() {
     canvas.width  = w
     canvas.height = h
 
-    const particles: Particle[] = Array.from({ length: PARTICLE_COUNT }, () =>
-      makeParticle(w, h, true)
-    )
-
     const resize = () => {
       w = window.innerWidth
       h = window.innerHeight
       canvas.width  = w
       canvas.height = h
-      if (prefersReduced) draw(0, 0)
+      if (prefersReduced) draw(0)
     }
     window.addEventListener('resize', resize)
 
-    function drawBlobs(time: number) {
-      for (const b of BLOBS) {
-        const px = (b.cx + Math.sin(time * b.sx + b.phase) * b.ax) * w
-        const py = (b.cy + Math.cos(time * b.sy + b.phase * 1.3) * b.ay) * h
-        const r  = b.r * Math.min(w, h)
-        const [r_, g_, b_] = b.rgb
-        const grad = ctx.createRadialGradient(px, py, 0, px, py, r)
-        grad.addColorStop(0,    `rgba(${r_},${g_},${b_},${b.alpha})`)
-        grad.addColorStop(0.42, `rgba(${r_},${g_},${b_},${+(b.alpha * 0.4).toFixed(3)})`)
-        grad.addColorStop(1,    `rgba(${r_},${g_},${b_},0)`)
-        ctx.fillStyle = grad
-        ctx.beginPath()
-        ctx.arc(px, py, r, 0, Math.PI * 2)
-        ctx.fill()
+    function drawBand(band: Band, time: number) {
+      const topYs: number[] = []
+      const botYs: number[] = []
+      const half = band.thickness / 2
+
+      for (let i = 0; i <= STEPS; i++) {
+        const xf = i / STEPS
+        let cy = band.baseY
+        for (const wave of band.waves) {
+          cy += Math.sin(xf * wave.freq * Math.PI * 2 + time * wave.tfreq + wave.phase) * wave.amp
+        }
+        topYs.push((cy - half) * h)
+        botYs.push((cy + half) * h)
       }
+
+      // path: top edge L→R, bottom edge R→L
+      ctx.beginPath()
+      ctx.moveTo(0, topYs[0])
+      for (let i = 1; i <= STEPS; i++) {
+        ctx.lineTo((i / STEPS) * w, topYs[i])
+      }
+      for (let i = STEPS; i >= 0; i--) {
+        ctx.lineTo((i / STEPS) * w, botYs[i])
+      }
+      ctx.closePath()
+
+      // vertical gradient — transparent → color → transparent
+      const minY = Math.min(...topYs)
+      const maxY = Math.max(...botYs)
+      const grad = ctx.createLinearGradient(0, minY, 0, maxY)
+      const [r, g, b] = band.rgb
+      grad.addColorStop(0,    `rgba(${r},${g},${b},0)`)
+      grad.addColorStop(0.28, `rgba(${r},${g},${b},${band.alpha})`)
+      grad.addColorStop(0.72, `rgba(${r},${g},${b},${band.alpha})`)
+      grad.addColorStop(1,    `rgba(${r},${g},${b},0)`)
+
+      ctx.fillStyle = grad
+      ctx.fill()
     }
 
-    function drawParticles(dt: number) {
-      for (const p of particles) {
-        if (!prefersReduced) {
-          p.life += p.speed * dt
-          p.x    += p.vx * dt
-          p.y    += p.vy * dt
-          if (p.life >= 1) Object.assign(p, makeParticle(w, h, false))
-        }
-
-        const alpha = alphaFromLife(p.life) * p.maxAlpha
-        if (alpha < 0.01) continue
-
-        const [r, g, b] = p.rgb
-
-        if (p.r > 2.8) {
-          // larger particles get a soft radial glow
-          const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.5)
-          glow.addColorStop(0,   `rgba(${r},${g},${b},${alpha.toFixed(3)})`)
-          glow.addColorStop(0.4, `rgba(${r},${g},${b},${(alpha * 0.6).toFixed(3)})`)
-          glow.addColorStop(1,   `rgba(${r},${g},${b},0)`)
-          ctx.beginPath()
-          ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2)
-          ctx.fillStyle = glow
-          ctx.fill()
-        }
-
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${r},${g},${b},${alpha.toFixed(3)})`
-        ctx.fill()
-      }
-    }
-
-    function draw(time: number, deltaTime: number) {
+    function draw(time: number) {
       ctx.clearRect(0, 0, w, h)
-      drawBlobs(time)
-      drawParticles(deltaTime)
+      for (const band of BANDS) {
+        drawBand(band, time)
+      }
     }
 
     if (prefersReduced) {
-      draw(0, 0)
+      draw(0)
       return () => window.removeEventListener('resize', resize)
     }
 
