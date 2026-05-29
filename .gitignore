@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# tool logs
+.playwright-mcp/
+skills-lock.json
+
+# claude local settings (contains machine-specific paths)
+.claude/settings.local.json

@@ -1,3 +1,0 @@
-[     131ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/Truvala_Web/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
-[     150ms] [LOG] [HMR] connected @ http://localhost:3000/Truvala_Web/_next/static/chunks/node_modules_next_dist_115brz8._.js:2477
-[  496997ms] [ERROR] WebSocket connection to 'ws://localhost:3000/Truvala_Web/_next/webpack-hmr?id=JkfR_rOdZYPYBkBCgrByp' failed: WebSocket opening handshake timed out @ http://localhost:3000/Truvala_Web/_next/static/chunks/node_modules_next_dist_client_0fhqo1d._.js:13322
