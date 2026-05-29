@@ -15,14 +15,14 @@ const BLOBS: Blob[] = [
   { cx: 0.45, cy: 0.80, r: 0.45, rgb: [124, 58,  237], alpha: 0.08, phase: 3.6, sx: 0.14, sy: 0.18, ax: 0.12, ay: 0.08 },
 ]
 
-// mobile: only lines with showMobile:true are drawn (keeps it from compressing)
+// showMobile:false lines are hidden on screens < 768px
 const LINES = [
   {
     x0: -0.05, y0: 0.32, x1: 1.05, y1: 0.44,
     drift: 'y' as const, driftSpeed:  0.009,
     waves: [
-      { amp: 0.13, freq: 1.6, phase: 0.0, ts: 0.010 },
-      { amp: 0.05, freq: 3.2, phase: 1.4, ts: 0.016 },
+      { amp: 0.18, freq: 0.8, phase: 0.0, ts: 0.022 },
+      { amp: 0.07, freq: 1.6, phase: 1.4, ts: 0.034 },
     ],
     rgb: [37, 99, 235]  as [number,number,number], alpha: 0.26, width: 1.2,
     showMobile: false,
@@ -31,8 +31,8 @@ const LINES = [
     x0: 1.05, y0: 0.05, x1: -0.05, y1: 0.80,
     drift: 'y' as const, driftSpeed: -0.007,
     waves: [
-      { amp: 0.11, freq: 1.3, phase: 2.1, ts: 0.008 },
-      { amp: 0.05, freq: 2.8, phase: 0.7, ts: 0.013 },
+      { amp: 0.16, freq: 0.7, phase: 2.1, ts: 0.018 },
+      { amp: 0.06, freq: 1.5, phase: 0.7, ts: 0.028 },
     ],
     rgb: [6, 182, 212]  as [number,number,number], alpha: 0.22, width: 1.0,
     showMobile: true,
@@ -41,8 +41,8 @@ const LINES = [
     x0: 0.18, y0: -0.05, x1: 0.38, y1: 1.05,
     drift: 'x' as const, driftSpeed: -0.006,
     waves: [
-      { amp: 0.10, freq: 1.4, phase: 3.8, ts: 0.009 },
-      { amp: 0.04, freq: 2.6, phase: 1.1, ts: 0.006 },
+      { amp: 0.14, freq: 0.8, phase: 3.8, ts: 0.020 },
+      { amp: 0.05, freq: 1.4, phase: 1.1, ts: 0.014 },
     ],
     rgb: [99, 102, 241] as [number,number,number], alpha: 0.20, width: 0.9,
     showMobile: true,
