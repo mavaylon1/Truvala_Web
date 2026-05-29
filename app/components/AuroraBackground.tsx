@@ -3,27 +3,54 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 
-interface GlowWave {
-  baseY:    number   // 0–1 vertical center
-  amp:      number   // 0–1 oscillation amplitude
-  freqFrac: number   // wave period as fraction of screen width
-  speed:    number   // rad / s
-  phase:    number
-  glowR:    number   // radius of each gradient circle (px)
-  alpha:    number   // peak opacity per gradient
-  rgb:      [number, number, number]
+interface Blob {
+  cx: number; cy: number; r: number
+  rgb: [number, number, number]; alpha: number
+  phase: number; sx: number; sy: number; ax: number; ay: number
 }
 
-// Each wave is rendered as overlapping soft radial gradients placed along
-// a sine path — circles overlap enough to merge into a continuous glow band
-const WAVES: GlowWave[] = [
-  { baseY: 0.28, amp: 0.10, freqFrac: 0.48, speed: 0.14, phase: 0.0, glowR: 110, alpha: 0.055, rgb: [37,  99,  235] },
-  { baseY: 0.50, amp: 0.12, freqFrac: 0.42, speed: 0.11, phase: 1.8, glowR: 130, alpha: 0.050, rgb: [6,   182, 212] },
-  { baseY: 0.72, amp: 0.09, freqFrac: 0.52, speed: 0.13, phase: 3.4, glowR: 100, alpha: 0.048, rgb: [99,  102, 241] },
-  { baseY: 0.38, amp: 0.08, freqFrac: 0.38, speed: 0.09, phase: 0.9, glowR: 120, alpha: 0.040, rgb: [34,  211, 238] },
+interface Particle {
+  x: number; y: number
+  vx: number; vy: number
+  r: number; alpha: number
+}
+
+const BLOBS: Blob[] = [
+  { cx: 0.10, cy: 0.18, r: 0.60, rgb: [37,  99,  235], alpha: 0.14, phase: 0.0, sx: 0.23, sy: 0.18, ax: 0.10, ay: 0.09 },
+  { cx: 0.82, cy: 0.10, r: 0.52, rgb: [6,   182, 212], alpha: 0.12, phase: 1.9, sx: 0.18, sy: 0.27, ax: 0.09, ay: 0.12 },
+  { cx: 0.45, cy: 0.82, r: 0.48, rgb: [124, 58,  237], alpha: 0.10, phase: 3.6, sx: 0.15, sy: 0.20, ax: 0.13, ay: 0.09 },
+  { cx: 0.92, cy: 0.62, r: 0.42, rgb: [34,  211, 238], alpha: 0.10, phase: 0.8, sx: 0.30, sy: 0.16, ax: 0.07, ay: 0.11 },
+  { cx: 0.18, cy: 0.75, r: 0.50, rgb: [59,  130, 246], alpha: 0.11, phase: 2.4, sx: 0.21, sy: 0.26, ax: 0.11, ay: 0.08 },
+  { cx: 0.60, cy: 0.38, r: 0.40, rgb: [99,  102, 241], alpha: 0.08, phase: 4.2, sx: 0.26, sy: 0.19, ax: 0.08, ay: 0.12 },
 ]
 
-const STEP = 28   // px between gradient circles — enough overlap to merge seamlessly
+const CONNECT_DIST    = 160
+const CONNECT_ALPHA   = 0.28
+
+function particleCount(w: number): number {
+  if (w < 480)  return 40    // small phone
+  if (w < 768)  return 58    // large phone
+  if (w < 1024) return 72    // tablet
+  if (w < 1920) return 90    // desktop
+  if (w < 2560) return 130   // 1440p / wide
+  return 180                  // ultrawide 3440+
+}
+
+function initParticles(w: number, h: number): Particle[] {
+  const count = particleCount(w)
+  return Array.from({ length: count }, () => {
+    const speed = 0.025 + Math.random() * 0.025
+    const angle = Math.random() * Math.PI * 2
+    return {
+      x:     Math.random() * w,
+      y:     Math.random() * h,
+      vx:    Math.cos(angle) * speed,
+      vy:    Math.sin(angle) * speed,
+      r:     0.7 + Math.random() * 1.3,
+      alpha: 0.25 + Math.random() * 0.45,
+    }
+  })
+}
 
 export default function AuroraBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -38,43 +65,86 @@ export default function AuroraBackground() {
     canvas.width  = w
     canvas.height = h
 
+    let particles = initParticles(w, h)
+
     const resize = () => {
-      w = window.innerWidth
+      const newW = window.innerWidth
+      // Rebuild particles if crossing a breakpoint
+      if (particleCount(newW) !== particleCount(w)) {
+        particles = initParticles(newW, window.innerHeight)
+      }
+      w = newW
       h = window.innerHeight
       canvas.width  = w
       canvas.height = h
-      if (prefersReduced) draw(0)
+      if (prefersReduced) draw(0, 0)
     }
     window.addEventListener('resize', resize)
 
-    function drawWave(wave: GlowWave, time: number) {
-      const freq = (Math.PI * 2) / (w * wave.freqFrac)
-      const [r, g, b] = wave.rgb
-
-      for (let x = -wave.glowR; x <= w + wave.glowR; x += STEP) {
-        const cy = (wave.baseY + wave.amp * Math.sin(x * freq + time * wave.speed + wave.phase)) * h
-
-        const grad = ctx.createRadialGradient(x, cy, 0, x, cy, wave.glowR)
-        grad.addColorStop(0,    `rgba(${r},${g},${b},${wave.alpha})`)
-        grad.addColorStop(0.45, `rgba(${r},${g},${b},${(wave.alpha * 0.5).toFixed(3)})`)
-        grad.addColorStop(1,    `rgba(${r},${g},${b},0)`)
-
-        ctx.beginPath()
-        ctx.arc(x, cy, wave.glowR, 0, Math.PI * 2)
+    function drawBlobs(time: number) {
+      for (const b of BLOBS) {
+        const px = (b.cx + Math.sin(time * b.sx + b.phase) * b.ax) * w
+        const py = (b.cy + Math.cos(time * b.sy + b.phase * 1.3) * b.ay) * h
+        const r  = b.r * Math.min(w, h)
+        const [r_, g_, b_] = b.rgb
+        const grad = ctx.createRadialGradient(px, py, 0, px, py, r)
+        grad.addColorStop(0,    `rgba(${r_},${g_},${b_},${b.alpha})`)
+        grad.addColorStop(0.42, `rgba(${r_},${g_},${b_},${+(b.alpha * 0.4).toFixed(3)})`)
+        grad.addColorStop(1,    `rgba(${r_},${g_},${b_},0)`)
         ctx.fillStyle = grad
+        ctx.beginPath()
+        ctx.arc(px, py, r, 0, Math.PI * 2)
         ctx.fill()
       }
     }
 
-    function draw(time: number) {
-      ctx.clearRect(0, 0, w, h)
-      for (const wave of WAVES) {
-        drawWave(wave, time)
+    function updateAndDrawParticles(dt: number) {
+      // Update positions
+      for (const p of particles) {
+        p.x += p.vx * dt
+        p.y += p.vy * dt
+        if (p.x < 0)  p.x += w
+        if (p.x > w)  p.x -= w
+        if (p.y < 0)  p.y += h
+        if (p.y > h)  p.y -= h
+      }
+
+      // Connections
+      ctx.lineWidth = 0.8
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx   = particles[i].x - particles[j].x
+          const dy   = particles[i].y - particles[j].y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          if (dist < CONNECT_DIST) {
+            const a = (1 - dist / CONNECT_DIST) * CONNECT_ALPHA
+            ctx.beginPath()
+            ctx.moveTo(particles[i].x, particles[i].y)
+            ctx.lineTo(particles[j].x, particles[j].y)
+            ctx.strokeStyle = `rgba(37,99,235,${a.toFixed(3)})`
+            ctx.stroke()
+          }
+        }
+      }
+
+      // Dots
+      for (const p of particles) {
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(37,99,235,${p.alpha.toFixed(3)})`
+        ctx.fill()
       }
     }
 
+    function draw(time: number, deltaTime: number) {
+      ctx.clearRect(0, 0, w, h)
+      drawBlobs(time)
+      if (!prefersReduced) updateAndDrawParticles(deltaTime)
+      else updateAndDrawParticles(0)
+    }
+
     if (prefersReduced) {
-      draw(0)
+      draw(0, 0)
       return () => window.removeEventListener('resize', resize)
     }
 
