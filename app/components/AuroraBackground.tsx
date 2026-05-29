@@ -10,57 +10,53 @@ interface Blob {
 }
 
 const BLOBS: Blob[] = [
-  { cx: 0.10, cy: 0.18, r: 0.60, rgb: [37,  99,  235], alpha: 0.13, phase: 0.0, sx: 0.23, sy: 0.18, ax: 0.10, ay: 0.09 },
-  { cx: 0.82, cy: 0.10, r: 0.52, rgb: [6,   182, 212], alpha: 0.11, phase: 1.9, sx: 0.18, sy: 0.27, ax: 0.09, ay: 0.12 },
-  { cx: 0.45, cy: 0.82, r: 0.48, rgb: [124, 58,  237], alpha: 0.09, phase: 3.6, sx: 0.15, sy: 0.20, ax: 0.13, ay: 0.09 },
-  { cx: 0.92, cy: 0.62, r: 0.42, rgb: [34,  211, 238], alpha: 0.09, phase: 0.8, sx: 0.30, sy: 0.16, ax: 0.07, ay: 0.11 },
-  { cx: 0.18, cy: 0.75, r: 0.50, rgb: [59,  130, 246], alpha: 0.10, phase: 2.4, sx: 0.21, sy: 0.26, ax: 0.11, ay: 0.08 },
+  { cx: 0.12, cy: 0.20, r: 0.55, rgb: [37,  99,  235], alpha: 0.12, phase: 0.0, sx: 0.20, sy: 0.16, ax: 0.10, ay: 0.09 },
+  { cx: 0.80, cy: 0.15, r: 0.50, rgb: [6,   182, 212], alpha: 0.10, phase: 1.9, sx: 0.16, sy: 0.24, ax: 0.08, ay: 0.11 },
+  { cx: 0.45, cy: 0.80, r: 0.45, rgb: [124, 58,  237], alpha: 0.08, phase: 3.6, sx: 0.14, sy: 0.18, ax: 0.12, ay: 0.08 },
 ]
 
-// Spatial scale — fixed pixel units so the pattern looks the same size on all screens
-const S        = 0.0022
-const STEP     = 4     // px per integration step
-const MAX_STEPS = 220  // max length of each streamline
-
-// Vector field angle at pixel (x, y) — layered sines create organic regions of
-// convergence and divergence without forcing closed loops
-function fieldAngle(x: number, y: number, t: number): number {
-  return (
-    Math.PI       * Math.sin(x * S * 2.6 + y * S * 1.5 + t * 0.09)       +
-    Math.PI * 0.5 * Math.cos(-x * S * 1.8 + y * S * 2.3 + t * 0.06 + 1.8) +
-    Math.PI * 0.2 * Math.sin(x * S * 4.1 - y * S * 1.2 + t * 0.11 + 3.5)
-  )
-}
-
-const LINE_STYLES: { rgb: [number,number,number]; alpha: number; width: number }[] = [
-  { rgb: [37,  99,  235], alpha: 0.18, width: 0.8 },
-  { rgb: [6,   182, 212], alpha: 0.15, width: 0.7 },
-  { rgb: [99,  102, 241], alpha: 0.14, width: 0.7 },
+// Four lines — mean trajectory + organic waves + slow drift so they travel on/off screen.
+// driftSpeed: screen-heights (or widths) per second — negative = opposite direction.
+const LINES = [
+  {
+    x0: -0.05, y0: 0.30, x1: 1.05, y1: 0.30,
+    drift: 'y' as const, driftSpeed:  0.018,
+    waves: [
+      { amp: 0.14, freq: 1.6, phase: 0.0, ts: 0.07 },
+      { amp: 0.05, freq: 3.1, phase: 1.4, ts: 0.11 },
+    ],
+    rgb: [37, 99, 235]  as [number,number,number], alpha: 0.26, width: 1.2,
+  },
+  {
+    x0: 1.05, y0: 0.55, x1: -0.05, y1: 0.55,
+    drift: 'y' as const, driftSpeed: -0.013,
+    waves: [
+      { amp: 0.12, freq: 1.2, phase: 2.2, ts: 0.06 },
+      { amp: 0.06, freq: 2.7, phase: 0.6, ts: 0.10 },
+    ],
+    rgb: [6, 182, 212]  as [number,number,number], alpha: 0.22, width: 1.0,
+  },
+  {
+    x0: -0.05, y0: 0.72, x1: 1.05, y1: 0.72,
+    drift: 'y' as const, driftSpeed:  0.022,
+    waves: [
+      { amp: 0.10, freq: 2.0, phase: 3.8, ts: 0.08 },
+      { amp: 0.04, freq: 0.8, phase: 1.0, ts: 0.05 },
+    ],
+    rgb: [99, 102, 241] as [number,number,number], alpha: 0.20, width: 0.9,
+  },
+  {
+    x0: 0.75, y0: -0.05, x1: 0.75, y1: 1.05,
+    drift: 'x' as const, driftSpeed: -0.016,
+    waves: [
+      { amp: 0.13, freq: 1.4, phase: 1.8, ts: 0.09 },
+      { amp: 0.05, freq: 2.5, phase: 3.2, ts: 0.12 },
+    ],
+    rgb: [37, 99, 235]  as [number,number,number], alpha: 0.20, width: 0.9,
+  },
 ]
 
-function makeSeedPoints(w: number, h: number): { x: number; y: number; style: number }[] {
-  let cols: number, rows: number
-  if      (w < 480)  { cols = 5;  rows = 9  }
-  else if (w < 768)  { cols = 7;  rows = 11 }
-  else if (w < 1024) { cols = 9;  rows = 13 }
-  else if (w < 1920) { cols = 11; rows = 15 }
-  else if (w < 2560) { cols = 15; rows = 17 }
-  else               { cols = 19; rows = 19 }
-
-  const seeds = []
-  const cw = w / cols
-  const ch = h / rows
-  for (let c = 0; c < cols; c++) {
-    for (let r = 0; r < rows; r++) {
-      seeds.push({
-        x:     (c + 0.5) * cw + (Math.random() - 0.5) * cw * 0.4,
-        y:     (r + 0.5) * ch + (Math.random() - 0.5) * ch * 0.4,
-        style: (c * 3 + r * 2) % LINE_STYLES.length,
-      })
-    }
-  }
-  return seeds
-}
+const SAMPLES = 240  // points per line — more = smoother curve
 
 export default function AuroraBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -75,14 +71,11 @@ export default function AuroraBackground() {
     canvas.width  = w
     canvas.height = h
 
-    let seeds = makeSeedPoints(w, h)
-
     const resize = () => {
       w = window.innerWidth
       h = window.innerHeight
       canvas.width  = w
       canvas.height = h
-      seeds = makeSeedPoints(w, h)
       if (prefersReduced) draw(0)
     }
     window.addEventListener('resize', resize)
@@ -95,7 +88,7 @@ export default function AuroraBackground() {
         const [r_, g_, b_] = b.rgb
         const grad = ctx.createRadialGradient(px, py, 0, px, py, r)
         grad.addColorStop(0,    `rgba(${r_},${g_},${b_},${b.alpha})`)
-        grad.addColorStop(0.42, `rgba(${r_},${g_},${b_},${+(b.alpha * 0.4).toFixed(3)})`)
+        grad.addColorStop(0.45, `rgba(${r_},${g_},${b_},${+(b.alpha * 0.4).toFixed(3)})`)
         grad.addColorStop(1,    `rgba(${r_},${g_},${b_},0)`)
         ctx.fillStyle = grad
         ctx.beginPath()
@@ -104,38 +97,52 @@ export default function AuroraBackground() {
       }
     }
 
-    function drawStreamlines(time: number) {
-      // Group seeds by style for fewer ctx state changes
-      for (let si = 0; si < LINE_STYLES.length; si++) {
-        const style = LINE_STYLES[si]
-        const [r, g, b] = style.rgb
-        ctx.strokeStyle = `rgba(${r},${g},${b},${style.alpha})`
-        ctx.lineWidth   = style.width
+    function drawLines(time: number) {
+      for (const ln of LINES) {
+        const dx  = ln.x1 - ln.x0
+        const dy  = ln.y1 - ln.y0
+        const len = Math.sqrt(dx * dx + dy * dy)
+        const px  = -dy / len   // perpendicular unit vector
+        const py  =  dx / len
+
+        // Drift offset wraps in [0, 1) — draw at offset AND offset±1
+        // so the line re-enters seamlessly from the opposite edge
+        const raw    = (time * ln.driftSpeed) % 1.0
+        const offset = raw < 0 ? raw + 1.0 : raw
+        const copies = [offset, offset - 1.0, offset + 1.0]
+
+        const [r, g, b] = ln.rgb
+        ctx.strokeStyle = `rgba(${r},${g},${b},${ln.alpha})`
+        ctx.lineWidth   = ln.width
         ctx.lineCap     = 'round'
         ctx.lineJoin    = 'round'
 
-        ctx.beginPath()
-        for (const seed of seeds) {
-          if (seed.style !== si) continue
-          let x = seed.x
-          let y = seed.y
-          ctx.moveTo(x, y)
-          for (let step = 0; step < MAX_STEPS; step++) {
-            const angle = fieldAngle(x, y, time)
-            x += Math.cos(angle) * STEP
-            y += Math.sin(angle) * STEP
-            if (x < -20 || x > w + 20 || y < -20 || y > h + 20) break
-            ctx.lineTo(x, y)
+        for (const o of copies) {
+          ctx.beginPath()
+          for (let i = 0; i <= SAMPLES; i++) {
+            const s = i / SAMPLES
+
+            let off = 0
+            for (const wv of ln.waves) {
+              off += wv.amp * Math.sin(s * wv.freq * Math.PI * 2 + time * wv.ts + wv.phase)
+            }
+
+            const bx = (ln.x0 + dx * s + (ln.drift === 'x' ? o : 0)) * w
+            const by = (ln.y0 + dy * s + (ln.drift === 'y' ? o : 0)) * h
+            const x  = bx + px * off * Math.min(w, h)
+            const y  = by + py * off * Math.min(w, h)
+
+            i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
           }
+          ctx.stroke()
         }
-        ctx.stroke()
       }
     }
 
     function draw(time: number) {
       ctx.clearRect(0, 0, w, h)
       drawBlobs(time)
-      drawStreamlines(time)
+      drawLines(time)
     }
 
     if (prefersReduced) {
