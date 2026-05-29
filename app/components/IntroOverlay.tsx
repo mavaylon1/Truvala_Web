@@ -57,17 +57,25 @@ export default function IntroOverlay() {
 
   return (
     <div ref={containerRef} className="fixed inset-0 z-[9999]" aria-hidden="true">
-      {/* Left panel — light blue-white */}
+      {/* Left panel — frosted glass over aurora */}
       <div
         ref={leftRef}
         className="absolute top-0 bottom-0 left-0 w-1/2"
-        style={{ background: 'linear-gradient(160deg, #dbeafe 0%, #eff6ff 45%, #f8faff 100%)' }}
+        style={{
+          background: 'rgba(219, 234, 254, 0.72)',
+          backdropFilter: 'blur(20px) saturate(1.4) brightness(1.05)',
+          WebkitBackdropFilter: 'blur(20px) saturate(1.4) brightness(1.05)',
+        }}
       />
       {/* Right panel */}
       <div
         ref={rightRef}
         className="absolute top-0 bottom-0 right-0 w-1/2"
-        style={{ background: 'linear-gradient(200deg, #f8faff 0%, #eff6ff 55%, #dbeafe 100%)' }}
+        style={{
+          background: 'rgba(240, 245, 255, 0.72)',
+          backdropFilter: 'blur(20px) saturate(1.4) brightness(1.05)',
+          WebkitBackdropFilter: 'blur(20px) saturate(1.4) brightness(1.05)',
+        }}
       />
 
       {/* Center: seam + logo */}

@@ -97,3 +97,5 @@ Set `_legacyUndefinedCheck: true` on element class to enable. @ https://www.yout
     at Array.forEach (<anonymous>)
     at _.Vd (https://www.gstatic.com/og/_/js/k=og.asy.en_US.8O7hiE3msEQ.2019.O/rt=j/m=_ac,_awd,ada,lldp,qads/exm=/d=1/ed=1/rs=AA2YrTv07YhAb0eggjeMCZa6Nd35sTdeVA:69:881)
     at Ph (https://www.gstatic.com/og/_/js/k=og.asy.en_US.8O7hiE3msEQ.2019.O/rt=j/m=_ac,_awd,ada,lldp,qads/exm=/d=1/ed=1/rs=AA2YrTv07YhAb0eggjeMCZa6Nd35sTdeVA:127:662) @ https://www.gstatic.com/og/_/js/k=og.asy.en_US.8O7hiE3msEQ.2019.O/rt=j/m=_ac,_awd,ada,lldp,qads/exm=/d=1/ed=1/rs=AA2YrTv07YhAb0eggjeMCZa6Nd35sTdeVA:126
+[12368482ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://www.youtube.com/generate_204:0
+[45011205ms] [ERROR] Failed to load resource: net::ERR_INTERNET_DISCONNECTED @ https://www.youtube.com/generate_204:0

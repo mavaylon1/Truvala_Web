@@ -32,10 +32,13 @@
   --ease-in-out:  cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-html { scroll-behavior: auto; }
+html {
+  scroll-behavior: auto;
+  background: var(--background);
+}
 
 body {
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
   font-family: var(--font-geist-sans, system-ui, sans-serif);
   overflow-x: hidden;

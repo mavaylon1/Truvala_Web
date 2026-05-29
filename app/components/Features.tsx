@@ -224,7 +224,7 @@ export default function Features() {
   )
 
   return (
-    <section id="features" ref={ref} className="section-base" style={{ background: 'var(--background)' }}>
+    <section id="features" ref={ref} className="section-base" style={{ background: 'transparent' }}>
       <div className="container">
         <div className="feat-head text-center max-w-2xl mx-auto mb-20">
           <span

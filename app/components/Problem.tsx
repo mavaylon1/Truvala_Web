@@ -76,7 +76,7 @@ export default function Problem() {
   )
 
   return (
-    <section id="problem" ref={ref} className="section-base relative" style={{ background: 'var(--surface)' }}>
+    <section id="problem" ref={ref} className="section-base relative" style={{ background: 'rgba(238, 243, 255, 0.82)' }}>
       <div className="absolute inset-0 grid-bg pointer-events-none" style={{ opacity: 0.5 }} />
 
       <div className="container relative z-10">

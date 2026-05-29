@@ -7,6 +7,9 @@ import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type QuickTo = (...args: any[]) => any
+
 const SCORE_TARGET = 78
 const CIRCUMFERENCE = 2 * Math.PI * 38
 
@@ -179,7 +182,9 @@ function BrowserMockup({ score }: { score: number }) {
 }
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef   = useRef<HTMLDivElement>(null)
+  const mouseOrb1Ref   = useRef<HTMLDivElement>(null)
+  const mouseOrb2Ref   = useRef<HTMLDivElement>(null)
   const [score, setScore] = useState(0)
 
   useGSAP(
@@ -199,18 +204,31 @@ export default function Hero() {
         .from('.h-mockup',  { y: 56, opacity: 0, duration: 1.1, ease: 'power3.out' }, '-=0.9')
 
       if (prefersReduced) return
-
-      gsap.to('.hero-orb-1', {
-        y: -100, ease: 'none',
-        scrollTrigger: { trigger: containerRef.current, start: 'top top', end: 'bottom top', scrub: 2 },
-      })
-      gsap.to('.hero-orb-2', {
-        y: -60, ease: 'none',
-        scrollTrigger: { trigger: containerRef.current, start: 'top top', end: 'bottom top', scrub: 3 },
-      })
     },
     { scope: containerRef }
   )
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReduced || !mouseOrb1Ref.current || !mouseOrb2Ref.current) return
+
+    const q1x: QuickTo = gsap.quickTo(mouseOrb1Ref.current, 'x', { duration: 2.8, ease: 'power3.out' })
+    const q1y: QuickTo = gsap.quickTo(mouseOrb1Ref.current, 'y', { duration: 2.8, ease: 'power3.out' })
+    const q2x: QuickTo = gsap.quickTo(mouseOrb2Ref.current, 'x', { duration: 4.5, ease: 'power3.out' })
+    const q2y: QuickTo = gsap.quickTo(mouseOrb2Ref.current, 'y', { duration: 4.5, ease: 'power3.out' })
+
+    const onMouse = (e: MouseEvent) => {
+      const nx = (e.clientX / window.innerWidth  - 0.5) * 2
+      const ny = (e.clientY / window.innerHeight - 0.5) * 2
+      q1x(nx * 48)
+      q1y(ny * 34)
+      q2x(-nx * 32)
+      q2y(-ny * 24)
+    }
+
+    window.addEventListener('mousemove', onMouse, { passive: true })
+    return () => window.removeEventListener('mousemove', onMouse)
+  }, [])
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -231,43 +249,29 @@ export default function Hero() {
     <section
       ref={containerRef}
       className="relative min-h-[100dvh] flex items-center pt-28 pb-16"
-      style={{ background: 'var(--background)' }}
     >
-      {/* Background orbs — own overflow clip so wave can escape section */}
+      {/* Mouse-reactive parallax orbs — no filter:blur, radial-gradient is inherently soft */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="hero-orb-1 absolute" style={{ top: '-18%', left: '-8%' }}>
-          <div
-            className="rounded-full"
-            style={{
-              width: 860, height: 860,
-              background: 'radial-gradient(circle, rgba(37,99,235,0.08) 0%, rgba(59,130,246,0.03) 50%, transparent 70%)',
-              filter: 'blur(80px)',
-              animation: 'orb-1 22s ease-in-out infinite',
-            }}
-          />
-        </div>
-        <div className="hero-orb-2 absolute" style={{ top: '10%', right: '-12%' }}>
-          <div
-            className="rounded-full"
-            style={{
-              width: 700, height: 700,
-              background: 'radial-gradient(circle, rgba(6,182,212,0.08) 0%, rgba(34,211,238,0.03) 50%, transparent 70%)',
-              filter: 'blur(72px)',
-              animation: 'orb-2 26s ease-in-out infinite',
-            }}
-          />
-        </div>
-        <div className="absolute" style={{ bottom: '-10%', left: '35%' }}>
-          <div
-            className="rounded-full"
-            style={{
-              width: 500, height: 500,
-              background: 'radial-gradient(circle, rgba(124,58,237,0.05) 0%, transparent 70%)',
-              filter: 'blur(64px)',
-              animation: 'orb-3 18s ease-in-out infinite',
-            }}
-          />
-        </div>
+        <div
+          ref={mouseOrb1Ref}
+          className="absolute rounded-full"
+          style={{
+            width: 700, height: 700,
+            top: '5%', left: '15%',
+            transform: 'translate(-50%, -50%)',
+            background: 'radial-gradient(circle, rgba(37,99,235,0.13) 0%, rgba(37,99,235,0.04) 45%, transparent 70%)',
+          }}
+        />
+        <div
+          ref={mouseOrb2Ref}
+          className="absolute rounded-full"
+          style={{
+            width: 580, height: 580,
+            top: '45%', right: '8%',
+            transform: 'translate(50%, -50%)',
+            background: 'radial-gradient(circle, rgba(34,211,238,0.11) 0%, rgba(34,211,238,0.03) 45%, transparent 70%)',
+          }}
+        />
       </div>
 
       {/* Subtle grid */}
