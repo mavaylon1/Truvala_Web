@@ -18,12 +18,15 @@ const LEVELS = [
   { v:  0.65, rgb: [6,   182, 212] as [number,number,number], alpha: 0.11, width: 0.6 },
 ]
 
-// Layered sine waves in different directions — produces closed contour loops
-function heightAt(nx: number, ny: number, t: number): number {
+// Fixed pixel scale so the pattern has the same physical size on every screen.
+// Mobile sees fewer features rather than a compressed/tiled version.
+const S = 0.00175
+
+function heightAt(x: number, y: number, t: number): number {
   return (
-    0.50 * Math.sin(nx * 5.2 + ny * 3.1 + t * 0.08) +
-    0.32 * Math.sin(-nx * 3.8 + ny * 4.6 + t * 0.06 + 2.1) +
-    0.18 * Math.sin(nx * 7.4 - ny * 2.4 + t * 0.10 + 4.3)
+    0.50 * Math.sin(x * S * 5.2 + y * S * 3.1 + t * 0.08) +
+    0.32 * Math.sin(-x * S * 3.8 + y * S * 4.6 + t * 0.06 + 2.1) +
+    0.18 * Math.sin(x * S * 7.4 - y * S * 2.4 + t * 0.10 + 4.3)
   )
 }
 
@@ -117,10 +120,10 @@ export default function AuroraBackground() {
     function draw(time: number) {
       ctx.clearRect(0, 0, w, h)
 
-      // Fill height field
+      // Fill height field — pass actual pixel coords, not normalized
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
-          field[r * cols + c] = heightAt(c * g / w, r * g / h, time)
+          field[r * cols + c] = heightAt(c * g, r * g, time)
         }
       }
 
