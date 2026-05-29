@@ -3,79 +3,29 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 
-interface Wave {
-  freq:   number  // spatial cycles across screen
-  amp:    number  // fraction of screen height
-  phase:  number  // spatial phase offset
-  tfreq:  number  // temporal speed (rad / s)
+interface Strand {
+  r1:    number   // outer arm length (fraction of min viewport dim)
+  r2:    number   // inner arm length
+  ω1:    number   // outer rotation speed (rad / s)
+  ω2:    number   // inner rotation speed
+  n:     number   // harmonic — controls how many loops per revolution
+  phase: number   // phase offset
+  width: number   // stroke width px
+  rgb:   [number, number, number]
+  alpha: number
 }
 
-interface Band {
-  baseY:     number   // 0–1 fraction of screen height
-  thickness: number   // 0–1 fraction of screen height
-  alpha:     number   // peak opacity
-  rgb:       [number, number, number]
-  waves:     Wave[]
-}
-
-const BANDS: Band[] = [
-  {
-    baseY: 0.08, thickness: 0.08, alpha: 0.34,
-    rgb: [37, 99, 235],
-    waves: [
-      { freq: 1.1, amp: 0.050, phase: 0.0, tfreq: 0.38 },
-      { freq: 2.4, amp: 0.022, phase: 1.8, tfreq: 0.66 },
-      { freq: 0.6, amp: 0.032, phase: 3.2, tfreq: 0.22 },
-    ],
-  },
-  {
-    baseY: 0.24, thickness: 0.12, alpha: 0.29,
-    rgb: [6, 182, 212],
-    waves: [
-      { freq: 0.8, amp: 0.062, phase: 1.4, tfreq: 0.30 },
-      { freq: 1.9, amp: 0.028, phase: 0.7, tfreq: 0.56 },
-      { freq: 2.8, amp: 0.016, phase: 2.5, tfreq: 0.82 },
-    ],
-  },
-  {
-    baseY: 0.41, thickness: 0.15, alpha: 0.24,
-    rgb: [99, 102, 241],
-    waves: [
-      { freq: 1.3, amp: 0.068, phase: 2.6, tfreq: 0.42 },
-      { freq: 0.5, amp: 0.040, phase: 0.2, tfreq: 0.18 },
-      { freq: 2.2, amp: 0.024, phase: 3.8, tfreq: 0.72 },
-    ],
-  },
-  {
-    baseY: 0.57, thickness: 0.10, alpha: 0.31,
-    rgb: [34, 211, 238],
-    waves: [
-      { freq: 1.6, amp: 0.052, phase: 1.0, tfreq: 0.48 },
-      { freq: 2.7, amp: 0.020, phase: 4.2, tfreq: 0.74 },
-      { freq: 0.9, amp: 0.036, phase: 2.1, tfreq: 0.28 },
-    ],
-  },
-  {
-    baseY: 0.72, thickness: 0.13, alpha: 0.26,
-    rgb: [124, 58, 237],
-    waves: [
-      { freq: 0.7, amp: 0.060, phase: 3.5, tfreq: 0.34 },
-      { freq: 2.1, amp: 0.030, phase: 1.6, tfreq: 0.62 },
-      { freq: 1.4, amp: 0.040, phase: 0.4, tfreq: 0.44 },
-    ],
-  },
-  {
-    baseY: 0.88, thickness: 0.10, alpha: 0.31,
-    rgb: [37, 99, 235],
-    waves: [
-      { freq: 1.0, amp: 0.050, phase: 0.9, tfreq: 0.40 },
-      { freq: 2.5, amp: 0.025, phase: 2.8, tfreq: 0.68 },
-      { freq: 0.4, amp: 0.038, phase: 4.6, tfreq: 0.20 },
-    ],
-  },
+// Six strands — slow, soothing rotation speeds so the motion feels like breathing
+const STRANDS: Strand[] = [
+  { r1: 0.28, r2: 0.16, ω1:  0.09, ω2: -0.15, n: 2, phase: 0.0, width: 14, rgb: [37,  99,  235], alpha: 0.22 },
+  { r1: 0.22, r2: 0.20, ω1: -0.11, ω2:  0.18, n: 2, phase: 1.3, width: 10, rgb: [6,   182, 212], alpha: 0.20 },
+  { r1: 0.32, r2: 0.12, ω1:  0.08, ω2: -0.20, n: 3, phase: 2.5, width: 16, rgb: [99,  102, 241], alpha: 0.17 },
+  { r1: 0.18, r2: 0.22, ω1: -0.13, ω2:  0.14, n: 2, phase: 3.7, width:  9, rgb: [34,  211, 238], alpha: 0.21 },
+  { r1: 0.26, r2: 0.14, ω1:  0.10, ω2: -0.17, n: 2, phase: 0.9, width: 18, rgb: [124, 58,  237], alpha: 0.15 },
+  { r1: 0.30, r2: 0.10, ω1: -0.08, ω2:  0.22, n: 3, phase: 2.1, width: 12, rgb: [59,  130, 246], alpha: 0.19 },
 ]
 
-const STEPS = 80  // horizontal sample points per band
+const SAMPLES = 300  // points per strand — more = smoother curves
 
 export default function AuroraBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -99,50 +49,59 @@ export default function AuroraBackground() {
     }
     window.addEventListener('resize', resize)
 
-    function drawBand(band: Band, time: number) {
-      const topYs: number[] = []
-      const botYs: number[] = []
-      const half = band.thickness / 2
+    function drawStrand(s: Strand, time: number) {
+      const cx    = w / 2
+      const cy    = h / 2
+      const scale = Math.min(w, h)
+      const R1    = s.r1 * scale
+      const R2    = s.r2 * scale
 
-      for (let i = 0; i <= STEPS; i++) {
-        const xf = i / STEPS
-        let cy = band.baseY
-        for (const wave of band.waves) {
-          cy += Math.sin(xf * wave.freq * Math.PI * 2 + time * wave.tfreq + wave.phase) * wave.amp
-        }
-        topYs.push((cy - half) * h)
-        botYs.push((cy + half) * h)
-      }
-
-      // path: top edge L→R, bottom edge R→L
       ctx.beginPath()
-      ctx.moveTo(0, topYs[0])
-      for (let i = 1; i <= STEPS; i++) {
-        ctx.lineTo((i / STEPS) * w, topYs[i])
-      }
-      for (let i = STEPS; i >= 0; i--) {
-        ctx.lineTo((i / STEPS) * w, botYs[i])
+      for (let i = 0; i <= SAMPLES; i++) {
+        const t = (i / SAMPLES) * Math.PI * 2
+        const x = cx + R1 * Math.cos(s.ω1 * time + t)
+                     + R2 * Math.cos(s.ω2 * time + s.n * t + s.phase)
+        const y = cy + R1 * Math.sin(s.ω1 * time + t)
+                     + R2 * Math.sin(s.ω2 * time + s.n * t + s.phase)
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
       }
       ctx.closePath()
 
-      // vertical gradient — transparent → color → transparent
-      const minY = Math.min(...topYs)
-      const maxY = Math.max(...botYs)
-      const grad = ctx.createLinearGradient(0, minY, 0, maxY)
-      const [r, g, b] = band.rgb
-      grad.addColorStop(0,    `rgba(${r},${g},${b},0)`)
-      grad.addColorStop(0.28, `rgba(${r},${g},${b},${band.alpha})`)
-      grad.addColorStop(0.72, `rgba(${r},${g},${b},${band.alpha})`)
-      grad.addColorStop(1,    `rgba(${r},${g},${b},0)`)
+      const [r, g, b] = s.rgb
+      ctx.strokeStyle = `rgba(${r},${g},${b},${s.alpha})`
+      ctx.lineWidth   = s.width
+      ctx.lineCap     = 'round'
+      ctx.lineJoin    = 'round'
+      ctx.stroke()
+    }
 
-      ctx.fillStyle = grad
-      ctx.fill()
+    // Faint ambient glow so there's color even between strands
+    function drawAmbient(time: number) {
+      const ambients = [
+        { cx: 0.25, cy: 0.30, r: 0.55, rgb: [37, 99, 235]  as [number,number,number], alpha: 0.07 },
+        { cx: 0.75, cy: 0.65, r: 0.50, rgb: [6, 182, 212]  as [number,number,number], alpha: 0.06 },
+        { cx: 0.50, cy: 0.55, r: 0.45, rgb: [124, 58, 237] as [number,number,number], alpha: 0.05 },
+      ]
+      for (const a of ambients) {
+        const px = (a.cx + Math.sin(time * 0.12) * 0.06) * w
+        const py = (a.cy + Math.cos(time * 0.09) * 0.06) * h
+        const r  = a.r * Math.min(w, h)
+        const [r_, g_, b_] = a.rgb
+        const grad = ctx.createRadialGradient(px, py, 0, px, py, r)
+        grad.addColorStop(0, `rgba(${r_},${g_},${b_},${a.alpha})`)
+        grad.addColorStop(1, `rgba(${r_},${g_},${b_},0)`)
+        ctx.fillStyle = grad
+        ctx.beginPath()
+        ctx.arc(px, py, r, 0, Math.PI * 2)
+        ctx.fill()
+      }
     }
 
     function draw(time: number) {
       ctx.clearRect(0, 0, w, h)
-      for (const band of BANDS) {
-        drawBand(band, time)
+      drawAmbient(time)
+      for (const strand of STRANDS) {
+        drawStrand(strand, time)
       }
     }
 
