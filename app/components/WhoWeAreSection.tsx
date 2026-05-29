@@ -14,7 +14,7 @@ const team = [
     name: 'Matthew Avaylon',
     title: 'Founder & CEO',
     photo: '/ceo-matthew.png',
-    bio: 'Matthew brings a background in AI, data systems, and scientific software from the U.S. Department of Energy national laboratories and the defense industry — environments where data quality, trust, and decision-making are paramount. He started Truvala to bring the same rigor to real estate: using AI to deliver data-backed transparency that helps buyers make confident decisions and enables agents to better understand each buyer and guide them toward the right home.',
+    bio: 'Matthew Avaylon is the founder and CEO of Truvala. With a background in AI, data systems, and scientific software across U.S. Department of Energy national laboratories and the defense industry, he has worked on systems where data quality, trust, and decision-making matter. He started Truvala to use AI to bring more data-backed transparency to real estate while helping create a closer, more informed relationship between buyers and agents, so agents can better understand each buyer and guide them toward the right home.',
   },
   {
     name: 'Caleb Manicke',
