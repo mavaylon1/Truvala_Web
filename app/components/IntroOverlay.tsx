@@ -12,12 +12,14 @@ export default function IntroOverlay() {
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const alreadyPlayed = sessionStorage.getItem('introPlayed') === 'true'
 
-    if (prefersReduced) {
+    if (prefersReduced || alreadyPlayed) {
       if (containerRef.current) containerRef.current.style.display = 'none'
       return
     }
 
+    sessionStorage.setItem('introPlayed', 'true')
     document.body.style.overflow = 'hidden'
 
     gsap.set(logoRef.current, { y: -180, opacity: 0 })

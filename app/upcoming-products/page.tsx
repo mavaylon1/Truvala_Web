@@ -80,13 +80,13 @@ export default function UpcomingProducts() {
         <section style={{ padding: '0 24px 80px', maxWidth: 960, margin: '0 auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 28 }}>
 
-            {/* Truvala Scout */}
+            {/* Truvala Concierge */}
             <motion.div {...fadeUp(0.15)} style={{
               padding: '40px 36px',
               borderRadius: 22,
               background: 'rgba(255,255,255,0.97)',
-              border: '1px solid rgba(37,99,235,0.12)',
-              boxShadow: '0 6px 36px rgba(14,42,99,0.08)',
+              border: '1px solid rgba(5,150,105,0.12)',
+              boxShadow: '0 6px 36px rgba(5,150,105,0.06)',
               display: 'flex',
               flexDirection: 'column',
               gap: 20,
@@ -100,13 +100,94 @@ export default function UpcomingProducts() {
                 right: 24,
                 padding: '4px 12px',
                 borderRadius: 100,
-                background: 'linear-gradient(135deg, #2563eb, #1e3a8a)',
+                background: 'linear-gradient(135deg, #059669, #047857)',
                 fontSize: 11,
                 fontWeight: 700,
                 color: 'white',
                 letterSpacing: '0.07em',
               }}>
                 LAUNCHING JULY 20
+              </div>
+
+              {/* Icon */}
+              <div style={{
+                width: 56, height: 56, borderRadius: 16,
+                background: 'linear-gradient(140deg, #d1fae5 0%, #a7f3d0 100%)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+
+              <div>
+                <p style={{ fontSize: 12, fontWeight: 700, color: '#059669', letterSpacing: '0.08em', marginBottom: 6 }}>
+                  FOR AGENTS, BROKERAGES &amp; REALTOR WEBSITES
+                </p>
+                <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0a1628', letterSpacing: '-0.015em', marginBottom: 4 }}>
+                  Truvala Concierge
+                </h2>
+                <p style={{ fontSize: 14, color: '#6b7280', fontWeight: 500 }}>Embedded widget for listing pages</p>
+              </div>
+
+              <p style={{ fontSize: 15, color: '#4a5568', lineHeight: 1.78 }}>
+                Truvala Concierge is a user-facing AI guide for listing pages, backed by embedded widgets
+                that provide clear, interactive information to buyers. Designed to fit seamlessly into
+                realtor websites regardless of layout or design.
+              </p>
+
+              <p style={{ fontSize: 15, color: '#4a5568', lineHeight: 1.78 }}>
+                Concierge brings key listing information together — neighborhood context, schools, ownership
+                cost, insurance factors, mortgage readiness, solar potential, and questions to ask before
+                touring — giving buyers a full-service listing experience on the agent's own website.
+              </p>
+
+              <div style={{
+                padding: '16px 20px',
+                borderRadius: 12,
+                background: 'rgba(5,150,105,0.04)',
+                border: '1px solid rgba(5,150,105,0.1)',
+              }}>
+                <p style={{ fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 10 }}>What Concierge delivers</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {['Neighborhood & school context', 'Mortgage & insurance insight', 'AI question-and-answer', 'Buyer intent data for agents'].map(item => (
+                    <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#059669', flexShrink: 0 }} />
+                      <span style={{ fontSize: 13, color: '#6b7280' }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Truvala Scout */}
+            <motion.div {...fadeUp(0.22)} style={{
+              padding: '40px 36px',
+              borderRadius: 22,
+              background: 'rgba(255,255,255,0.97)',
+              border: '1px solid rgba(37,99,235,0.12)',
+              boxShadow: '0 6px 36px rgba(14,42,99,0.08)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 20,
+              position: 'relative',
+              overflow: 'hidden',
+            }}>
+              {/* Preview badge */}
+              <div style={{
+                position: 'absolute',
+                top: 24,
+                right: 24,
+                padding: '4px 12px',
+                borderRadius: 100,
+                background: 'rgba(37,99,235,0.1)',
+                border: '1px solid rgba(37,99,235,0.25)',
+                fontSize: 11,
+                fontWeight: 700,
+                color: '#2563eb',
+                letterSpacing: '0.07em',
+              }}>
+                PREVIEW AT DEMO
               </div>
 
               {/* Icon */}
@@ -154,87 +235,6 @@ export default function UpcomingProducts() {
                   {['Buyer fit score', 'Hidden risk flags', 'True ownership costs', 'Key questions to ask'].map(item => (
                     <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#2563eb', flexShrink: 0 }} />
-                      <span style={{ fontSize: 13, color: '#6b7280' }}>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Truvala Concierge */}
-            <motion.div {...fadeUp(0.22)} style={{
-              padding: '40px 36px',
-              borderRadius: 22,
-              background: 'rgba(255,255,255,0.97)',
-              border: '1px solid rgba(5,150,105,0.12)',
-              boxShadow: '0 6px 36px rgba(5,150,105,0.06)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 20,
-              position: 'relative',
-              overflow: 'hidden',
-            }}>
-              {/* Preview badge */}
-              <div style={{
-                position: 'absolute',
-                top: 24,
-                right: 24,
-                padding: '4px 12px',
-                borderRadius: 100,
-                background: 'rgba(5,150,105,0.1)',
-                border: '1px solid rgba(5,150,105,0.25)',
-                fontSize: 11,
-                fontWeight: 700,
-                color: '#059669',
-                letterSpacing: '0.07em',
-              }}>
-                PREVIEW AT DEMO
-              </div>
-
-              {/* Icon */}
-              <div style={{
-                width: 56, height: 56, borderRadius: 16,
-                background: 'linear-gradient(140deg, #d1fae5 0%, #a7f3d0 100%)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-
-              <div>
-                <p style={{ fontSize: 12, fontWeight: 700, color: '#059669', letterSpacing: '0.08em', marginBottom: 6 }}>
-                  FOR AGENTS, BROKERAGES &amp; REALTOR WEBSITES
-                </p>
-                <h2 style={{ fontSize: 26, fontWeight: 800, color: '#0a1628', letterSpacing: '-0.015em', marginBottom: 4 }}>
-                  Truvala Concierge
-                </h2>
-                <p style={{ fontSize: 14, color: '#6b7280', fontWeight: 500 }}>Embedded widget for listing pages</p>
-              </div>
-
-              <p style={{ fontSize: 15, color: '#4a5568', lineHeight: 1.78 }}>
-                Truvala Concierge is a user-facing AI guide for listing pages, backed by embedded widgets
-                that provide clear, interactive information to buyers. Designed to fit seamlessly into
-                realtor websites regardless of layout or design.
-              </p>
-
-              <p style={{ fontSize: 15, color: '#4a5568', lineHeight: 1.78 }}>
-                Concierge brings key listing information together — neighborhood context, schools, ownership
-                cost, insurance factors, mortgage readiness, solar potential, and questions to ask before
-                touring — giving buyers a full-service listing experience on the agent's own website.
-              </p>
-
-              <div style={{
-                padding: '16px 20px',
-                borderRadius: 12,
-                background: 'rgba(5,150,105,0.04)',
-                border: '1px solid rgba(5,150,105,0.1)',
-              }}>
-                <p style={{ fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 10 }}>What Concierge delivers</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  {['Neighborhood & school context', 'Mortgage & insurance insight', 'AI question-and-answer', 'Buyer intent data for agents'].map(item => (
-                    <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <div style={{ width: 5, height: 5, borderRadius: '50%', background: '#059669', flexShrink: 0 }} />
                       <span style={{ fontSize: 13, color: '#6b7280' }}>{item}</span>
                     </div>
                   ))}
