@@ -3,54 +3,80 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 
-interface Blob {
-  cx: number; cy: number; r: number
-  rgb: [number, number, number]; alpha: number
-  phase: number; sx: number; sy: number; ax: number; ay: number
-}
+// Grid cell size — smaller = smoother lines, more CPU
+const GRID = 12
 
-interface Particle {
-  x: number; y: number
-  vx: number; vy: number
-  r: number; alpha: number
-}
-
-const BLOBS: Blob[] = [
-  { cx: 0.10, cy: 0.18, r: 0.60, rgb: [37,  99,  235], alpha: 0.14, phase: 0.0, sx: 0.23, sy: 0.18, ax: 0.10, ay: 0.09 },
-  { cx: 0.82, cy: 0.10, r: 0.52, rgb: [6,   182, 212], alpha: 0.12, phase: 1.9, sx: 0.18, sy: 0.27, ax: 0.09, ay: 0.12 },
-  { cx: 0.45, cy: 0.82, r: 0.48, rgb: [124, 58,  237], alpha: 0.10, phase: 3.6, sx: 0.15, sy: 0.20, ax: 0.13, ay: 0.09 },
-  { cx: 0.92, cy: 0.62, r: 0.42, rgb: [34,  211, 238], alpha: 0.10, phase: 0.8, sx: 0.30, sy: 0.16, ax: 0.07, ay: 0.11 },
-  { cx: 0.18, cy: 0.75, r: 0.50, rgb: [59,  130, 246], alpha: 0.11, phase: 2.4, sx: 0.21, sy: 0.26, ax: 0.11, ay: 0.08 },
-  { cx: 0.60, cy: 0.38, r: 0.40, rgb: [99,  102, 241], alpha: 0.08, phase: 4.2, sx: 0.26, sy: 0.19, ax: 0.08, ay: 0.12 },
+const LEVELS = [
+  { v: -0.62, rgb: [6,   182, 212] as [number,number,number], alpha: 0.11, width: 0.6 },
+  { v: -0.38, rgb: [37,  99,  235] as [number,number,number], alpha: 0.14, width: 0.8 },
+  { v: -0.14, rgb: [59,  130, 246] as [number,number,number], alpha: 0.12, width: 0.6 },
+  { v:  0.10, rgb: [99,  102, 241] as [number,number,number], alpha: 0.15, width: 0.9 },
+  { v:  0.34, rgb: [37,  99,  235] as [number,number,number], alpha: 0.12, width: 0.7 },
+  { v:  0.58, rgb: [6,   182, 212] as [number,number,number], alpha: 0.10, width: 0.6 },
 ]
 
-const CONNECT_DIST    = 100
-const CONNECT_ALPHA   = 0.28
-const MAX_CONNECTIONS = 2
-
-function particleCount(w: number): number {
-  if (w < 480)  return 20    // small phone
-  if (w < 768)  return 29    // large phone
-  if (w < 1024) return 58    // tablet
-  if (w < 1920) return 72    // desktop
-  if (w < 2560) return 104   // 1440p / wide
-  return 144                  // ultrawide 3440+
+// Layered sine waves in different directions — produces closed contour loops
+function heightAt(nx: number, ny: number, t: number): number {
+  return (
+    0.50 * Math.sin(nx * 5.2 + ny * 3.1 + t * 0.08) +
+    0.32 * Math.sin(-nx * 3.8 + ny * 4.6 + t * 0.06 + 2.1) +
+    0.18 * Math.sin(nx * 7.4 - ny * 2.4 + t * 0.10 + 4.3)
+  )
 }
 
-function initParticles(w: number, h: number): Particle[] {
-  const count = particleCount(w)
-  return Array.from({ length: count }, () => {
-    const speed = 0.012 + Math.random() * 0.013
-    const angle = Math.random() * Math.PI * 2
-    return {
-      x:     Math.random() * w,
-      y:     Math.random() * h,
-      vx:    Math.cos(angle) * speed,
-      vy:    Math.sin(angle) * speed,
-      r:     0.7 + Math.random() * 1.3,
-      alpha: 0.25 + Math.random() * 0.45,
+// Marching squares — draw one contour level into the current path
+function traceContour(
+  ctx: CanvasRenderingContext2D,
+  field: Float32Array,
+  cols: number,
+  rows: number,
+  level: number,
+  g: number,
+) {
+  ctx.beginPath()
+
+  for (let r = 0; r < rows - 1; r++) {
+    for (let c = 0; c < cols - 1; c++) {
+      const tl = field[r * cols + c]
+      const tr = field[r * cols + c + 1]
+      const br = field[(r + 1) * cols + c + 1]
+      const bl = field[(r + 1) * cols + c]
+
+      const code = (tl > level ? 8 : 0)
+                 | (tr > level ? 4 : 0)
+                 | (br > level ? 2 : 0)
+                 | (bl > level ? 1 : 0)
+
+      if (code === 0 || code === 15) continue
+
+      const x = c * g
+      const y = r * g
+      const li = (a: number, b: number) => g * (level - a) / (b - a)
+
+      const T = [x + li(tl, tr), y      ]
+      const R = [x + g,          y + li(tr, br)]
+      const B = [x + li(bl, br), y + g  ]
+      const L = [x,              y + li(tl, bl)]
+
+      const seg = (a: number[], b: number[]) => {
+        ctx.moveTo(a[0], a[1])
+        ctx.lineTo(b[0], b[1])
+      }
+
+      switch (code) {
+        case  1: case 14: seg(L, B); break
+        case  2: case 13: seg(B, R); break
+        case  3: case 12: seg(L, R); break
+        case  4: case 11: seg(T, R); break
+        case  5:          seg(T, L); seg(R, B); break
+        case  6: case  9: seg(T, B); break
+        case  7: case  8: seg(T, L); break
+        case 10:          seg(T, R); seg(L, B); break
+      }
     }
-  })
+  }
+
+  ctx.stroke()
 }
 
 export default function AuroraBackground() {
@@ -66,95 +92,44 @@ export default function AuroraBackground() {
     canvas.width  = w
     canvas.height = h
 
-    let particles = initParticles(w, h)
+    // Pre-allocate field array — reuse every frame to avoid GC pressure
+    let cols  = Math.ceil(w / GRID) + 2
+    let rows  = Math.ceil(h / GRID) + 2
+    let field = new Float32Array(cols * rows)
 
     const resize = () => {
-      const newW = window.innerWidth
-      // Rebuild particles if crossing a breakpoint
-      if (particleCount(newW) !== particleCount(w)) {
-        particles = initParticles(newW, window.innerHeight)
-      }
-      w = newW
+      w = window.innerWidth
       h = window.innerHeight
       canvas.width  = w
       canvas.height = h
-      if (prefersReduced) draw(0, 0)
+      cols  = Math.ceil(w / GRID) + 2
+      rows  = Math.ceil(h / GRID) + 2
+      field = new Float32Array(cols * rows)
+      if (prefersReduced) draw(0)
     }
     window.addEventListener('resize', resize)
 
-    function drawBlobs(time: number) {
-      for (const b of BLOBS) {
-        const px = (b.cx + Math.sin(time * b.sx + b.phase) * b.ax) * w
-        const py = (b.cy + Math.cos(time * b.sy + b.phase * 1.3) * b.ay) * h
-        const r  = b.r * Math.min(w, h)
-        const [r_, g_, b_] = b.rgb
-        const grad = ctx.createRadialGradient(px, py, 0, px, py, r)
-        grad.addColorStop(0,    `rgba(${r_},${g_},${b_},${b.alpha})`)
-        grad.addColorStop(0.42, `rgba(${r_},${g_},${b_},${+(b.alpha * 0.4).toFixed(3)})`)
-        grad.addColorStop(1,    `rgba(${r_},${g_},${b_},0)`)
-        ctx.fillStyle = grad
-        ctx.beginPath()
-        ctx.arc(px, py, r, 0, Math.PI * 2)
-        ctx.fill()
-      }
-    }
+    function draw(time: number) {
+      ctx.clearRect(0, 0, w, h)
 
-    function updateAndDrawParticles(dt: number) {
-      // Update positions
-      for (const p of particles) {
-        p.x += p.vx * dt
-        p.y += p.vy * dt
-        if (p.x < 0)  p.x += w
-        if (p.x > w)  p.x -= w
-        if (p.y < 0)  p.y += h
-        if (p.y > h)  p.y -= h
-      }
-
-      // Connections — find candidates, sort by distance, cap per dot
-      const counts = new Int8Array(particles.length)
-      const candidates: { i: number; j: number; dist: number }[] = []
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx   = particles[i].x - particles[j].x
-          const dy   = particles[i].y - particles[j].y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < CONNECT_DIST) candidates.push({ i, j, dist })
+      // Fill height field
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          field[r * cols + c] = heightAt(c * GRID / w, r * GRID / h, time)
         }
       }
-      candidates.sort((a, b) => a.dist - b.dist)
 
-      ctx.lineWidth = 0.8
-      for (const { i, j, dist } of candidates) {
-        if (counts[i] >= MAX_CONNECTIONS || counts[j] >= MAX_CONNECTIONS) continue
-        counts[i]++
-        counts[j]++
-        const a = (1 - dist / CONNECT_DIST) * CONNECT_ALPHA
-        ctx.beginPath()
-        ctx.moveTo(particles[i].x, particles[i].y)
-        ctx.lineTo(particles[j].x, particles[j].y)
-        ctx.strokeStyle = `rgba(37,99,235,${a.toFixed(3)})`
-        ctx.stroke()
+      // Draw each contour level
+      for (const lv of LEVELS) {
+        const [r, g, b] = lv.rgb
+        ctx.strokeStyle = `rgba(${r},${g},${b},${lv.alpha})`
+        ctx.lineWidth   = lv.width
+        traceContour(ctx, field, cols, rows, lv.v, GRID)
       }
-
-      // Dots
-      for (const p of particles) {
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(37,99,235,${p.alpha.toFixed(3)})`
-        ctx.fill()
-      }
-    }
-
-    function draw(time: number, deltaTime: number) {
-      ctx.clearRect(0, 0, w, h)
-      drawBlobs(time)
-      if (!prefersReduced) updateAndDrawParticles(deltaTime)
-      else updateAndDrawParticles(0)
     }
 
     if (prefersReduced) {
-      draw(0, 0)
+      draw(0)
       return () => window.removeEventListener('resize', resize)
     }
 
