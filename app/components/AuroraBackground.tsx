@@ -26,6 +26,7 @@ const BLOBS: Blob[] = [
 
 const CONNECT_DIST    = 100
 const CONNECT_ALPHA   = 0.28
+const MAX_CONNECTIONS = 2
 
 function particleCount(w: number): number {
   if (w < 480)  return 20    // small phone
@@ -109,22 +110,31 @@ export default function AuroraBackground() {
         if (p.y > h)  p.y -= h
       }
 
-      // Connections
-      ctx.lineWidth = 0.8
+      // Connections — find candidates, sort by distance, cap per dot
+      const counts = new Int8Array(particles.length)
+      const candidates: { i: number; j: number; dist: number }[] = []
+
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx   = particles[i].x - particles[j].x
           const dy   = particles[i].y - particles[j].y
           const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < CONNECT_DIST) {
-            const a = (1 - dist / CONNECT_DIST) * CONNECT_ALPHA
-            ctx.beginPath()
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(37,99,235,${a.toFixed(3)})`
-            ctx.stroke()
-          }
+          if (dist < CONNECT_DIST) candidates.push({ i, j, dist })
         }
+      }
+      candidates.sort((a, b) => a.dist - b.dist)
+
+      ctx.lineWidth = 0.8
+      for (const { i, j, dist } of candidates) {
+        if (counts[i] >= MAX_CONNECTIONS || counts[j] >= MAX_CONNECTIONS) continue
+        counts[i]++
+        counts[j]++
+        const a = (1 - dist / CONNECT_DIST) * CONNECT_ALPHA
+        ctx.beginPath()
+        ctx.moveTo(particles[i].x, particles[i].y)
+        ctx.lineTo(particles[j].x, particles[j].y)
+        ctx.strokeStyle = `rgba(37,99,235,${a.toFixed(3)})`
+        ctx.stroke()
       }
 
       // Dots
