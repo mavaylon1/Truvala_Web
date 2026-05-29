@@ -15,46 +15,49 @@ const BLOBS: Blob[] = [
   { cx: 0.45, cy: 0.80, r: 0.45, rgb: [124, 58,  237], alpha: 0.08, phase: 3.6, sx: 0.14, sy: 0.18, ax: 0.12, ay: 0.08 },
 ]
 
-// Four lines — mean trajectory + organic waves + slow drift so they travel on/off screen.
-// driftSpeed: screen-heights (or widths) per second — negative = opposite direction.
+// driftSpeed in screen-fractions per second — halved for a slower, calmer feel
 const LINES = [
   {
     x0: -0.05, y0: 0.30, x1: 1.05, y1: 0.30,
-    drift: 'y' as const, driftSpeed:  0.018,
+    drift: 'y' as const, driftSpeed:  0.009,
     waves: [
-      { amp: 0.14, freq: 1.6, phase: 0.0, ts: 0.07 },
-      { amp: 0.05, freq: 3.1, phase: 1.4, ts: 0.11 },
+      { amp: 0.14, freq: 1.6, phase: 0.0, ts: 0.035 },
+      { amp: 0.05, freq: 3.1, phase: 1.4, ts: 0.055 },
     ],
     rgb: [37, 99, 235]  as [number,number,number], alpha: 0.26, width: 1.2,
   },
   {
     x0: 1.05, y0: 0.55, x1: -0.05, y1: 0.55,
-    drift: 'y' as const, driftSpeed: -0.013,
+    drift: 'y' as const, driftSpeed: -0.0065,
     waves: [
-      { amp: 0.12, freq: 1.2, phase: 2.2, ts: 0.06 },
-      { amp: 0.06, freq: 2.7, phase: 0.6, ts: 0.10 },
+      { amp: 0.12, freq: 1.2, phase: 2.2, ts: 0.030 },
+      { amp: 0.06, freq: 2.7, phase: 0.6, ts: 0.050 },
     ],
     rgb: [6, 182, 212]  as [number,number,number], alpha: 0.22, width: 1.0,
   },
   {
     x0: -0.05, y0: 0.72, x1: 1.05, y1: 0.72,
-    drift: 'y' as const, driftSpeed:  0.022,
+    drift: 'y' as const, driftSpeed:  0.011,
     waves: [
-      { amp: 0.10, freq: 2.0, phase: 3.8, ts: 0.08 },
-      { amp: 0.04, freq: 0.8, phase: 1.0, ts: 0.05 },
+      { amp: 0.10, freq: 2.0, phase: 3.8, ts: 0.040 },
+      { amp: 0.04, freq: 0.8, phase: 1.0, ts: 0.025 },
     ],
     rgb: [99, 102, 241] as [number,number,number], alpha: 0.20, width: 0.9,
   },
   {
     x0: 0.75, y0: -0.05, x1: 0.75, y1: 1.05,
-    drift: 'x' as const, driftSpeed: -0.016,
+    drift: 'x' as const, driftSpeed: -0.008,
     waves: [
-      { amp: 0.13, freq: 1.4, phase: 1.8, ts: 0.09 },
-      { amp: 0.05, freq: 2.5, phase: 3.2, ts: 0.12 },
+      { amp: 0.13, freq: 1.4, phase: 1.8, ts: 0.045 },
+      { amp: 0.05, freq: 2.5, phase: 3.2, ts: 0.060 },
     ],
     rgb: [37, 99, 235]  as [number,number,number], alpha: 0.20, width: 0.9,
   },
 ]
+
+const FADE_ZONE    = 0.18   // fraction of screen over which lines fade in/out
+const REPEL_DIST   = 0.16   // lines within this distance (screen fractions) push apart
+const REPEL_STR    = 0.055  // max repulsion offset
 
 const SAMPLES = 240  // points per line — more = smoother curve
 
@@ -98,42 +101,68 @@ export default function AuroraBackground() {
     }
 
     function drawLines(time: number) {
-      for (const ln of LINES) {
+      // Current centre position of each line (used for repulsion)
+      const centres = LINES.map(ln => {
+        const raw = (time * ln.driftSpeed) % 1.0
+        const o   = raw < 0 ? raw + 1.0 : raw
+        return ln.drift === 'y' ? ln.y0 + o : ln.x0 + o
+      })
+
+      // Soft repulsion between same-axis lines — pushes them apart
+      // but doesn't prevent crossing when drift forces them together
+      const repel = new Array(LINES.length).fill(0)
+      for (let i = 0; i < LINES.length; i++) {
+        for (let j = i + 1; j < LINES.length; j++) {
+          if (LINES[i].drift !== LINES[j].drift) continue
+          const d = centres[i] - centres[j]
+          const a = Math.abs(d)
+          if (a < REPEL_DIST && a > 0.001) {
+            // Cosine falloff — smooth repulsion that tapers to zero at threshold
+            const f = REPEL_STR * 0.5 * (1 + Math.cos(Math.PI * a / REPEL_DIST))
+            const s = d > 0 ? 1 : -1
+            repel[i] += s * f
+            repel[j] -= s * f
+          }
+        }
+      }
+
+      for (let li = 0; li < LINES.length; li++) {
+        const ln = LINES[li]
         const dx  = ln.x1 - ln.x0
         const dy  = ln.y1 - ln.y0
         const len = Math.sqrt(dx * dx + dy * dy)
-        const px  = -dy / len   // perpendicular unit vector
+        const px  = -dy / len
         const py  =  dx / len
 
-        // Drift offset wraps in [0, 1) — draw at offset AND offset±1
-        // so the line re-enters seamlessly from the opposite edge
         const raw    = (time * ln.driftSpeed) % 1.0
-        const offset = raw < 0 ? raw + 1.0 : raw
-        const copies = [offset, offset - 1.0, offset + 1.0]
+        const offset = (raw < 0 ? raw + 1.0 : raw) + repel[li]
+        const copies = [offset - 1.0, offset, offset + 1.0]
 
         const [r, g, b] = ln.rgb
-        ctx.strokeStyle = `rgba(${r},${g},${b},${ln.alpha})`
-        ctx.lineWidth   = ln.width
-        ctx.lineCap     = 'round'
-        ctx.lineJoin    = 'round'
+        ctx.lineWidth = ln.width
+        ctx.lineCap   = 'round'
+        ctx.lineJoin  = 'round'
 
         for (const o of copies) {
+          // Edge fade — line softens as it approaches screen boundary
+          const pos  = ln.drift === 'y' ? ln.y0 + o : ln.x0 + o
+          const fade = Math.max(0, Math.min(pos / FADE_ZONE, (1.0 - pos) / FADE_ZONE, 1))
+          if (fade < 0.01) continue
+
           ctx.beginPath()
           for (let i = 0; i <= SAMPLES; i++) {
             const s = i / SAMPLES
-
             let off = 0
             for (const wv of ln.waves) {
               off += wv.amp * Math.sin(s * wv.freq * Math.PI * 2 + time * wv.ts + wv.phase)
             }
-
             const bx = (ln.x0 + dx * s + (ln.drift === 'x' ? o : 0)) * w
             const by = (ln.y0 + dy * s + (ln.drift === 'y' ? o : 0)) * h
             const x  = bx + px * off * Math.min(w, h)
             const y  = by + py * off * Math.min(w, h)
-
             i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
           }
+          ctx.strokeStyle = `rgba(${r},${g},${b},${(ln.alpha * fade).toFixed(3)})`
           ctx.stroke()
         }
       }
