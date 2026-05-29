@@ -9,10 +9,14 @@ interface Blob {
   phase: number; sx: number; sy: number; ax: number; ay: number
 }
 
-interface Particle {
+interface Orb {
   x: number; y: number
   vx: number; vy: number
-  r: number; alpha: number
+  r: number
+  maxAlpha: number
+  life: number    // 0–1 progress through lifecycle
+  speed: number   // life units per ms
+  rgb: [number, number, number]
 }
 
 const BLOBS: Blob[] = [
@@ -24,23 +28,37 @@ const BLOBS: Blob[] = [
   { cx: 0.60, cy: 0.38, r: 0.40, rgb: [99,  102, 241], alpha: 0.08, phase: 4.2, sx: 0.26, sy: 0.19, ax: 0.08, ay: 0.12 },
 ]
 
-const PARTICLE_COUNT  = 85
-const CONNECT_DIST    = 160  // px — max distance to draw a line
-const CONNECT_ALPHA   = 0.28 // max line opacity
+const ORB_COLORS: [number, number, number][] = [
+  [37,  99,  235],
+  [6,   182, 212],
+  [124, 58,  237],
+  [34,  211, 238],
+  [59,  130, 246],
+]
 
-function initParticles(w: number, h: number): Particle[] {
-  return Array.from({ length: PARTICLE_COUNT }, () => {
-    const speed = 0.025 + Math.random() * 0.025   // px / ms
-    const angle = Math.random() * Math.PI * 2
-    return {
-      x:     Math.random() * w,
-      y:     Math.random() * h,
-      vx:    Math.cos(angle) * speed,
-      vy:    Math.sin(angle) * speed,
-      r:     0.7 + Math.random() * 1.3,
-      alpha: 0.25 + Math.random() * 0.45,
-    }
-  })
+const ORB_COUNT = 14
+
+function alphaFromLife(life: number): number {
+  if (life < 0.2) return life / 0.2
+  if (life < 0.8) return 1.0
+  return (1.0 - life) / 0.2
+}
+
+function makeOrb(w: number, h: number, randomLife = false): Orb {
+  const lifetime  = 12000 + Math.random() * 10000   // 12–22 s in ms
+  const angle     = Math.random() * Math.PI * 2
+  const drift     = 0.004 + Math.random() * 0.008   // px / ms
+  return {
+    x:        Math.random() * w,
+    y:        Math.random() * h,
+    vx:       Math.cos(angle) * drift,
+    vy:       Math.sin(angle) * drift,
+    r:        65 + Math.random() * 75,               // 65–140 px
+    maxAlpha: 0.07 + Math.random() * 0.11,           // 0.07–0.18
+    life:     randomLife ? Math.random() : 0,
+    speed:    1 / lifetime,
+    rgb:      ORB_COLORS[Math.floor(Math.random() * ORB_COLORS.length)],
+  }
 }
 
 export default function AuroraBackground() {
@@ -56,7 +74,8 @@ export default function AuroraBackground() {
     canvas.width  = w
     canvas.height = h
 
-    const particles = initParticles(w, h)
+    // Stagger initial life so orbs don't all sync up
+    const orbs: Orb[] = Array.from({ length: ORB_COUNT }, () => makeOrb(w, h, true))
 
     const resize = () => {
       w = window.innerWidth
@@ -84,51 +103,40 @@ export default function AuroraBackground() {
       }
     }
 
-    function updateParticles(dt: number) {
-      for (const p of particles) {
-        p.x += p.vx * dt
-        p.y += p.vy * dt
-        // wrap edges
-        if (p.x < 0)  p.x += w
-        if (p.x > w)  p.x -= w
-        if (p.y < 0)  p.y += h
-        if (p.y > h)  p.y -= h
-      }
-    }
+    function drawOrbs(dt: number) {
+      ctx.save()
+      ctx.globalCompositeOperation = 'screen'
 
-    function drawParticles() {
-      // connections
-      ctx.lineWidth = 0.8
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx   = particles[i].x - particles[j].x
-          const dy   = particles[i].y - particles[j].y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < CONNECT_DIST) {
-            const a = (1 - dist / CONNECT_DIST) * CONNECT_ALPHA
-            ctx.beginPath()
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(37,99,235,${a.toFixed(3)})`
-            ctx.stroke()
-          }
+      for (const orb of orbs) {
+        if (!prefersReduced) {
+          orb.life += orb.speed * dt
+          orb.x    += orb.vx * dt
+          orb.y    += orb.vy * dt
+          if (orb.life >= 1) Object.assign(orb, makeOrb(w, h, false))
         }
-      }
 
-      // dots
-      for (const p of particles) {
+        const alpha = alphaFromLife(orb.life) * orb.maxAlpha
+        if (alpha < 0.002) continue
+
+        const [r, g, b] = orb.rgb
+        const grad = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, orb.r)
+        grad.addColorStop(0,    `rgba(${r},${g},${b},${alpha.toFixed(3)})`)
+        grad.addColorStop(0.45, `rgba(${r},${g},${b},${(alpha * 0.5).toFixed(3)})`)
+        grad.addColorStop(1,    `rgba(${r},${g},${b},0)`)
+
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(37,99,235,${p.alpha.toFixed(3)})`
+        ctx.arc(orb.x, orb.y, orb.r, 0, Math.PI * 2)
+        ctx.fillStyle = grad
         ctx.fill()
       }
+
+      ctx.restore()
     }
 
     function draw(time: number, deltaTime: number) {
       ctx.clearRect(0, 0, w, h)
       drawBlobs(time)
-      if (!prefersReduced) updateParticles(deltaTime)
-      drawParticles()
+      drawOrbs(deltaTime)
     }
 
     if (prefersReduced) {
