@@ -24,22 +24,22 @@ const BLOBS: Blob[] = [
   { cx: 0.60, cy: 0.38, r: 0.40, rgb: [99,  102, 241], alpha: 0.08, phase: 4.2, sx: 0.26, sy: 0.19, ax: 0.08, ay: 0.12 },
 ]
 
-const CONNECT_DIST    = 160
+const CONNECT_DIST    = 100
 const CONNECT_ALPHA   = 0.28
 
 function particleCount(w: number): number {
-  if (w < 480)  return 40    // small phone
-  if (w < 768)  return 58    // large phone
-  if (w < 1024) return 72    // tablet
-  if (w < 1920) return 90    // desktop
-  if (w < 2560) return 130   // 1440p / wide
-  return 180                  // ultrawide 3440+
+  if (w < 480)  return 20    // small phone
+  if (w < 768)  return 29    // large phone
+  if (w < 1024) return 58    // tablet
+  if (w < 1920) return 72    // desktop
+  if (w < 2560) return 104   // 1440p / wide
+  return 144                  // ultrawide 3440+
 }
 
 function initParticles(w: number, h: number): Particle[] {
   const count = particleCount(w)
   return Array.from({ length: count }, () => {
-    const speed = 0.025 + Math.random() * 0.025
+    const speed = 0.012 + Math.random() * 0.013
     const angle = Math.random() * Math.PI * 2
     return {
       x:     Math.random() * w,
