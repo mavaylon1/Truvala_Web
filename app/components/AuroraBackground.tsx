@@ -16,6 +16,7 @@ interface Particle {
   maxAlpha: number
   life: number   // 0–1
   speed: number  // life units per ms
+  rgb: [number, number, number]
 }
 
 const BLOBS: Blob[] = [
@@ -27,7 +28,17 @@ const BLOBS: Blob[] = [
   { cx: 0.60, cy: 0.38, r: 0.40, rgb: [99,  102, 241], alpha: 0.08, phase: 4.2, sx: 0.26, sy: 0.19, ax: 0.08, ay: 0.12 },
 ]
 
-const PARTICLE_COUNT = 120
+const PARTICLE_COUNT = 140
+
+const PARTICLE_COLORS: [number, number, number][] = [
+  [255, 255, 255],   // white  — 50 %
+  [255, 255, 255],
+  [255, 255, 255],
+  [37,  99,  235],   // blue   — 25 %
+  [37,  99,  235],
+  [6,   182, 212],   // cyan   — 15 %
+  [34,  211, 238],   // bright cyan — 10 %
+]
 
 function alphaFromLife(life: number): number {
   if (life < 0.18) return life / 0.18
@@ -38,16 +49,17 @@ function alphaFromLife(life: number): number {
 function makeParticle(w: number, h: number, randomLife = false): Particle {
   const lifetime = 3500 + Math.random() * 5000  // 3.5–8.5 s
   const angle    = Math.random() * Math.PI * 2
-  const drift    = 0.010 + Math.random() * 0.020  // px / ms — slow float
+  const drift    = 0.010 + Math.random() * 0.020
   return {
     x:        Math.random() * w,
     y:        Math.random() * h,
     vx:       Math.cos(angle) * drift,
     vy:       Math.sin(angle) * drift,
-    r:        1.0 + Math.random() * 2.5,          // 1–3.5 px
-    maxAlpha: 0.35 + Math.random() * 0.45,        // 0.35–0.80
+    r:        1.2 + Math.random() * 3.2,          // 1.2–4.4 px
+    maxAlpha: 0.55 + Math.random() * 0.40,        // 0.55–0.95
     life:     randomLife ? Math.random() : 0,
     speed:    1 / lifetime,
+    rgb:      PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)],
   }
 }
 
@@ -106,9 +118,23 @@ export default function AuroraBackground() {
         const alpha = alphaFromLife(p.life) * p.maxAlpha
         if (alpha < 0.01) continue
 
+        const [r, g, b] = p.rgb
+
+        if (p.r > 2.8) {
+          // larger particles get a soft radial glow
+          const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.5)
+          glow.addColorStop(0,   `rgba(${r},${g},${b},${alpha.toFixed(3)})`)
+          glow.addColorStop(0.4, `rgba(${r},${g},${b},${(alpha * 0.6).toFixed(3)})`)
+          glow.addColorStop(1,   `rgba(${r},${g},${b},0)`)
+          ctx.beginPath()
+          ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2)
+          ctx.fillStyle = glow
+          ctx.fill()
+        }
+
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`
+        ctx.fillStyle = `rgba(${r},${g},${b},${alpha.toFixed(3)})`
         ctx.fill()
       }
     }
