@@ -107,9 +107,7 @@ export default function UpcomingSection() {
             </p>
 
             <p style={{ fontSize: 15, color: '#4a5568', lineHeight: 1.78 }}>
-              Concierge brings key listing information together — neighborhood context, schools, ownership
-              cost, insurance factors, mortgage readiness, solar potential, and questions to ask before
-              touring — giving buyers a full-service listing experience on the agent's own website.
+              Concierge brings key listing information together: neighborhood context, schools, ownership cost, insurance factors, mortgage readiness, solar potential, and questions to ask before touring. Buyers get a full-service listing experience directly on the agent's own website.
             </p>
 
             <div style={{ padding: '16px 18px', borderRadius: 12, background: 'rgba(5,150,105,0.04)', border: '1px solid rgba(5,150,105,0.1)' }}>

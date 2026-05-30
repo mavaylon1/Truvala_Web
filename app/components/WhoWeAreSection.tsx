@@ -52,10 +52,6 @@ export default function WhoWeAreSection() {
           Who are we
         </motion.h2>
 
-        <motion.p {...fadeUp(0.24)} style={{ fontSize: 'clamp(15px, 2.5vw, 18px)', color: '#6b7280', lineHeight: 1.7 }}>
-          Truvala was built by people who believe that buying a home should feel informed, not overwhelming —
-          and that the relationship between agents and buyers is worth strengthening, not replacing.
-        </motion.p>
       </div>
 
       {/* ── Team cards ──────────────────────────────── */}

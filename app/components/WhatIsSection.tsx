@@ -38,10 +38,6 @@ export default function WhatIsSection() {
           more transparent.
         </motion.h2>
 
-        <motion.p {...fadeUp(0.24)} style={{ fontSize: 'clamp(15px, 2.5vw, 19px)', color: '#6b7280', lineHeight: 1.7, maxWidth: 640, margin: '0 auto' }}>
-          Truvala is an AI real estate startup focused on making home buying clearer, smarter, and more
-          transparent for both buyers and real estate professionals.
-        </motion.p>
       </div>
 
       {/* ── What we're building ─────────────────────── */}
