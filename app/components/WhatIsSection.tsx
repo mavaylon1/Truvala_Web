@@ -165,32 +165,6 @@ export default function WhatIsSection() {
         </div>
       </div>
 
-      {/* ── Mission ─────────────────────────────────── */}
-      <div style={{ padding: '0 clamp(16px, 5vw, 24px) clamp(48px, 8vw, 80px)', maxWidth: 800, margin: '0 auto' }}>
-        <motion.div {...fadeUp(0.1)} style={{
-          padding: 'clamp(32px, 5vw, 52px) clamp(24px, 5vw, 48px)',
-          borderRadius: 24,
-          background: 'linear-gradient(135deg, rgba(37,99,235,0.05) 0%, rgba(6,182,212,0.05) 100%)',
-          border: '1px solid rgba(37,99,235,0.12)',
-          textAlign: 'center',
-        }}>
-          <div style={{
-            width: 44, height: 44, borderRadius: 12,
-            background: 'linear-gradient(140deg, #2563eb 0%, #1e3a8a 100%)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 22px',
-          }}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <p style={{ fontSize: 'clamp(16px, 2.5vw, 19px)', color: '#1e3a8a', lineHeight: 1.75, fontWeight: 500 }}>
-            Our goal is not to replace agents or become another search site. Truvala exists to make the
-            homebuying decision{' '}
-            <strong style={{ color: '#2563eb' }}>more informed, more actionable, and more trustworthy</strong>
-            {' '}for everyone involved.
-          </p>
-        </motion.div>
-      </div>
 
     </section>
   )

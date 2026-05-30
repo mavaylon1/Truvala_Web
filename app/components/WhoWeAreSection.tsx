@@ -52,6 +52,10 @@ export default function WhoWeAreSection() {
           Who are we
         </motion.h2>
 
+        <motion.p {...fadeUp(0.24)} style={{ fontSize: 'clamp(15px, 2.5vw, 18px)', color: '#6b7280', lineHeight: 1.7 }}>
+          Our goal is not to replace agents or become another search site. Truvala exists to make the homebuying decision more informed, more actionable, and more trustworthy for everyone involved.
+        </motion.p>
+
       </div>
 
       {/* ── Team cards ──────────────────────────────── */}
